@@ -1,4 +1,4 @@
-import { sections } from '../public/candidate-model.js';
+import { sections, describeCandidate } from '../public/candidate-model.js';
 
 function fail(message) { throw Object.assign(new Error(message), { status: 400 }); }
 function text(value, field, required = false, limit = 3000) {
@@ -48,6 +48,8 @@ export function validateCandidate(value) {
   const result = {
     id, name: text(value.name, 'name', true, 180), party: text(value.party, 'party', true, 180),
     role: value.role, scope: text(value.scope, 'scope', true, 180), status: text(value.status, 'status', false, 100),
+    description: text(value.description, 'description', false, 2000),
+    photo: null,
     source: { name: text(source.name, 'source.name', true, 180), url: url(source.url, 'source.url', true), consultedAt, pdfUrl: url(source.pdfUrl, 'source.pdfUrl') },
     reviewedSections: [...new Set(reviewed)],
     education: list(value.education, 'education', item => {
@@ -66,6 +68,15 @@ export function validateCandidate(value) {
     annotations: list(value.annotations, 'annotations', item => ({ section: text(item.section, 'section'), date: text(item.date, 'annotation.date'), before: text(item.before, 'before', false, 20000), after: text(item.after, 'after', false, 20000) }))
   };
   if (result.additional.length > 200) fail('Demasiados textos adicionales');
+  if (value.photo != null) {
+    const photo = value.photo;
+    if (typeof photo !== 'object' || Array.isArray(photo)) fail('Fotografía inválida');
+    const path = text(photo.url, 'photo.url', true, 2000);
+    if (!/^\/portraits\/[\w-]+\.(jpg|png)$/.test(path)) fail('La fotografía debe ser un archivo local en portraits');
+    result.photo = { url: path, sourceUrl: url(photo.sourceUrl, 'photo.sourceUrl', true), consultedAt: text(photo.consultedAt, 'photo.consultedAt', true, 10), attribution: text(photo.attribution, 'photo.attribution', false, 180) };
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(result.photo.consultedAt) || !Number.isFinite(Date.parse(result.photo.consultedAt)) || new Date(result.photo.consultedAt).toISOString().slice(0,10) !== result.photo.consultedAt) fail('Fecha de fotografía inválida');
+  }
+  if (!result.description) result.description = describeCandidate(result);
   return result;
 }
 

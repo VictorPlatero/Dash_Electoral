@@ -9,12 +9,13 @@ import { analyze, csvCell } from '../public/candidate-model.js';
 import { validateBatch } from '../src/schema.mjs';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.jpg':'image/jpeg', '.png':'image/png' };
 const security = { 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Frame-Options': 'DENY', 'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" };
 
 export async function createDashboardServer({ root = resolve(project, 'dist'), dbPath = process.env.DATABASE_PATH || resolve(project, 'storage/candidates.sqlite'), adminToken = process.env.ADMIN_TOKEN || '' } = {}) {
   const store = openStore(dbPath), staticCache = new Map();
   try {
+    store.setReports(JSON.parse(await readFile(resolve(root,'data.json'),'utf8')));
     const seed = await readFile(resolve(root, 'candidates.json'), 'utf8');
     const hash = createHash('sha256').update(seed).digest('hex');
     if (store.seedHash() !== hash) store.import(JSON.parse(seed), 'JNE', hash);
@@ -45,15 +46,13 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
         if (name === '/api/health') return json(res, 200, { status: 'ok', database: 'sqlite' });
         if (name === '/api/candidates/meta') return json(res, 200, { ...store.overview(), canWrite: canWrite(req), storage: 'SQLite' });
         if (name === '/api/candidates') return json(res, 200, store.list(url.searchParams));
+        if (name === '/api/candidates/analytics') return json(res, 200, store.analytics(url.searchParams));
         if (name === '/api/candidates/backup') {
           res.writeHead(200, { ...security, 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': 'attachment; filename="tacna-hojas-de-vida.json"', 'Cache-Control': 'no-store' });
           return res.end(JSON.stringify({ schemaVersion: 1, exportedAt: new Date().toISOString(), candidates: store.all() }, null, 2));
         }
         if (name === '/api/candidates/export') {
-          const filtered = store.list(new URLSearchParams({ ...Object.fromEntries(url.searchParams), limit: '50', page: '1' }));
-          const ids = new Set(filtered.candidates.map(c => c.id));
-          for (let page = 2; (page - 1) * 50 < filtered.total; page++) for (const c of store.list(new URLSearchParams({ ...Object.fromEntries(url.searchParams), limit: '50', page: String(page) })).candidates) ids.add(c.id);
-          const rows = [['nombre','organizacion','cargo','ambito','formacion','anios_experiencia_sin_solapamiento','registros_judiciales_declarados','absoluciones_declaradas','ingreso_anual_pen','anio_ingresos','secciones_revisadas_porcentaje','consulta','fuente'], ...store.all().filter(c => ids.has(c.id)).map(c => { const a = analyze(c); return [c.name,c.party,c.role,c.scope,a.highest,a.years,a.judicialRecords,a.acquittals,a.income,c.finances?.year,a.coverage,c.source.consultedAt,c.source.url]; })];
+          const rows = [['nombre','organizacion','cargo','ambito','descripcion','foto_local','porcentaje_reportado_lista','posicion_en_reporte','corte_resultados','fuente_resultados','formacion','anios_experiencia_sin_solapamiento','registros_judiciales_declarados','absoluciones_declaradas','ingreso_anual_pen','anio_ingresos','secciones_revisadas_porcentaje','consulta','fuente'], ...store.filtered(url.searchParams).map(c => { const a=analyze(c); return [c.name,c.party,c.role,c.scope,c.description,c.photo?.url,c.electoral?.percent,c.electoral?.position,c.electoral?.cutoff,c.electoral?.source.url,a.highest,a.years,a.judicialRecords,a.acquittals,a.income,c.finances?.year,a.coverage,c.source.consultedAt,c.source.url]; })];
           res.writeHead(200, { ...security, 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="tacna-candidatos.csv"', 'Cache-Control': 'no-store' });
           return res.end('\uFEFF' + rows.map(row => row.map(csvCell).join(',')).join('\r\n'));
         }
@@ -69,11 +68,11 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
       const info = await stat(file);
       let asset = staticCache.get(file);
       if (!asset || asset.mtime !== info.mtimeMs) {
-        const data = await readFile(file); asset = { mtime: info.mtimeMs, data, compressed: gzipSync(data), etag: '"' + createHash('sha256').update(data).digest('hex').slice(0,24) + '"' }; staticCache.set(file, asset);
+        const data = await readFile(file); asset = { mtime: info.mtimeMs, data, compressed: ['.html','.css','.js','.json','.svg'].includes(extname(file)) ? gzipSync(data) : null, etag: '"' + createHash('sha256').update(data).digest('hex').slice(0,24) + '"' }; staticCache.set(file, asset);
       }
       const headers = { ...security, 'Content-Type': types[extname(file)] || 'application/octet-stream', 'Cache-Control': 'public, max-age=0, must-revalidate', ETag: asset.etag, Vary: 'Accept-Encoding' };
       if (req.headers['if-none-match'] === asset.etag) { res.writeHead(304, headers); return res.end(); }
-      const compress = /\bgzip\b/.test(req.headers['accept-encoding'] || '') && asset.data.length > 1024;
+      const compress = /\bgzip\b/.test(req.headers['accept-encoding'] || '') && asset.data.length > 1024 && ['.html','.css','.js','.json','.svg'].includes(extname(file));
       const data = compress ? asset.compressed : asset.data;
       res.writeHead(200, { ...headers, ...(compress ? { 'Content-Encoding': 'gzip' } : {}), 'Content-Length': data.length });
       res.end(req.method === 'HEAD' ? undefined : data);

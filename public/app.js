@@ -65,7 +65,7 @@ function navigate() {
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
   $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
-  document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados y directorio: 06 oct 2026';
+  document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados: 13 oct 2026 · Directorio: 06 oct 2026';
   if (viewId === 'candidatos') {
     candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => { $('candidate-status').textContent = 'No se pudieron cargar las fichas. Recarga la página para reintentar.'; candidatesModule = null; });
   }

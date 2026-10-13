@@ -7,3 +7,79 @@
 @media(max-width:700px){.candidate-hero{padding:28px 23px}.candidate-hero h2{font-size:30px}.hero-seal{display:none}.candidate-controls{grid-template-columns:1fr;padding:17px;gap:14px}.search-filter{grid-column:auto}.candidate-list-actions .button{font-size:11px;padding:10px 12px}.candidate-list-actions select{width:150px}.candidate-stat small{font-size:10px}.candidate-shortcut{padding:20px;gap:12px}.candidate-shortcut strong{font-size:14px}.candidate-dialog{padding:22px 18px}.detail-header h2{font-size:22px}.detail-grid{grid-template-columns:1fr}.detail-summary{gap:12px;padding:17px}.detail-summary strong{font-size:17px}.detail-summary small{font-size:10px}.detail-section{padding:17px}.candidate-pagination{gap:12px}.candidate-card-footer{gap:7px}.candidate-identity h3{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.candidate-card{transition:none}}
 .detail-entry p{white-space:pre-line}.sidebar{overflow-y:auto}.candidate-dialog .detail-summary strong{overflow-wrap:anywhere}
+
+/* Candidate identity, source photographs and electoral performance. */
+.candidate-hero{padding:26px 32px}
+.candidate-hero h2{font-size:34px;margin:12px 0}
+.hero-analysis-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero-analysis-actions .amber{width:auto}
+.hero-analysis-actions .outline{background:#ffffff0a;color:white;border-color:#ffffff35}
+.candidate-stats .candidate-stat strong{font-size:26px;overflow-wrap:anywhere}
+.candidate-portrait{position:relative;isolation:isolate;flex-shrink:0;width:104px;height:140px;border-radius:10px;overflow:hidden;background:#eaf1f6;border:1px solid #dce5ec}
+.candidate-portrait img{display:block;position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center top}
+.portrait-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:25px;font-weight:750;color:var(--navy)}
+.portrait-credit{position:absolute;z-index:2;bottom:0;left:0;right:0;padding:5px 3px;text-align:center;background:#0a2941cc;color:white;font-size:8px;letter-spacing:.4px}
+.candidate-identity h3{font-size:19px;text-transform:none;line-height:1.4;margin:9px 0}
+.candidate-identity p{font-size:12px}
+.candidate-card-heading{gap:18px;align-items:center}
+.candidate-description{font-size:13px;color:#4c6577;line-height:1.8;margin:18px 0 5px}
+.candidate-card .candidate-description{min-height:70px}
+.candidate-vote{border-radius:8px;background:#edf4fa;padding:15px 17px;margin-top:18px}
+.vote-title{font-size:9px;font-weight:700;letter-spacing:1px;color:#526e82}
+.vote-value{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:8px 0}
+.vote-value strong{font-size:29px;color:var(--navy);font-weight:800;letter-spacing:-.8px}
+.vote-rank{font-size:10px;color:#526e82;border:1px solid #cddce8;padding:5px 8px;border-radius:4px}
+.vote-track{height:5px;background:#d9e5ef;border-radius:6px;overflow:hidden}
+.vote-track span{display:block;height:100%;background:var(--blue);border-radius:6px}
+.vote-cutoff{font-size:10px;color:#526e82;line-height:1.7;margin:8px 0 0}
+.vote-unavailable{background:#f5f7f9}
+.vote-unavailable .vote-value strong{font-size:20px;font-weight:650;color:#627484}
+.candidate-percentage-filter{display:flex;gap:12px;align-items:center;margin:16px 0;font-size:12px;color:#526e82}
+.candidate-percentage-filter select,.bi-scatter-heading select{background:#fff;border:1px solid #d4dfe8;color:var(--ink);padding:9px 10px;border-radius:5px;max-width:100%;font-size:12px}
+.candidate-list-actions select{width:250px}
+.detail-identity{display:flex;gap:24px;align-items:center}
+.detail-portrait{width:124px;height:165px}
+.compare-portrait{width:70px;height:88px;margin-bottom:10px}
+.comparison-table thead th>span{display:block}
+
+/* Filtered BI indicators and graphs use the complete cohort, not pagination. */
+.bi-analytics{margin-top:38px;scroll-margin-top:20px}
+.bi-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:20px}
+.bi-heading h2{font-size:24px;margin:10px 0}
+.bi-heading p{font-size:13px;color:#526e82;line-height:1.8;margin:5px 0}
+.bi-heading .pill{white-space:nowrap}
+.bi-vote-charts,.bi-insight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.bi-insight-grid{margin-top:20px}
+.bi-vote-charts h3,.bi-insight-grid h3{font-size:16px;line-height:1.6;margin:10px 0}
+.bi-subtitle{font-size:12px;line-height:1.8;color:#526e82;margin-bottom:18px}
+.bi-rank-row{width:100%;display:grid;grid-template-columns:38px minmax(0,1fr) 75px;gap:12px;text-align:left;align-items:center;background:transparent;border:0;border-bottom:1px solid var(--line);padding:12px 0}
+.bi-rank-row:hover{background:#f8fafc}
+.bi-portrait{width:38px;height:48px;border-radius:5px}
+.bi-portrait .portrait-credit{display:none}
+.bi-portrait .portrait-fallback{font-size:12px}
+.bi-rank-identity{display:block;min-width:0}
+.bi-rank-identity>strong{display:block;font-size:12px;line-height:1.6}
+.bi-rank-identity>small{display:block;font-size:10px;color:#526e82;line-height:1.6}
+.bi-rank-track{display:block;background:#edf2f6;height:6px;margin-top:8px;border-radius:5px;overflow:hidden}
+.bi-rank-track>span{display:block;background:var(--blue);height:100%;border-radius:5px}
+.bi-rank-row:first-of-type .bi-rank-track>span{background:var(--amber)}
+.bi-rank-percent{font-size:13px;color:var(--navy);text-align:right;font-variant-numeric:tabular-nums}
+.bi-chart-note{font-size:11px;line-height:1.8;color:#526e82;margin-top:18px}
+.bi-education-row{margin-top:22px}
+.bi-education-row>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:12px;line-height:1.7}
+.bi-education-row strong{font-size:11px;white-space:nowrap}
+.bi-education-track{height:12px;border-radius:5px;background:#edf2f6;margin-top:9px;overflow:hidden}
+.bi-education-track span{display:block;background:var(--blue);height:100%;border-radius:5px}
+.bi-education-row:first-child .bi-education-track span{background:var(--amber)}
+.bi-scatter-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.bi-scatter-heading label{display:block;color:#526e82;font-size:10px;margin-bottom:5px}
+.bi-scatter-svg{width:100%;height:auto;display:block;margin-top:22px;overflow:visible}
+.scatter-grid{stroke:#e0e8ef;stroke-width:1}
+.scatter-label{fill:#526e82;font-size:12px;font-family:inherit}
+.scatter-point{cursor:pointer;outline:none}
+.scatter-point circle{fill:var(--blue);stroke:white;stroke-width:2}
+.scatter-point:hover circle,.scatter-point:focus circle{fill:#c48420;stroke:var(--navy);stroke-width:3}
+.large-reading .candidate-description{font-size:18px!important}
+.large-reading .candidate-card .candidate-description{min-height:0}
+@media(max-width:1100px){.bi-vote-charts,.bi-insight-grid{grid-template-columns:1fr}.candidate-stats .candidate-stat strong{font-size:24px}}
+@media(max-width:700px){.candidate-hero{padding:24px}.candidate-hero h2{font-size:29px}.candidate-portrait{width:86px;height:116px}.candidate-card-heading{gap:15px}.candidate-identity h3{font-size:18px}.candidate-card .candidate-description{min-height:0}.candidate-list-actions select{width:100%}.candidate-percentage-filter{flex-direction:column;align-items:flex-start;gap:8px}.candidate-percentage-filter select{width:100%}.bi-heading{flex-direction:column}.bi-heading h2{font-size:21px}.detail-identity{gap:16px}.detail-identity h2{font-size:20px}.detail-portrait{width:85px;height:114px}.compare-portrait{width:60px;height:75px}.bi-portrait{width:38px;height:48px}.hero-analysis-actions .button{font-size:11px}.candidate-vote{padding:14px}.bi-rank-row{gap:9px;grid-template-columns:38px minmax(0,1fr) 65px}.bi-rank-percent{font-size:12px}}

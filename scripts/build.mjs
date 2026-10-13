@@ -1,4 +1,4 @@
-import { mkdir, copyFile, readdir } from 'node:fs/promises';
+import { mkdir, cp } from 'node:fs/promises';
 await mkdir('dist', { recursive: true });
-for (const file of await readdir('public')) await copyFile(`public/${file}`, `dist/${file}`);
+await cp('public', 'dist', { recursive: true, filter: path => !path.endsWith('.tmp') });
 console.log('Dashboard preparado en dist/');

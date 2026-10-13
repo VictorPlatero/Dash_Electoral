@@ -2,6 +2,7 @@ import { mkdir, writeFile, readFile, rename } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { validateCandidate } from '../src/schema.mjs';
+import { downloadPortrait } from './portraits.mjs';
 
 const API = 'https://votoinformado.jne.gob.pe/api/v1';
 const clean = value => String(value ?? '').trim();
@@ -98,7 +99,12 @@ async function sync() {
             candidates.push(validateCandidate({ id: `jne-list-${list.idSolicitudLista}`, name: [head.nombres, head.apellidoPaterno, head.apellidoMaterno].map(clean).filter(Boolean).join(' '), party: list.party, role: head.cargoEleccion === 'GOBERNADOR REGIONAL' ? 'regional' : 'municipal', scope: head.cargoEleccion === 'GOBERNADOR REGIONAL' ? 'Departamento de Tacna' : 'Provincia de Tacna', status: clean(head.estadoCandidato), source: { name: 'JNE · Listado de candidaturas; DJHV no disponible', url: 'https://votoinformado.jne.gob.pe/candidatos/resultados?departamento=Tacna&depCode=22&provincia=Tacna&provCode=01', consultedAt }, reviewedSections: [], additional: ['El listado del JNE devuelve esta candidatura sin un identificador de hoja de vida. No se completan sus datos por inferencia.'] }));
             continue;
           }
-          try { candidates.push(mapProfile(await request(`/candidatos/hoja-vida/${encodeURIComponent(head.idHojaVida)}`), head, consultedAt)); }
+          try {
+            const profile = await request(`/candidatos/hoja-vida/${encodeURIComponent(head.idHojaVida)}`);
+            const candidate = mapProfile(profile, head, consultedAt);
+            candidate.photo = await downloadPortrait(clean(profile.datoGeneral.urlFoto), candidate.id, candidate.source.url, consultedAt);
+            candidates.push(candidate);
+          }
           catch (error) { errors.push({ party: list.party, id: head.idHojaVida, error: error.message }); }
         }
         console.log(`${list.party}: consultada`);

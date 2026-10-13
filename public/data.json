@@ -4,68 +4,68 @@
   "municipal": {
     "title": "Alcaldía provincial",
     "scope": "Provincia de Tacna",
-    "reportedProgress": 93.1,
-    "cutoff": "05 oct 2026 · 06:52",
+    "reportedProgress": 99.151,
+    "cutoff": "06 oct 2026 · 12:46",
     "source": "municipal",
     "parties": [
       {
         "name": "Alianza para el Progreso",
         "short": "APP",
-        "percent": 28.556
+        "percent": 28.043
       },
       {
         "name": "Ahora Nación - AN",
         "short": "AN",
-        "percent": 21.171
+        "percent": 22.269
       },
       {
         "name": "Podemos Perú",
         "short": "PP",
-        "percent": 18.188
+        "percent": 17.826
       },
       {
         "name": "Movimiento Independiente Regional Fuerza Tacna",
         "short": "FT",
-        "percent": 16.13
+        "percent": 15.803
       },
       {
         "name": "Progresemos",
         "short": "PRO",
-        "percent": 5.991
+        "percent": 5.947
       }
     ]
   },
   "regional": {
     "title": "Gobierno regional",
     "scope": "Departamento de Tacna",
-    "reportedProgress": 93.133,
-    "cutoff": "05 oct 2026 · 06:32",
+    "reportedProgress": 98.839,
+    "cutoff": "06 oct 2026 · 12:46",
     "source": "regional",
     "parties": [
       {
         "name": "Alianza para el Progreso",
         "short": "APP",
-        "percent": 29.535
+        "percent": 29.314
       },
       {
         "name": "Ahora Nación - AN",
         "short": "AN",
-        "percent": 17
+        "percent": 17.63
       },
       {
         "name": "Renovación Popular Perú",
         "short": "RP",
-        "percent": 13.871
+        "percent": 13.615
       },
       {
         "name": "Movimiento Independiente Regional Fuerza Tacna",
         "short": "FT",
-        "percent": 8.928
+        "percent": 8.777
       },
       {
         "name": "Podemos Perú",
         "short": "PP",
-        "percent": 7.923
+        "percent": 7.772
       }
     ]
   },
@@ -75,14 +75,14 @@
       "name": "El Comercio · alcaldía provincial",
       "type": "Reporte periodístico",
       "url": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-provincia-de-tacna-tacna-noticia/",
-      "note": "Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:52. No verificado directamente contra las actas de ONPE."
+      "note": "Cinco organizaciones publicadas por El Comercio, que atribuye el conteo a ONPE. Corte del 6 de octubre de 2026, 12:46; revisado el 13 de octubre de 2026. No verificado directamente contra las actas de ONPE. No es una proclamación."
     },
     {
       "id": "regional",
       "name": "El Comercio · gobierno regional",
       "type": "Reporte periodístico",
       "url": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-region-de-tacna-noticia/",
-      "note": "Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:32. No es una proclamación de ganador."
+      "note": "Cinco organizaciones publicadas por El Comercio, que atribuye el conteo a ONPE. Corte del 6 de octubre de 2026, 12:46; revisado el 13 de octubre de 2026. No verificado directamente contra las actas de ONPE. No es una proclamación."
     },
     {
       "id": "onpe",
@@ -133,5 +133,6 @@
       "url": "https://votoinformado.jne.gob.pe/",
       "note": "21 fichas de titulares consultadas el 13 de octubre de 2026: 14 de gobernador regional y 7 de alcalde provincial. Dos listas municipales sin nombre ni DJHV en la consulta. Declaraciones del postulante; no auditoría independiente. Cada ficha contiene su enlace específico."
     }
-  ]
+  ],
+  "resultsResearched": "2026-10-13"
 }
