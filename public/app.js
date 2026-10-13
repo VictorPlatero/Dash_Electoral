@@ -3,6 +3,7 @@ let selected = 'municipal';
 let citizen;
 let candidatesModule;
 let mapModule;
+let resultsModule,resultsLoading;
 let citizenLoading = false;
 const colors = ['#ffad32', '#184a6a', '#2c6280', '#63899f', '#9fb7c6'];
 const $ = (id) => document.getElementById(id);
@@ -21,7 +22,6 @@ function renderElection() {
   $('bar-chart').setAttribute('aria-label', election.parties.map(p => p.name + ': ' + number(p.percent) + '%').join('; '));
   $('bar-chart').replaceChildren();
   $('compact-ranking').replaceChildren();
-  $('results-body').replaceChildren();
   election.parties.forEach((party, i) => {
     const bar = document.createElement('div');
     bar.className = 'bar-row';
@@ -39,20 +39,12 @@ function renderElection() {
     rank.children[1].textContent = party.name;
     rank.children[2].textContent = number(party.percent) + '%';
     $('compact-ranking').append(rank);
-    const tr = document.createElement('tr');
-    for (const value of [String(i + 1).padStart(2, '0'), party.name, number(party.percent) + '%']) {
-      const td = document.createElement('td'); td.textContent = value; tr.append(td);
-    }
-    const status = document.createElement('td');
-    status.innerHTML = '<span class="table-status">Parcial</span>';
-    tr.append(status); $('results-body').append(tr);
   });
   $('progress').textContent = number(election.reportedProgress) + '%';
   $('donut').style.background = `conic-gradient(var(--navy) 0 ${election.reportedProgress}%, var(--amber) ${election.reportedProgress}% 100%)`;
   $('cutoff').textContent = election.cutoff;
   $('report-link').href = source(election.source).url;
-  $('results-title').textContent = election.title + ' · Tacna';
-  $('results-cutoff').textContent = 'Reporte parcial de El Comercio · Corte: ' + election.cutoff;
+  resultsModule?.render(selected);
 }
 function navigate() {
   if(location.hash==='#main') {$('main').setAttribute('tabindex','-1');$('main').focus();return;}
@@ -82,6 +74,7 @@ function navigate() {
     }
   }
   if(viewId==='mapa')mapModule ||= import('./map.js').then(module=>module.init()).catch(()=>{mapModule=null;});
+  if(viewId==='resultados')resultsLoading ||= import('./results.js').then(async module=>{await module.init(data);resultsModule=module;module.render(selected);}).catch(()=>{resultsLoading=null;$('results-status').textContent='No se pudo cargar el análisis. Recarga la página para volver a intentarlo.';});
   if (viewId === 'vecinos') loadCitizen();
   $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false');
   if (id === 'province-select') $('province-select').focus();
@@ -111,20 +104,12 @@ function renderCalendar() {
     calendar.append(cell);
   }
 }
-function exportCSV() {
-  const e = data[selected];
-  const rows = [['cargo', 'ambito', 'organizacion', 'porcentaje_reportado', 'avance_reportado', 'corte', 'fuente', 'estado'], ...e.parties.map(p => [e.title, e.scope, p.name, p.percent, e.reportedProgress, e.cutoff, source(e.source).url, 'Parcial; fuente periodística; sin actualización en vivo'])];
-  const csv = '\uFEFF' + rows.map(row => row.map(value => '"' + String(value).replaceAll('"', '""') + '"').join(',')).join('\r\n');
-  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-  const link = document.createElement('a'); link.href = url; link.download = `tacna-${selected}-2026.csv`; link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 document.querySelectorAll('[data-election]').forEach(button => button.addEventListener('click', () => { selected = button.dataset.election; if (data) renderElection(); }));
 $('menu').addEventListener('click', () => { const open = $('sidebar').classList.toggle('open'); $('menu').setAttribute('aria-expanded', String(open)); });
 document.querySelectorAll('[data-view]').forEach(link => link.addEventListener('click', () => { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); }));
 document.addEventListener('keydown', event => { if (event.key === 'Escape') { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); } });
 document.addEventListener('click', event => { if (!event.target.closest('#sidebar') && !event.target.closest('#menu')) { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); } });
-$('export').addEventListener('click', exportCSV);
+$('export').addEventListener('click',()=>resultsModule?.exportCurrent());
 window.addEventListener('hashchange', navigate);
 const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function renderServices() {

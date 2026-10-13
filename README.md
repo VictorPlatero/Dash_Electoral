@@ -69,6 +69,18 @@ Los indicadores y gráficos responden a los filtros de candidatos y utilizan **t
 
 La carga JNE funciona como ETL: extracción de listas y DJHV, validación del ámbito, normalización de campos y carga transaccional. La base relaciona las fichas y sus dimensiones de formación, experiencia y registros judiciales con la tabla de hechos `electoral_reports` (cargo, organización, ámbito, porcentaje y metadatos de fuente). Los porcentajes se importan desde `public/data.json` al iniciar el servidor; no son editables por el importador de hojas de vida. El CSV incluye foto, descripción, porcentaje, posición, corte y fuente para continuar el análisis tabular.
 
+## Resultados detallados
+
+La sección `#resultados` ofrece seis indicadores: primera lista, brecha entre primera y segunda, concentración de las dos primeras, votos válidos, avance de actas y cantidad de organizaciones del reporte. La lectura automática resume la primera posición y la concentración de las tres primeras, siempre dentro del cargo, ámbito y corte seleccionados.
+
+Incluye ranking con fotos y enlaces JNE cuando están disponibles, anillo de distribución, comparación interactiva de dos listas, diagrama de organizaciones presentes en alcaldía y gobierno regional, curva de concentración acumulada y distribución de votos válidos respecto de votos emitidos. Las barras utilizan una escala común de 0–100%; no se renormalizan los porcentajes de los listados incompletos. Los nombres largos del comparador se abrevian solo en la etiqueta del dibujo; los selectores y textos accesibles conservan su nombre completo.
+
+El selector de fuente separa **Andina / ONPE** (el snapshot territorial con cuatro elecciones provinciales y el total regional) de **El Comercio** (las cinco organizaciones del corte del 6 de octubre, Tacna provincial o departamento). No se completan los votos del reporte periodístico con cantidades de otra fecha. Los reportes territoriales conservan sus propias fechas, incluidas las omisiones del resumen incompatible de Candarave. Si el snapshot territorial no carga, se mantiene disponible el corte periodístico y un botón de reintento.
+
+La tabla detalla posición, organización, candidatura vinculada, porcentaje, votos, diferencia con la primera, diferencia con la fila anterior y acumulado. Las brechas se expresan en puntos porcentuales. Las sumas pueden diferir ligeramente del 100% por redondeo. La descarga CSV exporta el reporte seleccionado completo, con ámbito, corte, consulta y fuente; los cálculos derivados se redondean a tres decimales y los datos pendientes permanecen vacíos.
+
+Los votos válidos y los emitidos usan denominadores distintos. El resto de los emitidos no se divide entre blancos y nulos sin un desglose compatible. El avance de actas no es participación: no se calcula una tasa de participación con el padrón contradictorio. La comparación entre cargos muestra porcentajes de elecciones y ámbitos diferentes, con sus cortes y fuentes, sin sumarlos ni inferir transferencias de votos. La metodología de cada indicador está disponible en la propia sección.
+
 ## Mapa electoral interactivo
 
 La sección `#mapa` permite seleccionar las **4 provincias y los 28 distritos**, incluyendo La Yarada Los Palos, mediante polígonos o un selector por nombre. Tiene zoom, desplazamiento, selección por teclado, filtros por cargo, organización y candidatura, detalle de votos y porcentajes, enlaces a las fuentes y descarga CSV de las zonas visibles. Funciona en móvil y en Render Static Site sin una API propia, claves ni servicios de mapas externos en tiempo de ejecución.
@@ -114,7 +126,7 @@ O ejecuta `node scripts/sync-jne.mjs`. Detén el servidor antes del último coma
 ## Arquitectura y rendimiento
 
 - Frontend HTML/CSS/JavaScript sin frameworks ni dependencias de producción.
-- Módulos de candidatos, directorio ciudadano y mapa cargados al entrar en su sección. El mapa utiliza SVG y un snapshot territorial de unos 216 KB, sin librerías ni peticiones a proveedores externos al navegar.
+- Módulos de candidatos, resultados detallados, directorio ciudadano y mapa cargados al entrar en su sección. Los gráficos de resultados y el mapa utilizan SVG/CSS; el snapshot territorial ocupa unos 216 KB, sin librerías ni peticiones a proveedores externos al navegar.
 - Búsqueda con debounce, cancelación de consultas anteriores y paginación (8 fichas por página).
 - SQLite con WAL, claves foráneas, índices por cargo/organización/ámbito y nombre, consultas parametrizadas y unión a hechos electorales; migración automática de la base previa sin eliminar fichas.
 - Caché de archivos en memoria, gzip para texto y revalidación ETag/304. Las fotos tienen carga diferida y hash de contenido; las 21 fotografías suman unos 553 KB.
@@ -129,7 +141,7 @@ npm test
 
 O `node --test`. Las pruebas funcionales cubren solapamiento de experiencia, datos ausentes, absoluciones, ámbito y mapeo JNE, integridad y fuente de las 21 fotos, descripciones, vinculación de porcentajes, denominadores BI, mediana por año, migración SQLite, anotaciones, validación, persistencia, autorización, filtros, paginación, respaldo, CSV y caché HTTP.
 
-La suite completa tiene **28 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. Las ocho pruebas del mapa verifican provincias y distritos, correspondencia de códigos, compatibilidad de ámbito y fecha, denominadores, ausencia de porcentajes inventados, metadatos incompatibles, geometría SVG, fuentes y fotos JNE, y exportación de valores ausentes. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
+La suite completa tiene **34 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. Las ocho pruebas del mapa verifican provincias y distritos, correspondencia de códigos, compatibilidad de ámbito y fecha, denominadores, ausencia de porcentajes inventados, metadatos incompatibles, geometría SVG, fuentes y fotos JNE, y exportación de valores ausentes. Las seis pruebas de resultados cubren separación de fuentes y cortes, denominadores, brechas, acumulados, comparación de listas y cargos, recuperación sin snapshot y CSV completo con valores nulos y precisión decimal. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
 
 ## Render
 
