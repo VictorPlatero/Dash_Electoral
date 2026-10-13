@@ -1,6 +1,6 @@
 # Tacna Decide — resultados y hojas de vida
 
-Dashboard en español de las elecciones regionales y municipales de Tacna. Incluye una base SQLite dentro de la carpeta del proyecto, 21 fotografías oficiales, descripciones de hojas de vida, porcentajes reportados por lista, indicadores de inteligencia de negocios y comparación de hasta tres candidatos al mismo cargo y ámbito.
+Dashboard en español de las elecciones regionales y municipales de Tacna. Incluye una base SQLite dentro de la carpeta del proyecto, 21 fotografías oficiales del catálogo, descripciones de hojas de vida, porcentajes reportados por lista, indicadores de inteligencia de negocios, comparación de hasta tres candidatos al mismo cargo y ámbito y un mapa electoral interactivo.
 
 Funciona tanto como **Render Static Site** (catálogo público de consulta) como **Web Service Node** (SQLite y edición centralizada). El sitio estático carga sus JSON publicados; no depende de endpoints `/api` que no existen en ese tipo de alojamiento. Los botones de perfiles, detalles, análisis, comparación, fotos, filtros y descargas funcionan en ambas modalidades.
 
@@ -69,6 +69,28 @@ Los indicadores y gráficos responden a los filtros de candidatos y utilizan **t
 
 La carga JNE funciona como ETL: extracción de listas y DJHV, validación del ámbito, normalización de campos y carga transaccional. La base relaciona las fichas y sus dimensiones de formación, experiencia y registros judiciales con la tabla de hechos `electoral_reports` (cargo, organización, ámbito, porcentaje y metadatos de fuente). Los porcentajes se importan desde `public/data.json` al iniciar el servidor; no son editables por el importador de hojas de vida. El CSV incluye foto, descripción, porcentaje, posición, corte y fuente para continuar el análisis tabular.
 
+## Mapa electoral interactivo
+
+La sección `#mapa` permite seleccionar las **4 provincias y los 28 distritos**, incluyendo La Yarada Los Palos, mediante polígonos o un selector por nombre. Tiene zoom, desplazamiento, selección por teclado, filtros por cargo, organización y candidatura, detalle de votos y porcentajes, enlaces a las fuentes y descarga CSV de las zonas visibles. Funciona en móvil y en Render Static Site sin una API propia, claves ni servicios de mapas externos en tiempo de ejecución.
+
+El archivo publicado `public/territorial.json` contiene geometría referencial y reportes consultados el **13 de octubre de 2026** en el [visor electoral de Andina](https://andina.pe/agencia/embedresultadosmunicipales2026.aspx?dep=220000&nivel=provincial&widget=1), que atribuye sus datos a ONPE. La [geometría distribuida por Andina](https://andina.pe/agencia/js/geo/onpe_indice.json) incluye los 28 distritos; el servicio MINAM consultado conserva 27. Se mantienen separados los códigos ONPE e INEI, cuya numeración de provincias difiere. Los polígonos se simplifican para navegación y no certifican límites legales.
+
+La consulta permitió validar **cinco reportes**: las cuatro alcaldías provinciales y el total del gobierno regional. No devolvió un desglose validable de apoyo distrital ni de votación regional por provincia. Las zonas sin datos se rayan; no se les asigna cero ni el porcentaje de su provincia o departamento. El indicador de mayor apoyo de un candidato requiere al menos dos zonas de su misma elección, nivel y fecha de corte; con este catálogo señala que falta un desglose comparable.
+
+Cada provincia elige candidatos distintos. El filtro de organización puede mostrar listas diferentes del mismo partido; el filtro de candidatura respeta su ámbito. Se añadieron fotos y enlaces JNE de las listas encabezantes de Candarave, Tarata y Jorge Basadre, además del catálogo de Tacna. No se atribuye a un candidato de Tacna el porcentaje de otra persona del mismo partido.
+
+Los reportes provinciales de Tacna, Tarata y Jorge Basadre indican corte **5 de octubre, 10:46 a. m. de Lima**. El regional conserva la fecha indicada por su propia fuente. En Candarave, el resumen de actas tiene un total distinto al listado: se mantienen los votos y porcentajes coherentes del listado y se omiten fecha y avance del resumen incompatible. Estos cortes permanecen separados de los resultados del 6 de octubre de la vista general y de las fichas; no se mezclan como si fueran la misma actualización.
+
+Para actualizar geometría, resultados y fotos de las listas encabezantes:
+
+```sh
+npm run sync:map
+npm test
+npm run build
+```
+
+Equivalente: `node scripts/sync-map.mjs`. Usa tres consultas simultáneas, pausas, tiempo máximo, reintentos y validación de ámbito, votos y porcentajes. Solo reemplaza el JSON al completar la sincronización. `node scripts/sync-map.mjs --resume` reutiliza respuestas de menos de 24 horas guardadas en `research/`; omite esa opción para consultar de nuevo. El snapshot territorial se versiona en Git y se publica junto con el frontend.
+
 ## Importar y mantener la base
 
 En Candidatos, abre **Importar fichas**. Descarga un ejemplo de estructura (contiene una ficha real), edítalo y carga el JSON o pégalo. La vista previa permite revisar nombres y cargo; el servidor valida todos los campos antes de guardar el lote en una transacción. Un ID existente actualiza la ficha; otro ID agrega un registro. Incluye siempre una fuente HTTPS y una fecha de consulta válida. No importa directamente PDF o imágenes: la extracción oficial se realiza mediante el script JNE y los datos manuales se importan en JSON.
@@ -92,7 +114,7 @@ O ejecuta `node scripts/sync-jne.mjs`. Detén el servidor antes del último coma
 ## Arquitectura y rendimiento
 
 - Frontend HTML/CSS/JavaScript sin frameworks ni dependencias de producción.
-- Módulo de candidatos y directorio ciudadano cargados al entrar en su sección.
+- Módulos de candidatos, directorio ciudadano y mapa cargados al entrar en su sección. El mapa utiliza SVG y un snapshot territorial de unos 216 KB, sin librerías ni peticiones a proveedores externos al navegar.
 - Búsqueda con debounce, cancelación de consultas anteriores y paginación (8 fichas por página).
 - SQLite con WAL, claves foráneas, índices por cargo/organización/ámbito y nombre, consultas parametrizadas y unión a hechos electorales; migración automática de la base previa sin eliminar fichas.
 - Caché de archivos en memoria, gzip para texto y revalidación ETag/304. Las fotos tienen carga diferida y hash de contenido; las 21 fotografías suman unos 553 KB.
@@ -107,7 +129,7 @@ npm test
 
 O `node --test`. Las pruebas funcionales cubren solapamiento de experiencia, datos ausentes, absoluciones, ámbito y mapeo JNE, integridad y fuente de las 21 fotos, descripciones, vinculación de porcentajes, denominadores BI, mediana por año, migración SQLite, anotaciones, validación, persistencia, autorización, filtros, paginación, respaldo, CSV y caché HTTP.
 
-La suite completa tiene **20 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
+La suite completa tiene **28 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. Las ocho pruebas del mapa verifican provincias y distritos, correspondencia de códigos, compatibilidad de ámbito y fecha, denominadores, ausencia de porcentajes inventados, metadatos incompatibles, geometría SVG, fuentes y fotos JNE, y exportación de valores ausentes. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
 
 ## Render
 

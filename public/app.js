@@ -2,6 +2,7 @@ let data;
 let selected = 'municipal';
 let citizen;
 let candidatesModule;
+let mapModule;
 let citizenLoading = false;
 const colors = ['#ffad32', '#184a6a', '#2c6280', '#63899f', '#9fb7c6'];
 const $ = (id) => document.getElementById(id);
@@ -55,7 +56,7 @@ function renderElection() {
 }
 function navigate() {
   if(location.hash==='#main') {$('main').setAttribute('tabindex','-1');$('main').focus();return;}
-  const allowed = ['resumen', 'resultados', 'candidatos', 'perfiles','analisis', 'contexto', 'fuentes', 'vecinos', 'province-select'];
+  const allowed = ['resumen', 'resultados', 'candidatos', 'perfiles','analisis','mapa', 'contexto', 'fuentes', 'vecinos', 'province-select'];
   const id = allowed.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'resumen';
   const viewId = id === 'province-select' ? 'vecinos' : ['perfiles','analisis'].includes(id)?'candidatos':id;
   document.querySelectorAll('.view').forEach(view => view.hidden = view.id !== viewId);
@@ -65,7 +66,7 @@ function navigate() {
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
-  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
+  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', mapa:'Mapa electoral de Tacna', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
   document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados: 13 oct 2026 · Directorio: 06 oct 2026';
   if (viewId === 'candidatos') {
     candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => {
@@ -80,6 +81,7 @@ function navigate() {
       candidatesModule.then(()=>{if(location.hash===expectedHash && !$('candidate-content').hidden) requestAnimationFrame(()=>$(id).scrollIntoView({block:'start',behavior:'auto'}));});
     }
   }
+  if(viewId==='mapa')mapModule ||= import('./map.js').then(module=>module.init()).catch(()=>{mapModule=null;});
   if (viewId === 'vecinos') loadCitizen();
   $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false');
   if (id === 'province-select') $('province-select').focus();

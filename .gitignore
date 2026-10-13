@@ -6,3 +6,4 @@ node_modules/
 *.sqlite*
 test-results/
 public/candidates.json.tmp
+public/territorial.json.tmp

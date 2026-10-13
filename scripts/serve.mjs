@@ -34,7 +34,7 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
   const server = createServer(async (req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost'), name = decodeURIComponent(url.pathname);
-      if(name==='/runtime.json' && ['GET','HEAD'].includes(req.method)) return json(res,200,{mode:'server',version:'2.1.2'});
+      if(name==='/runtime.json' && ['GET','HEAD'].includes(req.method)) return json(res,200,{mode:'server',version:'2.2.0'});
       if (name.startsWith('/api/')) {
         if (name === '/api/candidates/import' && req.method === 'POST') {
           if (req.headers.origin && req.headers.origin !== 'http://' + req.headers.host && req.headers.origin !== 'https://' + req.headers.host) return json(res, 403, { error: 'Origen no permitido' });
