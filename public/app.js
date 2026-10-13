@@ -54,9 +54,10 @@ function renderElection() {
   $('results-cutoff').textContent = 'Reporte parcial de El Comercio · Corte: ' + election.cutoff;
 }
 function navigate() {
-  const allowed = ['resumen', 'resultados', 'candidatos', 'contexto', 'fuentes', 'vecinos', 'province-select'];
+  if(location.hash==='#main') {$('main').setAttribute('tabindex','-1');$('main').focus();return;}
+  const allowed = ['resumen', 'resultados', 'candidatos', 'perfiles','analisis', 'contexto', 'fuentes', 'vecinos', 'province-select'];
   const id = allowed.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'resumen';
-  const viewId = id === 'province-select' ? 'vecinos' : id;
+  const viewId = id === 'province-select' ? 'vecinos' : ['perfiles','analisis'].includes(id)?'candidatos':id;
   document.querySelectorAll('.view').forEach(view => view.hidden = view.id !== viewId);
   document.querySelector('.toolbar').hidden = !['resumen', 'resultados'].includes(viewId);
   document.querySelectorAll('[data-view]').forEach(link => {
@@ -67,7 +68,17 @@ function navigate() {
   $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
   document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados: 13 oct 2026 · Directorio: 06 oct 2026';
   if (viewId === 'candidatos') {
-    candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => { $('candidate-status').textContent = 'No se pudieron cargar las fichas. Recarga la página para reintentar.'; candidatesModule = null; });
+    candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => {
+      candidatesModule=null;
+      if(!$('candidate-status').querySelector('button')) {
+        const retry=document.createElement('button');retry.className='button outline';retry.textContent='Recargar página';retry.addEventListener('click',()=>location.reload());
+        $('candidate-status').replaceChildren(document.createTextNode('No se pudo cargar el catálogo. '),retry);
+      }
+    });
+    if(['perfiles','analisis'].includes(id)) {
+      const expectedHash=location.hash;
+      candidatesModule.then(()=>{if(location.hash===expectedHash && !$('candidate-content').hidden) requestAnimationFrame(()=>$(id==='perfiles'?'candidate-list-heading':'bi-analytics').scrollIntoView({block:'start',behavior:'auto'}));});
+    }
   }
   if (viewId === 'vecinos') loadCitizen();
   $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false');

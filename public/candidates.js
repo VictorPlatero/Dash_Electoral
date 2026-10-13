@@ -1,4 +1,5 @@
 import { analyze, roleLabel, humanize, describeCandidate } from './candidate-model.js';
+import { createCandidateClient } from './candidate-data.js';
 
 const $ = id => document.getElementById(id);
 const money = value => value == null ? 'No disponible' : new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN', maximumFractionDigits: 2 }).format(value);
@@ -7,6 +8,8 @@ const number = (value,digits=1) => new Intl.NumberFormat('es-PE',{maximumFractio
 const percent = value => value == null ? 'No disponible' : number(value,3) + '%';
 const chosen = new Map(), detailCache = new Map();
 let page = 1, listController, timer, preview, lastList, lastAnalytics, detailRequest = 0;
+const client=createCandidateClient();
+let eventsBound=false;
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -20,28 +23,23 @@ function link(label, url, className = 'text-link') {
 function button(label, className, action) {
   const node = el('button', className, label); node.type = 'button'; node.addEventListener('click', action); return node;
 }
-async function request(path, options = {}) {
-  const response = await fetch(path, { ...options, signal: options.signal || AbortSignal.timeout(15000) });
-  const body = await response.json().catch(() => null);
-  if (!response.ok) throw new Error(body?.error || 'No se pudo consultar el servidor');
-  return body;
-}
 function params() {
   return new URLSearchParams({ q: $('candidate-search').value.trim(), role: $('candidate-role').value, party: $('candidate-party').value, percentage: $('candidate-percentage').value, sort: $('candidate-sort').value, page: String(page), limit: '8' });
 }
 async function detail(id) {
-  if (!detailCache.has(id)) detailCache.set(id, request('/api/candidates/' + encodeURIComponent(id)).catch(error => { detailCache.delete(id); throw error; }));
+  if (!detailCache.has(id)) detailCache.set(id, client.detail(id).catch(error => { detailCache.delete(id); throw error; }));
   return detailCache.get(id);
 }
 
 async function overview() {
-  const meta = await request('/api/candidates/meta');
+  const meta = await client.meta();
+  $('candidate-import').hidden=!meta.supportsImport;
   const previous = $('candidate-party').value;
   $('candidate-party').replaceChildren(new Option('Todas las organizaciones', ''), ...meta.parties.map(party => new Option(party, party)));
   if (meta.parties.includes(previous)) $('candidate-party').value = previous;
   $('candidate-status').textContent = `${meta.total} fichas del JNE · ${meta.municipal} municipales / ${meta.regional} regionales · Consulta: ${date(meta.latestConsultation)}`;
   $('candidatos').dataset.consultedAt = date(meta.latestConsultation);
-  if (location.hash === '#candidatos') document.querySelector('.edition').textContent = 'Hojas de vida: ' + date(meta.latestConsultation);
+  if (['#candidatos','#perfiles','#analisis'].includes(location.hash)) document.querySelector('.edition').textContent = 'Hojas de vida: ' + date(meta.latestConsultation);
   $('candidate-source-note').textContent = `${meta.source.scope || 'Ámbito: Tacna'}. Última consulta de fichas: ${date(meta.latestConsultation)}. Los resultados por partido pertenecen a otro corte y no se usan para puntuar candidatos.`;
   $('candidate-unavailable').replaceChildren();
   if (meta.source.unavailableLists?.length) {
@@ -192,7 +190,7 @@ async function loadList() {
   $('candidate-count').textContent = 'Buscando fichas…';
   try {
     const query = params();
-    const [result,analytics] = await Promise.all([request('/api/candidates?'+query,{signal:controller.signal}),request('/api/candidates/analytics?'+query,{signal:controller.signal})]);
+    const [result,analytics] = await Promise.all([client.list(query,{signal:controller.signal}),client.analytics(query,{signal:controller.signal})]);
     lastList = result; page = result.page;
     renderCards(result.candidates);
     renderAnalytics(analytics);
@@ -200,7 +198,7 @@ async function loadList() {
     $('candidate-page').textContent = `Página ${page} de ${Math.max(1, Math.ceil(result.total / result.limit))}`;
     $('candidate-prev').disabled = page <= 1;
     $('candidate-next').disabled = page * result.limit >= result.total;
-    $('candidate-export').href = '/api/candidates/export?' + params();
+    $('candidate-export').disabled=result.total===0;
   } catch (error) {
     if (error.name !== 'AbortError') { $('candidate-count').textContent = error.message; $('candidate-cards').replaceChildren(button('Volver a intentar', 'button outline', loadList)); }
   } finally { if (!controller.signal.aborted) $('candidate-cards').setAttribute('aria-busy', 'false'); }
@@ -282,7 +280,10 @@ async function compare() {
   } catch (error) { $('compare-content').textContent = error.message; }
 }
 function downloadJSON(value, filename) {
-  const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
+  downloadText(JSON.stringify(value,null,2),filename,'application/json');
+}
+function downloadText(value,filename,type) {
+  const url = URL.createObjectURL(new Blob([value], { type }));
   const anchor = el('a'); anchor.href = url; anchor.download = filename; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 function invalidatePreview() { preview = null; $('import-save').disabled = true; $('import-preview-content').replaceChildren(); }
@@ -304,7 +305,7 @@ async function saveImport() {
   if (!preview) return; $('import-save').disabled = true;
   $('import-status').textContent = 'Validando y guardando fichas…';
   try {
-    const result = await request('/api/candidates/import', { method: 'POST', headers: { 'Content-Type': 'application/json', ...($('import-token').value ? { Authorization: 'Bearer ' + $('import-token').value } : {}) }, body: JSON.stringify(preview) });
+    const result = await client.import(preview,$('import-token').value);
     detailCache.clear(); chosen.clear(); renderTray(); await overview(); await loadList();
     $('import-status').textContent = `${result.imported} fichas guardadas. La lista ya está actualizada.`;
     preview = null; $('import-preview-content').replaceChildren();
@@ -312,6 +313,8 @@ async function saveImport() {
 }
 
 export async function init() {
+  if(!eventsBound) {
+  eventsBound=true;
   document.querySelectorAll('[data-close]').forEach(node => node.addEventListener('click', () => $(node.dataset.close).close()));
   for (const id of ['candidate-dialog', 'compare-dialog', 'import-dialog']) $(id).addEventListener('click', event => { if (event.target === $(id)) { const box = $(id).getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) $(id).close(); } });
   $('candidate-dialog').addEventListener('close', () => { detailRequest++; });
@@ -319,8 +322,9 @@ export async function init() {
   $('candidate-search').addEventListener('input', () => { clearTimeout(timer); listController?.abort(); timer = setTimeout(() => { page = 1; loadList(); }, 240); });
   for (const id of ['candidate-role', 'candidate-party', 'candidate-sort','candidate-percentage']) $(id).addEventListener('change', () => { clearTimeout(timer); page = 1; loadList(); });
   $('bi-scatter-role').addEventListener('change',renderScatter);
-  $('show-analytics').addEventListener('click',()=>$('bi-analytics').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));
-  $('show-profiles').addEventListener('click',()=>$('candidate-list-heading').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));
+  $('candidate-export').addEventListener('click',async()=>{try{downloadText(await client.csv(params()),'tacna-candidatos.csv','text/csv;charset=utf-8');}catch(error){$('candidate-count').textContent=error.message;}});
+  $('candidate-backup').addEventListener('click',async()=>{try{downloadJSON(await client.backup(),'tacna-hojas-de-vida.json');}catch(error){$('candidate-count').textContent=error.message;}});
+  $('import-backup').addEventListener('click',async()=>{try{downloadJSON(await client.backup(),'tacna-hojas-de-vida.json');}catch(error){$('import-status').textContent=error.message;}});
   $('candidate-prev').addEventListener('click', () => { page--; loadList(); });
   $('candidate-next').addEventListener('click', () => { page++; loadList(); });
   $('compare-open').addEventListener('click', compare);
@@ -338,6 +342,7 @@ export async function init() {
     try { const id = lastList?.candidates[0]?.id; if (!id) throw new Error('Limpia los filtros para cargar una ficha de ejemplo.'); const { analysis, ...record } = await detail(id); downloadJSON({ schemaVersion: 1, candidates: [record] }, 'ejemplo-hoja-de-vida.json'); $('import-status').textContent = 'El ejemplo contiene una ficha real del catálogo. Para agregar otra persona, cambia el ID, sus datos y la fuente. Un mismo ID actualiza la ficha existente.'; }
     catch (error) { $('import-status').textContent = error.message; }
   });
+  }
   try { await overview(); $('candidate-content').hidden = false; await loadList(); }
-  catch (error) { $('candidate-status').textContent = error.message; }
+  catch (error) {$('candidate-status').replaceChildren(document.createTextNode(error.message+' '),button('Volver a intentar','button outline',()=>init()));throw error;}
 }

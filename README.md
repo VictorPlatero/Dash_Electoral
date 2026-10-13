@@ -2,6 +2,8 @@
 
 Dashboard en español de las elecciones regionales y municipales de Tacna. Incluye una base SQLite dentro de la carpeta del proyecto, 21 fotografías oficiales, descripciones de hojas de vida, porcentajes reportados por lista, indicadores de inteligencia de negocios y comparación de hasta tres candidatos al mismo cargo y ámbito.
 
+Funciona tanto como **Render Static Site** (catálogo público de consulta) como **Web Service Node** (SQLite y edición centralizada). El sitio estático carga sus JSON publicados; no depende de endpoints `/api` que no existen en ese tipo de alojamiento. Los botones de perfiles, detalles, análisis, comparación, fotos, filtros y descargas funcionan en ambas modalidades.
+
 ## Ejecutar
 
 Requiere Node.js **22.13 o superior** (probado con 24.19). No requiere paquetes ni claves para consultar las fichas descargadas.
@@ -19,6 +21,15 @@ node scripts/serve.mjs
 ```
 
 Abre http://127.0.0.1:4173/#candidatos. La primera ejecución importa `public/candidates.json` en `storage/candidates.sqlite`. Se conservan las importaciones manuales al reiniciar; la semilla solo se vuelve a importar si cambia su contenido. Las actualizaciones se hacen por ID: no eliminan automáticamente fichas antiguas. El servidor escucha únicamente en el equipo local por defecto.
+
+Para reproducir un despliegue estático antes de subirlo:
+
+```sh
+npm run build
+npm run preview:static
+```
+
+O `node scripts/serve-static.mjs`; abre http://127.0.0.1:4174/#candidatos. Los enlaces `#perfiles` y `#analisis` admiten entrada directa, recarga y navegación con el historial. `public/runtime.json` identifica el catálogo estático; el servidor Node responde a esa misma ruta con su modalidad de API. Si un despliegue antiguo devuelve 404 o HTML en lugar de JSON para la API, el cliente carga el catálogo publicado.
 
 ## Datos oficiales consultados
 
@@ -62,6 +73,8 @@ La carga JNE funciona como ETL: extracción de listas y DJHV, validación del á
 
 En Candidatos, abre **Importar fichas**. Descarga un ejemplo de estructura (contiene una ficha real), edítalo y carga el JSON o pégalo. La vista previa permite revisar nombres y cargo; el servidor valida todos los campos antes de guardar el lote en una transacción. Un ID existente actualiza la ficha; otro ID agrega un registro. Incluye siempre una fuente HTTPS y una fecha de consulta válida. No importa directamente PDF o imágenes: la extracción oficial se realiza mediante el script JNE y los datos manuales se importan en JSON.
 
+La importación está disponible cuando se ejecuta el servidor SQLite. En Render Static Site se consulta el catálogo publicado y se puede descargar CSV o respaldo JSON; el botón de edición centralizada no aparece. Para publicar nuevos datos en ese modo, actualiza `public/candidates.json` mediante la sincronización o el catálogo exportado, valida con las pruebas y realiza build/push. La base SQLite local sigue dentro de `storage/`; no se simula una base compartida en un alojamiento estático.
+
 En localhost la administración está habilitada. Si defines `ADMIN_TOKEN`, debes introducir esa clave en el diálogo incluso en local. Fuera de localhost, las escrituras requieren la clave; sin clave configurada el acceso remoto es de lectura. La clave solo se mantiene mientras el diálogo está abierto. No publiques `.env` ni la base de trabajo en Git.
 
 Puedes descargar todas las fichas de la base en JSON desde `/api/candidates/backup`. Ese archivo se puede restaurar con el importador; el CSV es para análisis tabular. Para respaldar el archivo SQLite directamente, detén el servidor antes de copiarlo, de modo que no queden escrituras pendientes en WAL.
@@ -92,15 +105,19 @@ O ejecuta `node scripts/sync-jne.mjs`. Detén el servidor antes del último coma
 npm test
 ```
 
-O `node --test`. Las 15 pruebas cubren solapamiento de experiencia, datos ausentes, absoluciones, ámbito y mapeo JNE, integridad y fuente de las 21 fotos, descripciones, vinculación de porcentajes, denominadores BI, mediana por año, migración SQLite, anotaciones, validación, persistencia, autorización, filtros, paginación, respaldo, CSV y caché HTTP.
+O `node --test`. Las pruebas funcionales cubren solapamiento de experiencia, datos ausentes, absoluciones, ámbito y mapeo JNE, integridad y fuente de las 21 fotos, descripciones, vinculación de porcentajes, denominadores BI, mediana por año, migración SQLite, anotaciones, validación, persistencia, autorización, filtros, paginación, respaldo, CSV y caché HTTP.
+
+La suite completa tiene **20 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
 
 ## Render
 
-`render.yaml` ahora configura un **Web Service Node**, con disco persistente para SQLite, `DATABASE_PATH=/var/data/candidates.sqlite`, `HOST=0.0.0.0` y `ADMIN_TOKEN` generado. Build: `npm run build`. Start: `npm start`. Health check: `/api/health`.
+`render.yaml` configura un **Static Site**, compatible con `https://dash-electoral.onrender.com`. Build: `npm run build`. Publish Directory: `dist`. No requiere Start Command ni base de datos remota para consultar las fichas, abrir perfiles, comparar, analizar o exportar. Mantiene la configuración del alojamiento existente y no requiere crear un servicio de pago. Los cambios se publican con el autodeploy del repositorio conectado.
 
-La administración con SQLite requiere un servicio backend; una publicación solo estática no ofrece la API de candidatos. El Blueprint usa el plan Starter y un disco de 1 GB, ambos de pago. Revisa costos antes de desplegar. No se ha creado ningún servicio ni realizado una compra. [Documentación de discos de Render](https://render.com/docs/disks).
+Si necesitas edición centralizada y SQLite en Render, **`render-backend.yaml`** conserva el Blueprint opcional de Web Service Node: build `npm run build`, start `npm start`, health check `/api/health`, disco en `/var/data`, `DATABASE_PATH=/var/data/candidates.sqlite` y clave `ADMIN_TOKEN`. Esta opción usa Starter y un disco de 1 GB, ambos de pago; no se creó ni compró ese servicio. En Render, Node utiliza automáticamente `PORT` y `0.0.0.0`, incluso si `HOST` no está definido. [Static Sites](https://render.com/docs/static-sites), [Web Services](https://render.com/docs/web-services), [discos persistentes](https://render.com/docs/disks).
 
 ## API
+
+Estas rutas corresponden al **servidor Node**, no al Static Site. El frontend adapta su fuente de datos automáticamente; las descargas estáticas se generan en el navegador.
 
 | Método | Ruta | Uso |
 | --- | --- | --- |

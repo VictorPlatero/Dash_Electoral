@@ -108,3 +108,10 @@ export function csvCell(value) {
   if (/^[\s]*[=+@-]/.test(text)) text = "'" + text;
   return '"' + text.replaceAll('"', '""') + '"';
 }
+
+export function candidateCSV(candidates) {
+  const rows = [['nombre','organizacion','cargo','ambito','descripcion','foto_local','porcentaje_reportado_lista','posicion_en_reporte','corte_resultados','fuente_resultados','formacion','anios_experiencia_sin_solapamiento','registros_judiciales_declarados','absoluciones_declaradas','ingreso_anual_pen','anio_ingresos','secciones_revisadas_porcentaje','consulta','fuente'], ...candidates.map(c => {
+    const a=analyze(c);return [c.name,c.party,c.role,c.scope,c.description,c.photo?.url,c.electoral?.percent,c.electoral?.position,c.electoral?.cutoff,c.electoral?.source.url,a.highest,a.years,a.judicialRecords,a.acquittals,a.income,c.finances?.year,a.coverage,c.source.consultedAt,c.source.url];
+  })];
+  return '\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n');
+}

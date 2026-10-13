@@ -1,4 +1,12 @@
-import { mkdir, cp } from 'node:fs/promises';
+import { mkdir, cp, readFile, readdir, writeFile } from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {validateBatch} from '../src/schema.mjs';
+const catalog=JSON.parse(await readFile('public/candidates.json','utf8'));
+validateBatch(catalog);
 await mkdir('dist', { recursive: true });
 await cp('public', 'dist', { recursive: true, filter: path => !path.endsWith('.tmp') });
+const hash=createHash('sha256');
+for(const path of (await readdir('public')).filter(path=>/\.(js|css|json|html)$/.test(path)).sort()) hash.update(path).update(await readFile('public/'+path));
+const version=JSON.parse(await readFile('package.json','utf8')).version;
+await writeFile('dist/build-info.json',JSON.stringify({version,fingerprint:hash.digest('hex'),builtAt:new Date().toISOString(),candidates:catalog.candidates.length})+'\n');
 console.log('Dashboard preparado en dist/');

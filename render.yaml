@@ -1,21 +1,16 @@
 services:
   - type: web
-    name: tacna-electoral
-    runtime: node
-    plan: starter
+    name: dash-electoral
+    runtime: static
     buildCommand: npm run build
-    startCommand: npm start
-    healthCheckPath: /api/health
+    staticPublishPath: ./dist
     envVars:
       - key: NODE_VERSION
         value: 24.19.0
-      - key: HOST
-        value: 0.0.0.0
-      - key: DATABASE_PATH
-        value: /var/data/candidates.sqlite
-      - key: ADMIN_TOKEN
-        generateValue: true
-    disk:
-      name: electoral-data
-      mountPath: /var/data
-      sizeGB: 1
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin

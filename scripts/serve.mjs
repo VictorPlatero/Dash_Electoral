@@ -5,7 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash, timingSafeEqual } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { openStore } from '../src/store.mjs';
-import { analyze, csvCell } from '../public/candidate-model.js';
+import { analyze, candidateCSV } from '../public/candidate-model.js';
 import { validateBatch } from '../src/schema.mjs';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
@@ -34,6 +34,7 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
   const server = createServer(async (req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost'), name = decodeURIComponent(url.pathname);
+      if(name==='/runtime.json' && ['GET','HEAD'].includes(req.method)) return json(res,200,{mode:'server',version:'2.1.1'});
       if (name.startsWith('/api/')) {
         if (name === '/api/candidates/import' && req.method === 'POST') {
           if (req.headers.origin && req.headers.origin !== 'http://' + req.headers.host && req.headers.origin !== 'https://' + req.headers.host) return json(res, 403, { error: 'Origen no permitido' });
@@ -42,7 +43,7 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
           const payload = await body(req); validateBatch(payload);
           return json(res, 200, { imported: store.import(payload), message: 'Fichas guardadas en SQLite' });
         }
-        if (req.method !== 'GET') return json(res, 405, { error: 'Método no permitido' });
+        if (!['GET','HEAD'].includes(req.method)) return json(res, 405, { error: 'Método no permitido' });
         if (name === '/api/health') return json(res, 200, { status: 'ok', database: 'sqlite' });
         if (name === '/api/candidates/meta') return json(res, 200, { ...store.overview(), canWrite: canWrite(req), storage: 'SQLite' });
         if (name === '/api/candidates') return json(res, 200, store.list(url.searchParams));
@@ -52,9 +53,8 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
           return res.end(JSON.stringify({ schemaVersion: 1, exportedAt: new Date().toISOString(), candidates: store.all() }, null, 2));
         }
         if (name === '/api/candidates/export') {
-          const rows = [['nombre','organizacion','cargo','ambito','descripcion','foto_local','porcentaje_reportado_lista','posicion_en_reporte','corte_resultados','fuente_resultados','formacion','anios_experiencia_sin_solapamiento','registros_judiciales_declarados','absoluciones_declaradas','ingreso_anual_pen','anio_ingresos','secciones_revisadas_porcentaje','consulta','fuente'], ...store.filtered(url.searchParams).map(c => { const a=analyze(c); return [c.name,c.party,c.role,c.scope,c.description,c.photo?.url,c.electoral?.percent,c.electoral?.position,c.electoral?.cutoff,c.electoral?.source.url,a.highest,a.years,a.judicialRecords,a.acquittals,a.income,c.finances?.year,a.coverage,c.source.consultedAt,c.source.url]; })];
           res.writeHead(200, { ...security, 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="tacna-candidatos.csv"', 'Cache-Control': 'no-store' });
-          return res.end('\uFEFF' + rows.map(row => row.map(csvCell).join(',')).join('\r\n'));
+          return res.end(candidateCSV(store.filtered(url.searchParams)));
         }
         if (name.startsWith('/api/candidates/')) {
           const candidate = store.get(name.slice('/api/candidates/'.length));
@@ -90,6 +90,7 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const server = await createDashboardServer();
   const port = Number(process.env.PORT || 4173);
-  server.listen(port, process.env.HOST || '127.0.0.1', () => console.log(`Dashboard: http://localhost:${port} · SQLite`));
+  const host=process.env.HOST || (process.env.RENDER==='true'?'0.0.0.0':'127.0.0.1');
+  server.listen(port,host,()=>console.log(`Dashboard: http://localhost:${server.address().port} · SQLite · Host: ${host}`));
   for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close());
 }
