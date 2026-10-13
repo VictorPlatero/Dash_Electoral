@@ -1,3 +1,8 @@
-node_modules/
 dist/
+storage/
+research/
+node_modules/
 .env
+*.sqlite*
+test-results/
+public/candidates.json.tmp

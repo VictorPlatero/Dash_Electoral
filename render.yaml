@@ -1,10 +1,21 @@
 services:
   - type: web
     name: tacna-electoral
-    runtime: static
+    runtime: node
+    plan: starter
     buildCommand: npm run build
-    staticPublishPath: ./dist
-    headers:
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_PATH
+        value: /var/data/candidates.sqlite
+      - key: ADMIN_TOKEN
+        generateValue: true
+    disk:
+      name: electoral-data
+      mountPath: /var/data
+      sizeGB: 1

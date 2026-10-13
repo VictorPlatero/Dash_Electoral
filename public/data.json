@@ -2,35 +2,136 @@
   "researched": "2026-10-06",
   "electionDate": "2026-10-04",
   "municipal": {
-    "title": "Alcaldía provincial", "scope": "Provincia de Tacna", "reportedProgress": 93.1,
-    "cutoff": "05 oct 2026 · 06:52", "source": "municipal",
+    "title": "Alcaldía provincial",
+    "scope": "Provincia de Tacna",
+    "reportedProgress": 93.1,
+    "cutoff": "05 oct 2026 · 06:52",
+    "source": "municipal",
     "parties": [
-      {"name":"Alianza para el Progreso", "short":"APP", "percent":28.556},
-      {"name":"Ahora Nación - AN", "short":"AN", "percent":21.171},
-      {"name":"Podemos Perú", "short":"PP", "percent":18.188},
-      {"name":"Movimiento Independiente Regional Fuerza Tacna", "short":"FT", "percent":16.13},
-      {"name":"Progresemos", "short":"PRO", "percent":5.991}
+      {
+        "name": "Alianza para el Progreso",
+        "short": "APP",
+        "percent": 28.556
+      },
+      {
+        "name": "Ahora Nación - AN",
+        "short": "AN",
+        "percent": 21.171
+      },
+      {
+        "name": "Podemos Perú",
+        "short": "PP",
+        "percent": 18.188
+      },
+      {
+        "name": "Movimiento Independiente Regional Fuerza Tacna",
+        "short": "FT",
+        "percent": 16.13
+      },
+      {
+        "name": "Progresemos",
+        "short": "PRO",
+        "percent": 5.991
+      }
     ]
   },
   "regional": {
-    "title": "Gobierno regional", "scope": "Departamento de Tacna", "reportedProgress": 93.133,
-    "cutoff": "05 oct 2026 · 06:32", "source": "regional",
+    "title": "Gobierno regional",
+    "scope": "Departamento de Tacna",
+    "reportedProgress": 93.133,
+    "cutoff": "05 oct 2026 · 06:32",
+    "source": "regional",
     "parties": [
-      {"name":"Alianza para el Progreso", "short":"APP", "percent":29.535},
-      {"name":"Ahora Nación - AN", "short":"AN", "percent":17},
-      {"name":"Renovación Popular Perú", "short":"RP", "percent":13.871},
-      {"name":"Movimiento Independiente Regional Fuerza Tacna", "short":"FT", "percent":8.928},
-      {"name":"Podemos Perú", "short":"PP", "percent":7.923}
+      {
+        "name": "Alianza para el Progreso",
+        "short": "APP",
+        "percent": 29.535
+      },
+      {
+        "name": "Ahora Nación - AN",
+        "short": "AN",
+        "percent": 17
+      },
+      {
+        "name": "Renovación Popular Perú",
+        "short": "RP",
+        "percent": 13.871
+      },
+      {
+        "name": "Movimiento Independiente Regional Fuerza Tacna",
+        "short": "FT",
+        "percent": 8.928
+      },
+      {
+        "name": "Podemos Perú",
+        "short": "PP",
+        "percent": 7.923
+      }
     ]
   },
   "sources": [
-    {"id":"municipal","name":"El Comercio · alcaldía provincial","type":"Reporte periodístico","url":"https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-provincia-de-tacna-tacna-noticia/","note":"Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:52. No verificado directamente contra las actas de ONPE."},
-    {"id":"regional","name":"El Comercio · gobierno regional","type":"Reporte periodístico","url":"https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-region-de-tacna-noticia/","note":"Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:32. No es una proclamación de ganador."},
-    {"id":"onpe","name":"ONPE · ERM 2026","type":"Fuente oficial","url":"https://erm2026.onpe.gob.pe/","note":"Portal oficial del proceso electoral. Consultar aquí las actualizaciones oficiales; este dashboard contiene una copia fechada y no tiene conexión en vivo."},
-    {"id":"territory","name":"PCM · información territorial de Tacna","type":"Fuente oficial","url":"https://www.gob.pe/institucion/pcm/campa%C3%B1as/4351-tacna-informacion-territorial","note":"Referencia territorial publicada en 2021: cuatro provincias y 28 distritos. No representa una validación de delimitaciones electorales de 2026."},
-    {"id":"governor","name":"Gobierno Regional · Luis Ramón Torres Robledo","type":"Ficha oficial","url":"https://www.gob.pe/institucion/regiontacna/funcionarios/121322-luis-ramon-torres-robledo","note":"Autoridad del período 2023–2026. Inicio de gestión: 1 de enero de 2023."},
-    {"id":"mayor","name":"Municipalidad · Pascual Milton Güisa Bravo","type":"Ficha oficial","url":"https://www.gob.pe/institucion/munitacna/funcionarios/95129-pascual-milton-guisa-bravo","note":"Alcalde provincial del período 2023–2026. No se presenta como candidato ni ganador de las ERM 2026."},
-    {"id":"reniec","name":"RENIEC · padrón electoral de Tacna","type":"Fuente con inconsistencia","url":"https://www.gob.pe/institucion/reniec/noticias/1406458-reniec-tacna-registra-304-650-electores-para-las-elecciones-regionales-y-municipales","note":"Nota del 15 de junio de 2026: el título indica 304 650 electores y el cuerpo 349 859. Las cifras por sexo suman 304 650. Se excluye el total del padrón de los indicadores hasta su validación."},
-    {"id":"date","name":"Presidencia · convocatoria ERM 2026","type":"Fuente oficial","url":"https://www.gob.pe/institucion/presidencia/noticias/1328896-gobierno-convoco-elecciones-regionales-y-municipales-para-el-domingo-4-de-octubre","note":"Convocatoria de las elecciones regionales y municipales para el 4 de octubre de 2026."}
+    {
+      "id": "municipal",
+      "name": "El Comercio · alcaldía provincial",
+      "type": "Reporte periodístico",
+      "url": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-provincia-de-tacna-tacna-noticia/",
+      "note": "Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:52. No verificado directamente contra las actas de ONPE."
+    },
+    {
+      "id": "regional",
+      "name": "El Comercio · gobierno regional",
+      "type": "Reporte periodístico",
+      "url": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-region-de-tacna-noticia/",
+      "note": "Cinco organizaciones y avance del conteo atribuido a ONPE. Corte del 5 de octubre de 2026, 06:32. No es una proclamación de ganador."
+    },
+    {
+      "id": "onpe",
+      "name": "ONPE · ERM 2026",
+      "type": "Fuente oficial",
+      "url": "https://erm2026.onpe.gob.pe/",
+      "note": "Portal oficial del proceso electoral. Consultar aquí las actualizaciones oficiales; este dashboard contiene una copia fechada y no tiene conexión en vivo."
+    },
+    {
+      "id": "territory",
+      "name": "PCM · información territorial de Tacna",
+      "type": "Fuente oficial",
+      "url": "https://www.gob.pe/institucion/pcm/campa%C3%B1as/4351-tacna-informacion-territorial",
+      "note": "Referencia territorial publicada en 2021: cuatro provincias y 28 distritos. No representa una validación de delimitaciones electorales de 2026."
+    },
+    {
+      "id": "governor",
+      "name": "Gobierno Regional · Luis Ramón Torres Robledo",
+      "type": "Ficha oficial",
+      "url": "https://www.gob.pe/institucion/regiontacna/funcionarios/121322-luis-ramon-torres-robledo",
+      "note": "Autoridad del período 2023–2026. Inicio de gestión: 1 de enero de 2023."
+    },
+    {
+      "id": "mayor",
+      "name": "Municipalidad · Pascual Milton Güisa Bravo",
+      "type": "Ficha oficial",
+      "url": "https://www.gob.pe/institucion/munitacna/funcionarios/95129-pascual-milton-guisa-bravo",
+      "note": "Alcalde provincial del período 2023–2026. No se presenta como candidato ni ganador de las ERM 2026."
+    },
+    {
+      "id": "reniec",
+      "name": "RENIEC · padrón electoral de Tacna",
+      "type": "Fuente con inconsistencia",
+      "url": "https://www.gob.pe/institucion/reniec/noticias/1406458-reniec-tacna-registra-304-650-electores-para-las-elecciones-regionales-y-municipales",
+      "note": "Nota del 15 de junio de 2026: el título indica 304 650 electores y el cuerpo 349 859. Las cifras por sexo suman 304 650. Se excluye el total del padrón de los indicadores hasta su validación."
+    },
+    {
+      "id": "date",
+      "name": "Presidencia · convocatoria ERM 2026",
+      "type": "Fuente oficial",
+      "url": "https://www.gob.pe/institucion/presidencia/noticias/1328896-gobierno-convoco-elecciones-regionales-y-municipales-para-el-domingo-4-de-octubre",
+      "note": "Convocatoria de las elecciones regionales y municipales para el 4 de octubre de 2026."
+    },
+    {
+      "id": "candidate-jne",
+      "name": "JNE · Hojas de vida de candidatos de Tacna",
+      "type": "Fuente oficial · DJHV",
+      "url": "https://votoinformado.jne.gob.pe/",
+      "note": "21 fichas de titulares consultadas el 13 de octubre de 2026: 14 de gobernador regional y 7 de alcalde provincial. Dos listas municipales sin nombre ni DJHV en la consulta. Declaraciones del postulante; no auditoría independiente. Cada ficha contiene su enlace específico."
+    }
   ]
 }

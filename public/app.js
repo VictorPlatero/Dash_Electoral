@@ -1,6 +1,8 @@
 let data;
 let selected = 'municipal';
 let citizen;
+let candidatesModule;
+let citizenLoading = false;
 const colors = ['#ffad32', '#184a6a', '#2c6280', '#63899f', '#9fb7c6'];
 const $ = (id) => document.getElementById(id);
 const number = (value, digits = 3) => new Intl.NumberFormat('es-PE', { maximumFractionDigits: digits }).format(value);
@@ -52,7 +54,7 @@ function renderElection() {
   $('results-cutoff').textContent = 'Reporte parcial de El Comercio · Corte: ' + election.cutoff;
 }
 function navigate() {
-  const allowed = ['resumen', 'resultados', 'contexto', 'fuentes', 'vecinos', 'province-select'];
+  const allowed = ['resumen', 'resultados', 'candidatos', 'contexto', 'fuentes', 'vecinos', 'province-select'];
   const id = allowed.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'resumen';
   const viewId = id === 'province-select' ? 'vecinos' : id;
   document.querySelectorAll('.view').forEach(view => view.hidden = view.id !== viewId);
@@ -62,7 +64,12 @@ function navigate() {
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
-  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
+  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
+  document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados y directorio: 06 oct 2026';
+  if (viewId === 'candidatos') {
+    candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => { $('candidate-status').textContent = 'No se pudieron cargar las fichas. Recarga la página para reintentar.'; candidatesModule = null; });
+  }
+  if (viewId === 'vecinos') loadCitizen();
   $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false');
   if (id === 'province-select') $('province-select').focus();
 }
@@ -101,6 +108,7 @@ function exportCSV() {
 }
 document.querySelectorAll('[data-election]').forEach(button => button.addEventListener('click', () => { selected = button.dataset.election; if (data) renderElection(); }));
 $('menu').addEventListener('click', () => { const open = $('sidebar').classList.toggle('open'); $('menu').setAttribute('aria-expanded', String(open)); });
+document.querySelectorAll('[data-view]').forEach(link => link.addEventListener('click', () => { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); }));
 document.addEventListener('keydown', event => { if (event.key === 'Escape') { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); } });
 document.addEventListener('click', event => { if (!event.target.closest('#sidebar') && !event.target.closest('#menu')) { $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false'); } });
 $('export').addEventListener('click', exportCSV);
@@ -141,10 +149,15 @@ $('clear-services').addEventListener('click', () => { $('service-search').value 
 $('province-select').addEventListener('change', renderProvince);
 document.querySelectorAll('.checklist input').forEach(input => input.addEventListener('change', () => { $('checklist-progress').textContent = `${document.querySelectorAll('.checklist input:checked').length} de 4 pasos revisados`; }));
 $('print-guide').addEventListener('click', () => window.print());
-$('reading-toggle').addEventListener('click', () => { const expanded = document.body.classList.toggle('large-reading'); $('reading-toggle').setAttribute('aria-pressed', String(expanded)); });
+try { if (localStorage.getItem('tacna-reading') === 'large') { document.body.classList.add('large-reading'); $('reading-toggle').setAttribute('aria-pressed', 'true'); } } catch {}
+$('reading-toggle').addEventListener('click', () => { const expanded = document.body.classList.toggle('large-reading'); $('reading-toggle').setAttribute('aria-pressed', String(expanded)); try { localStorage.setItem('tacna-reading', expanded ? 'large' : 'normal'); } catch {} });
+function loadCitizen() {
+if (citizen || citizenLoading) return;
+citizenLoading = true;
 fetch('citizen.json').then(response => { if (!response.ok) throw new Error(); return response.json(); }).then(result => {
   citizen = result; renderServices(); renderProvince();
-}).catch(() => { $('service-count').textContent = 'No se pudo cargar el directorio. Recarga la página para volver a intentarlo.'; });
+}).catch(() => { citizenLoading = false; $('service-count').textContent = 'No se pudo cargar el directorio. Cambia de sección y vuelve a intentarlo.'; });
+}
 fetch('data.json').then(response => { if (!response.ok) throw new Error('Datos no disponibles'); return response.json(); }).then(result => {
   data = result; renderElection(); renderSources(); renderCalendar(); navigate(); $('loading').hidden = true; $('dashboard').hidden = false;
 }).catch(() => { $('loading').textContent = 'No se pudo cargar la información. Recarga la página o revisa que data.json esté publicado junto al dashboard.'; });

@@ -1,0 +1,2198 @@
+{
+  "schemaVersion": 1,
+  "consultedAt": "2026-10-13",
+  "source": "https://votoinformado.jne.gob.pe/",
+  "scope": "Gobernador regional de Tacna y alcalde provincial de Tacna; solo titulares devueltos por el JNE en la consulta",
+  "unavailableLists": [
+    {
+      "party": "MOVIMIENTO INDEPENDIENTE REGIONAL FUERZA TACNA",
+      "listId": 39637,
+      "note": "El JNE no devuelve nombre ni DJHV del titular en esta lista."
+    },
+    {
+      "party": "UNIDOS POR TACNA",
+      "listId": 40571,
+      "note": "El JNE no devuelve nombre ni DJHV del titular en esta lista."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "W6BVY4abPBxtK9DsWaUDTr6eHpe9HV9R",
+      "name": "ANTONIO RIQUELME SOTELO CALDERON",
+      "party": "ALIANZA ELECTORAL VENCEREMOS",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/W6BVY4abPBxtK9DsWaUDTr6eHpe9HV9R",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/068bb194-c13f-418f-a7e0-fd7a31bce85f.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS",
+          "degree": "ABOGADO",
+          "completed": true,
+          "year": 1991,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "ORGANISMO DE FORMALIZACION DE LA PROPIEDAD INFORMAL",
+          "position": "JEFE ZONAL - TACNA",
+          "startYear": 2022,
+          "endYear": 2022
+        },
+        {
+          "organization": "SUPERINTENDENCIA NACIONAL DE FISCALIZACION LABORAL - SUNAFIL",
+          "position": "INTENDENTE REGIONAL",
+          "startYear": 2021,
+          "endYear": 2022
+        },
+        {
+          "organization": "MINISTERIO DE TRANSPORTES Y COMUNICACIONES",
+          "position": "DIRECTOR OFICINA DESCONCENTRADA",
+          "startYear": 2021,
+          "endYear": 2021
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "BANDERAS TACNEÑISTAS",
+          "position": "Renuncia declarada",
+          "startYear": 2019,
+          "endYear": 2019
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO POLITICO POPULAR VOCES DEL PUEBLO",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 60000,
+        "publicIncome": 0,
+        "privateIncome": 60000,
+        "properties": 4,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "I50aYf3Ng23wyU2Rl57xXEBTHwmRGv9J",
+      "name": "BARBARA ESTHER CUADROS QUIHUE",
+      "party": "PARTIDO DEL BUEN GOBIERNO",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/I50aYf3Ng23wyU2Rl57xXEBTHwmRGv9J",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/0ddb5760-aa7b-4a5f-874f-f78a5a51aaa1.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional de San Agustín de Arequipa",
+          "degree": "BACHILLER EN ARQUITECTURA",
+          "completed": true,
+          "year": 2005,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada César Vallejo",
+          "degree": "ARQUITECTA",
+          "completed": true,
+          "year": 2005,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD DE ALCALÁ",
+          "degree": "TÍTULO PROPIO DE MÁSTER EN ALTA DIRECCIÓN EMPRESARIAL (GRADO DE MAESTRO)",
+          "completed": true,
+          "year": 2020,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "Instituto Geofísico del Perú|",
+          "position": "Arquitecto",
+          "startYear": 2026,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "RECUPEREMOS TACNA",
+          "position": "PRESIDENTE",
+          "startYear": 2014,
+          "endYear": 2015
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO DEL BUEN GOBIERNO",
+          "position": "Renuncia declarada",
+          "startYear": 2025,
+          "endYear": 2025
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "RECUPEREMOS TACNA",
+          "position": "Renuncia declarada",
+          "startYear": 2015,
+          "endYear": 2015
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 75000,
+        "publicIncome": 0,
+        "privateIncome": 75000,
+        "properties": 0,
+        "vehicles": 1
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "DpT5EYeFvyouHJ9vOUF5ZALy2TGNiCqE",
+      "name": "DAYAN WILSON JIMENEZ SALAS",
+      "party": "PROGRESEMOS",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/DpT5EYeFvyouHJ9vOUF5ZALy2TGNiCqE",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/02a6a691-0583-44ea-93b0-0be7a5fa9be1.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD JORGE BASADRE GROHMAN",
+          "degree": "LICENCIADO EN EDUCACIÓN",
+          "completed": true,
+          "year": 2024,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD CESAR VALLEJO SAC",
+          "degree": "MAESTRO EN ADMINISTRACIÓN EDUCACIÓN",
+          "completed": true,
+          "year": 2024,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MINEDU - I.E. FEDERICO BARRETO",
+          "position": "DOCENTE",
+          "startYear": 2025,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "CONTIGO TACNA",
+          "position": "SECRETARÍA DE ORGANIZACIÓN",
+          "startYear": 2013,
+          "endYear": 2014
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "CONTIGO TACNA",
+          "position": "FUNDADOR",
+          "startYear": 2013,
+          "endYear": 2014
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "NUEVA ESPERANZA",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+          "position": "Renuncia declarada",
+          "startYear": 2021,
+          "endYear": 2021
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 66000,
+        "publicIncome": 42000,
+        "privateIncome": 24000,
+        "properties": 0,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "n3ducFPeXbdYfnjjvOI9aqv_NesUfnHe",
+      "name": "DEMETRIO CUTIPA VILCA",
+      "party": "NUEVA ESPERANZA",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/n3ducFPeXbdYfnjjvOI9aqv_NesUfnHe",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/17cd1956-0cc5-4146-a242-592c8a18c194.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Técnica",
+          "institution": "INSITUTO SUPERIOR TECNOLOGICO FRANCISCO DE PAULA GONZALES VIGIL",
+          "degree": "ELECTRONICA",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD NACIONAL JORGE BASADRE GROHMANN",
+          "degree": "NO CONCLUIDO",
+          "completed": false,
+          "year": null,
+          "note": "CARRERA DE GEOLOGIA Y GEOTECNIA"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL ALTO DE LA ALIANZA",
+          "position": "ALCALDE",
+          "startYear": 2023,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "JUNTOS POR TACNA",
+          "position": "ALCALDE DISTRITAL",
+          "startYear": 2022,
+          "endYear": 2026
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "JUNTOS POR TACNA",
+          "position": "SECRETARIO DE ORGANIZACIÓN",
+          "startYear": 2021,
+          "endYear": 2023
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "JUNTOS POR TACNA",
+          "position": "FUNDADOR",
+          "startYear": 2021,
+          "endYear": 2023
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "JUNTOS POR TACNA",
+          "position": "Renuncia declarada",
+          "startYear": 2023,
+          "endYear": 2023
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "VAMOS PERU",
+          "position": "Renuncia declarada",
+          "startYear": 2020,
+          "endYear": 2020
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 172800,
+        "publicIncome": 172800,
+        "privateIncome": 0,
+        "properties": 2,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "9gAElUHVUiMoFaZjZX3_7QKEBqceYIlp",
+      "name": "EDGAR ROGELIO CONCORI COAQUIRA",
+      "party": "AHORA NACION - AN",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/9gAElUHVUiMoFaZjZX3_7QKEBqceYIlp",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/cc4d9a0d-8f79-4f46-bcd5-6674b747d134.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional Federico Villarreal",
+          "degree": "ESPECIALISTA EN GINECOLOGÍA Y OBSTETRICIA",
+          "completed": true,
+          "year": 2015,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional Jorge Basadre Grohmann",
+          "degree": "MEDICO CIRUJANO",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional Jorge Basadre Grohmann",
+          "degree": "BACHILLER EN MEDICINA HUMANA",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD NACIONAL JORGE BASADRE GROHMANN",
+          "degree": "MAESTRIA EN GERENCIA PUBLICA",
+          "completed": true,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "CENTRO DE SALUD CIUDAD NUEVA",
+          "position": "MEDICO CIRUJANO",
+          "startYear": 2024,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "SOMOS RENOVACION DISTRITAL",
+          "position": "ALCALDE DISTRITAL",
+          "startYear": 2015,
+          "endYear": 2018
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "ALIANZA PARA EL PROGRESO",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "SI SE PUEDE",
+          "position": "Renuncia declarada",
+          "startYear": 2023,
+          "endYear": 2023
+        }
+      ],
+      "legal": [
+        {
+          "kind": "Registro penal declarado",
+          "subject": "DESOBEDIENCIA A LA AUTORIDAD",
+          "outcome": "ABSUELTO",
+          "court": "TERCER JUZGADO UNIPERSONAL - SEDE CENTRAL",
+          "caseNumber": "00134-2020-5-2301-JR-PE-01",
+          "date": "30/03/2026",
+          "note": "ABSOLVER AL IMPUTADO."
+        }
+      ],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 135000,
+        "publicIncome": 120000,
+        "privateIncome": 15000,
+        "properties": 2,
+        "vehicles": 1
+      },
+      "additional": [],
+      "annotations": [
+        {
+          "section": "RELACIÓN DE SENTENCIAS",
+          "date": "2026-09-12",
+          "before": "RUBRO V – RELACIÓN DE SENTENCIAS\n¿TENGO INFORMACIÓN POR DECLARAR? [X] SÍ TENGO [ ] NO TENGO\nREGISTRO ÁMBITO PENAL 1\nN° DE EXPEDIENTE: 00134-2020-5-2301-JR-PE-01\nFECHA SENTENCIA FIRME: 30/03/2026\nÓRGANO JUDICIAL: TERCER JUZGADO UNIPERSONAL - SEDE CENTRAL\nDELITO: DESOBEDIENCIA A LA AUTORIDAD\nFALLO O PENA: ABSUELTO\nMODALIDAD: OTRO: ABSUELTO\nCUMPLIMIENTO DEL FALLO: PENA CUMPLIDA\nINFORMACIÓN COMPLEMENTARIA: ABSOLVER AL IMPUTADO.",
+          "after": "RUBRO V – RELACIÓN DE SENTENCIAS\n¿TENGO INFORMACIÓN POR DECLARAR? [X] SÍ TENGO [ ] NO TENGO\nREGISTRO ÁMBITO PENAL 1\nN° DE EXPEDIENTE: 00134-2020-5-2301-JR-PE-01\nFECHA SENTENCIA FIRME: 12/01/2026 (*)\nÓRGANO JUDICIAL: TERCER JUZGADO UNIPERSONAL - SEDE CENTRAL\nDELITO: DESOBEDIENCIA A LA AUTORIDAD\nFALLO O PENA: ABSUELTO\nMODALIDAD: OTRO: ABSUELTO\nCUMPLIMIENTO DEL FALLO: NO APLICA: SENTENCIA ABSOLUTORIA\nINFORMACIÓN COMPLEMENTARIA: ABSUELTO MEDIANTE RESOLUCIÓN N° 12, DE 12/01/2026, DECLARADA CONSENTIDA POR RESOLUCIÓN N° 13, DE 08/06/2026. ARCHIVO DEFINITIVO.\n(*) EL 12/01/2026 CORRESPONDE A LA FECHA DE EMISIÓN DE LA SENTENCIA ABSOLUTORIA. SU CONSENTIMIENTO FUE DECLARADO MEDIANTE RESOLUCIÓN N° 13, DE 08/06/2026. ESTA PRECISIÓN FORMA PARTE DE LA ANOTACIÓN MARGINAL."
+        }
+      ]
+    },
+    {
+      "id": "-TWfs9mROisbIBMw7CnijzfGeiBtT1Yw",
+      "name": "FELIX GERONIMO QUISPE MAMANI",
+      "party": "UNIDOS POR TACNA",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/-TWfs9mROisbIBMw7CnijzfGeiBtT1Yw",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/6f2b4f28-b115-42fe-9b37-f973bd99658c.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD JOSÉ CARLOS MARIÁTEGUI",
+          "degree": "INGENIERO MECÁNICO",
+          "completed": true,
+          "year": 2007,
+          "note": "REALIZO ESTUDIOS SUPERIORES EN LA UNIVERSIDAD NACIONAL JORGE BASADRE GROHMANN/BACHILLER EN INGENBIERIA MECÁNICA FECHA: 05/01/2007"
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD NACIONAL JORGE BASADRE GROHMANN",
+          "degree": "BACHILLER EN INGENIERIA MECANICA",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD ESAN",
+          "degree": "MAESTRO/MAGISTER EN ADMINISTRACIÓN",
+          "completed": true,
+          "year": 2016,
+          "note": "FECHA DE DIPLOMA: 21/06/2016"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "EAGLE CONSULTING SAC",
+          "position": "INGENIERO",
+          "startYear": 2025,
+          "endYear": 2025
+        },
+        {
+          "organization": "MATHARN SERVICIOS GENERALES S.A.C",
+          "position": "SUPERVISOR MECANICO",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "organization": "SERVICIOS Y CONSTRUCCION.IMESUR S.A.C.",
+          "position": "SUPERVISOR QHSSE",
+          "startYear": 2023,
+          "endYear": 2023
+        },
+        {
+          "organization": "TSK ELECTRONICA Y ELECTRICIDAD SA.,SUCURSAL DEL PERU",
+          "position": "EHS MANAGER",
+          "startYear": 2020,
+          "endYear": 2022
+        },
+        {
+          "organization": "DURO FELGUERA ENERGY STORAGE S.A.",
+          "position": "EHS MANAGER",
+          "startYear": 2019,
+          "endYear": 2020
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "UNIDOS POR TACNA",
+          "position": "FUNDADOR",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "UNIDOS POR TACNA",
+          "position": "APODERADO",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "LIBERTAD POPULAR",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "NUEVO PERU POR EL BUEN VIVIR",
+          "position": "Renuncia declarada",
+          "startYear": 2025,
+          "endYear": 2025
+        }
+      ],
+      "legal": [
+        {
+          "kind": "Registro de obligaciones declarado",
+          "subject": "FAMILIA / ALIMENTARIA",
+          "outcome": "ALIMENTOS",
+          "court": "1° JUZGADO DE FAMILIA - SEDE CENTRAL",
+          "caseNumber": "00316-2012-0-2301-JR-FC-01",
+          "date": "",
+          "note": "EXPEDIENTE ARCHIVADO/ALIMENTOS"
+        },
+        {
+          "kind": "Registro de obligaciones declarado",
+          "subject": "FAMILIA / ALIMENTARIA",
+          "outcome": "SENTENCIADO/ RESUELTO",
+          "court": "JUEZ PAZ LETRADO DESCARGA PROCESAL-MBJ ALBARRACIN",
+          "caseNumber": "01095-2008-0-2301-JP-FC-02",
+          "date": "",
+          "note": "FILIACION EXTRAMATRIMONIAL/FILIACION JUDICIAL DE PATERNIDAD EXTRAMATRIMONIAL"
+        }
+      ],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 34626,
+        "publicIncome": 0,
+        "privateIncome": 34626,
+        "properties": 2,
+        "vehicles": 1
+      },
+      "additional": [
+        "GERENTE Y TITULAR DE LA EMPRESA FG INGENIERIA Y CONSTRUCCION EIRL/PARTIDA REGISTRAL N° 12350768"
+      ],
+      "annotations": []
+    },
+    {
+      "id": "TQdpkBBKjpPzvd9pAVH00USWqxfuEWFx",
+      "name": "FERNANDO PABLO MARTORELL SOBERO",
+      "party": "RENOVACION POPULAR PERU",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/TQdpkBBKjpPzvd9pAVH00USWqxfuEWFx",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/0620e418-fcc8-465f-8e55-79669ed8f690.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD JORGE BASADRE G.",
+          "degree": "CONTABILIDAD",
+          "completed": false,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "LADRILLERA J. MARTORELL S.A.",
+          "position": "DIRECTOR DE PRODUCCION",
+          "startYear": 1990,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "BANDERAS TACNEÑISTAS",
+          "position": "SECRETARIO GENERAL REGIONAL",
+          "startYear": 2022,
+          "endYear": 2024
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "BANDERAS TACNEÑISTAS",
+          "position": "REPRESENTANTE LEGAL",
+          "startYear": 2022,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "BANDERAS TACNEÑISTAS",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 23055.47,
+        "publicIncome": 0,
+        "privateIncome": 23055.47,
+        "properties": 10,
+        "vehicles": 6
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "WE0DoiCpc4xn56dB6I7yPWHlGoSxtfiW",
+      "name": "FIDEL CARITA MONROY",
+      "party": "PARTIDO DEMOCRATA UNIDO PERU",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/WE0DoiCpc4xn56dB6I7yPWHlGoSxtfiW",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/d149b135-b720-4602-8588-834ad8cdb3f2.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "universidad nacional jorge basadre",
+          "degree": "ingeniero de minas",
+          "completed": true,
+          "year": 1993,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UINVERSIDAD NACIONIAL JORGRE BASADRE GROHMANN",
+          "degree": "MAESTRO EN CIENCIAS (MAGISTER CON MENCION EN GESTION EMPRESARIAL)",
+          "completed": true,
+          "year": 2005,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD PRIVADA DE TACNA",
+          "degree": "ADMINISTRACION",
+          "completed": true,
+          "year": 2011,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "universidad alas peruanas s.a.",
+          "position": "docente",
+          "startYear": 2015,
+          "endYear": 2025
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "TACNA EN ACCION",
+          "position": "ALCALDE PROVINCIAL",
+          "startYear": 2011,
+          "endYear": 2014
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "TACNA EN ACCION",
+          "position": "APODERADO",
+          "startYear": 2010,
+          "endYear": 2010
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "TACNA EN ACCION",
+          "position": "FUNDADOR",
+          "startYear": 2010,
+          "endYear": 2010
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PERU MODERNO",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 95015,
+        "publicIncome": 0,
+        "privateIncome": 95015,
+        "properties": 3,
+        "vehicles": 3
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "t48u1-qEJ3jrIXqBslqgYr-x3RYtPUPc",
+      "name": "FRANCISCO RAMOS FLORES",
+      "party": "PARTIDO PAIS PARA TODOS",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/t48u1-qEJ3jrIXqBslqgYr-x3RYtPUPc",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/b142ee2a-cd7f-4c4e-9f32-4c716fce3104.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional Jorge Basadre Grohmann",
+          "degree": "BACHILLER EN CIENCIAS CON MENCION EN INGENIERIA CIVIL",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "INGENIERO CIVIL",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "Maestría en Gestión y Políticas Públicas",
+          "completed": true,
+          "year": 2018,
+          "note": "Maestría en Gestión y Políticas Públicas - Constancia de Egresado"
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "Maestría en Ingeniería Civil con Mención en Gerencia de la Construcción",
+          "completed": true,
+          "year": 2017,
+          "note": "Maestría en Ingeniería Civil con Mención en Gerencia de la Construcción - Constancia de Egresado"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "Comercial FEDSUR S.A.C.",
+          "position": "Asesoramiento Técnico",
+          "startYear": 2026,
+          "endYear": 2026
+        },
+        {
+          "organization": "CONSORCIO CONCORDIA",
+          "position": "JEFE DE SUPERVISION",
+          "startYear": 2025,
+          "endYear": 2025
+        },
+        {
+          "organization": "MIRKO ANTONIO VARGAS DEL CASTILLO - CONSULTOR DE OBRA INGENIERIA CIVIL",
+          "position": "JEFE DE SUPERVISION",
+          "startYear": 2024,
+          "endYear": 2025
+        },
+        {
+          "organization": "CONSORCIO LA YARADA LOS PALOS",
+          "position": "JEFE DE SUPERVISION",
+          "startYear": 2023,
+          "endYear": 2023
+        },
+        {
+          "organization": "EL HORIZONTE S.R.L.",
+          "position": "RESIDENTE DE OBRA",
+          "startYear": 2023,
+          "endYear": 2023
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "PARTIDO PAIS PARA TODOS",
+          "position": "FUNDADOR",
+          "startYear": 2023,
+          "endYear": null
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "PARTIDO PAIS PARA TODOS",
+          "position": "SECRETARIO NACIONAL DE POLITICA E IDEOLOGÍA",
+          "startYear": 2023,
+          "endYear": null
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 88746,
+        "publicIncome": 0,
+        "privateIncome": 88746,
+        "properties": 0,
+        "vehicles": 2
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "KBPhd37eJI4qmgSNJZKTuemTTwhMV6lr",
+      "name": "HILDA MARISOL HERRERA HUAYHUA",
+      "party": "PARTIDO POLITICO TODO CON EL PUEBLO",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/KBPhd37eJI4qmgSNJZKTuemTTwhMV6lr",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/47441967-5ba5-49a4-8c07-6f22c6bc1d0b.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "No universitaria",
+          "institution": "Instituto Superior Pedagógico Público Jose Jimenez Borja - Tacna",
+          "degree": "Profesora de Educación Secundaria - Historia y Geografia",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "LICENCIADA EN EDUCACION SECUNDARIA",
+          "completed": true,
+          "year": 2009,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional de San Agustín de Arequipa",
+          "degree": "BACHILLER EN EDUCACION",
+          "completed": true,
+          "year": 2000,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "MAGISTER EN DOCENCIA UNIVERSITARIA Y GESTION EDUCATIVA",
+          "completed": true,
+          "year": 2004,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Catolica Santa Maria de Arequipa",
+          "degree": "Doctorado en Educacion",
+          "completed": true,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "Instituto de Educacion Superior Tecnologico Privado Guillermo Almenara Martins",
+          "position": "Director académico/Director general",
+          "startYear": 2021,
+          "endYear": 2026
+        },
+        {
+          "organization": "Unidad de Gestion Educativa Local de Tacna",
+          "position": "Profesora de Educacion Secundaria y otro",
+          "startYear": 2018,
+          "endYear": 2019
+        },
+        {
+          "organization": "Instituto de Educacion Superior Tecnológico Privado Guillermo Almenara Martins",
+          "position": "Director Académico",
+          "startYear": 2016,
+          "endYear": 2018
+        }
+      ],
+      "political": [],
+      "legal": [
+        {
+          "kind": "Registro penal declarado",
+          "subject": "Omisión, Rehusamiento de Actos Funcionales",
+          "outcome": "Un año privativo de libertad",
+          "court": "Sala Penal - Tacna",
+          "caseNumber": "02795-2015-37-2301-JR-PE-03",
+          "date": "06/04/2018",
+          "note": "Resolución N° 029, del 15/03/2021"
+        }
+      ],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 79000,
+        "publicIncome": 0,
+        "privateIncome": 79000,
+        "properties": 0,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "cCfhimsqaWKxm0F8pLL1L_wXFVMwj7V3",
+      "name": "JAIME SERGIO BAUTISTA AQUINO",
+      "party": "PERU MODERNO",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/cCfhimsqaWKxm0F8pLL1L_wXFVMwj7V3",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/c580423b-09cb-4322-875f-2c22d214286d.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Técnica",
+          "institution": "FRANCISCO DE PAULA GONZALES VIGIL",
+          "degree": "PROFESIONAL TÉCNICO EN ELECTRICIDAD",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD PRIVADA DE TACNA",
+          "degree": "ABOGADO",
+          "completed": true,
+          "year": 2011,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD PRIVADA DE TACNA",
+          "degree": "DOCTORADO EN DERECHO",
+          "completed": true,
+          "year": 2025,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL GREGORIO ALBARRAN",
+          "position": "SUBGERENTE DE PLANIFICACIÓN, MODERNIZACIÓN Y CT",
+          "startYear": 2024,
+          "endYear": 2025
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "MOVIMIENTO CIVICO PERUANO",
+          "position": "CONSEJERO REGIONAL",
+          "startYear": 2015,
+          "endYear": 2018
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "ALIANZA PARA EL PROGRESO",
+          "position": "Renuncia declarada",
+          "startYear": 2019,
+          "endYear": 2019
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "FE EN EL PERU",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [
+        {
+          "kind": "Registro de obligaciones declarado",
+          "subject": "CONTRACTUAL",
+          "outcome": "DEMANDA DE CUMPLIMIENTO DE OBLIGACIÓN DE OTORGAMIENTO DE TRANSFERENCIA VEHICULAR EN COMPRA VENTA",
+          "court": "1ER JUZGADO CIVIL DE TACNA",
+          "caseNumber": "01550-2008-0-2301-JR-CI-01",
+          "date": "",
+          "note": ""
+        }
+      ],
+      "finances": {
+        "year": null,
+        "annualIncome": null,
+        "publicIncome": null,
+        "privateIncome": null,
+        "properties": 2,
+        "vehicles": 10
+      },
+      "additional": [
+        "EL CANDIDATO SEÑALA HABER LABORADO EN LA MUNCIPALIDAD DISTRITSL DER SUSAPAYA COMO GERENTE DE ASESORIA JURÍDICA (RUC: 20279603835), UBICADO EN SUSAPAYA, EN EL AÑO 2023",
+        "EL CANDIDATO SEÑALA HABER REALIZADO UNA MESTRÍA EN LA UNIVERSIDAD CÉSAR VALLEJO EN LA ESPECIALIDAD DE GESTIÓN PÚBLICA",
+        "EL CANDIDATO SEÑALA HABER LABORADO EN EL GOBIERNO REGIONAL DE TACNA COMO CONSEJERO REGIONAL, UBICADO EN AV. GREGORIO ALBARRAN 526 - TACNA, DESDE EL AÑO 2015 HASTA EL 2018",
+        "EL CANDIDATO SEÑALA HABER LABORADO EN LA MUNICIPALIDAD DISTRITAL DE LA ALIANZA (RUC: 20147796715) EN EL ÁREA DE ASEOSORIA, UBICADA EN PROLONGACIÓN AV. PINTO 1337 TECNA, HASTA LE AÑO 2025",
+        "EL CANDIDATO SEÑALA QUE HA LABORADO EN LA MUNICIPALIDAD DISTRITAL DE SUSAPAYA (RUC: 20147796987) COMO SUBGERENTE FISCALIZACIÓN, UBICADO EN CALLE HERMANOS REYNOSO 15 POCOLAY EN EL AÑO 2024",
+        "EL CANDIDATO SEÑALA QUE PERTENECE AL DIRECTIVO DE CEADES-PERU, PRESIDENTE DEL CONSEJO DORECTIVO DE JUVENTUD DE FUTBUL CLUB, PRESIDNETE DEL CONSEJO DIRECTIVO DE ORGANIZACIÓN NO GUBERNAMENTAL TRANSCENDA PERÚ ONG"
+      ],
+      "annotations": [
+        {
+          "section": "RELACIÓN DE SENTENCIAS QUE DECLAREN FUNDADAS",
+          "date": "2026-09-25",
+          "before": "RUBRO VI – RELACIÓN DE SENTENCIAS, QUE DECLAREN FUNDADAS LAS DEMANDAS INTERPUESTAS CONTRA LOS CANDIDATOS POR INCUMPLIMIENTO DE OBLIGACIONES FAMILIARES Y/O ALIMENTARIAS, CONTRACTUALES Y LABORALES O POR INCURRIR EN VIOLENCIA FAMILIAR, QUE HUBIERAN QUEDADO FIRMES. \n¿TENGO INFORMACIÓN POR DECLARAR? _X_SI TENGO __ NO TENGO \nMATERIA DE LA DEMANDA 1\nMATERIA: CONTRACTUAL \nN° DE EXPEDIENTE: ﻿01550-2008-0-2301-JR-CI-01 \nÓRGANO JUDICIAL: 1ER JUZGADO CIVIL DE TACNA \nFALLO O PENA: DEMANDA DE CUMPLIMIENTO DE OBLIGACIÓN DE OTORGAMIENTO DE TRANSFERENCIA VEHICULAR EN COMPRA VENTA \nINFORMACIÓN COMPLEMENTARIA:",
+          "after": "RUBRO VI – RELACIÓN DE SENTENCIAS, QUE DECLAREN FUNDADAS LAS DEMANDAS INTERPUESTAS CONTRA LOS CANDIDATOS POR INCUMPLIMIENTO DE OBLIGACIONES FAMILIARES Y/O ALIMENTARIAS, CONTRACTUALES Y LABORALES O POR INCURRIR EN VIOLENCIA FAMILIAR, QUE HUBIERAN QUEDADO FIRMES. \n¿TENGO INFORMACIÓN POR DECLARAR? _X_SI TENGO __ NO TENGO \nMATERIA DE LA DEMANDA 1\nMATERIA: CUMPLIMIENTO DE OBLIGACIÓN DE OTORGAMIENTO DE TRANSFERENCIA VEHICULAR (*)\nN° DE EXPEDIENTE: 01550-2008-0-2301-JR-CI-01(**)\nÓRGANO JUDICIAL: PRIMER JUZGADO CIVIL- SEDE CENTRAL (***)\nFALLO O PENA: FUNDADA EN PARTE (****)\nINFORMACIÓN COMPLEMENTARIA: OBLIGACIÓN DE HACER\n(*)()(***)(****)CONFORME A LA RESOLUCIÓN Nº 33 DE FECHA 22.11.2013, REMITIDA MEDIANTE EL OFICIO N°002028-2026-P-CSJTA-PJ, RECIBIDO EN FECHA 04.08.2026, EMITIDO POR LA CORTE SUPERIOR DE JUSTICIA DE TACNA.\n¿"
+        }
+      ]
+    },
+    {
+      "id": "NV8u1JBzpSvCJr_yz2K9G7J01eag7raR",
+      "name": "JOEL SAUL CHINCHAZO MONTOYA",
+      "party": "PODEMOS PERU",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/NV8u1JBzpSvCJr_yz2K9G7J01eag7raR",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/036147b9-8639-4184-92d1-2e585b851709.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Católica de Santa María",
+          "degree": "BACHILLER EN MEDICINA VETERINARIA Y ZOOTECNIA",
+          "completed": true,
+          "year": 2013,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Católica de Santa María",
+          "degree": "MEDICO VETERINARIO Y ZOOTECNISTA",
+          "completed": true,
+          "year": 2013,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD PRIVADA DE TACNA",
+          "degree": "MAESTRIA EN GESTION POLÍTICAS PÚBLICAS",
+          "completed": true,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "CITY CAN",
+          "position": "DIRECTOR VETERINARIO",
+          "startYear": 2013,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "ACCION POPULAR",
+          "position": "Renuncia declarada",
+          "startYear": 2020,
+          "endYear": 2020
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "BANDERAS TACNEÑISTAS",
+          "position": "Renuncia declarada",
+          "startYear": 2022,
+          "endYear": 2022
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 725586,
+        "publicIncome": 0,
+        "privateIncome": 725586,
+        "properties": 2,
+        "vehicles": 2
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "-kUD4zaSVm7wnK6Ok-YCn7pltYUr6xNq",
+      "name": "LUIS ALBERTO LIENDO PIZARRO",
+      "party": "PARTIDO SICREO",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/-kUD4zaSVm7wnK6Ok-YCn7pltYUr6xNq",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/685c4f5a-8f78-41dd-b011-7768f6f5184a.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Técnica",
+          "institution": "INSTITUTO PEGAGOGICO \"JOSE JIMENEZ BORJA\"",
+          "degree": "PROFESOR DE EDUCACIÓN PRIMARIA",
+          "completed": true,
+          "year": null,
+          "note": "PROMOCIÓN: 1986\nOBTENIDO: 12/MARZO/1987\nCODIGO DE INSCRIPCIÓN: 00878GDDE TACNA"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "I.E. GUILLERMO AUZA ARCE",
+          "position": "DOCENTE - PRIMARIA",
+          "startYear": 1987,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO POPULAR CRISTIANO - PPC",
+          "position": "Renuncia declarada",
+          "startYear": 2010,
+          "endYear": 2010
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PERU MODERNO",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 43000,
+        "publicIncome": 43000,
+        "privateIncome": 0,
+        "properties": 0,
+        "vehicles": 0
+      },
+      "additional": [
+        "No están obligados a solicitar licencia los ciudadanos que bajo cualquier modalidad contractual ejerzan la función de docente de educación básica regular, técnica y universitaria, en merito del artículo 8°, inciso e) de la Ley de Elecciones Municipales - Ley 26864."
+      ],
+      "annotations": []
+    },
+    {
+      "id": "jjUexEXVwPR1JOUXN1JWgrDx6TN2B9Qy",
+      "name": "MARCO ANTONIO HUACOLLO ALVAREZ",
+      "party": "PARTIDO CIVICO OBRAS",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/jjUexEXVwPR1JOUXN1JWgrDx6TN2B9Qy",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/52a68e1c-12c1-4cc2-baf8-a58db7e8d060.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Nacional Jorge Basadre Grohmann",
+          "degree": "Ingeniería Agronómica",
+          "completed": true,
+          "year": 1995,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad José Carlos Mariátegui",
+          "degree": "Ciencias con Mención en Ingeniería Ambiental",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "Administración y Dirección de Empresas",
+          "completed": false,
+          "year": null,
+          "note": "Magister"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "Centro de Investigación y Producción de Abonos Orgánicos,  Capacitación y Asistencia Técnica – Perso",
+          "position": "Gerente",
+          "startYear": 2013,
+          "endYear": 2026
+        },
+        {
+          "organization": "INSTITUTO PARA EL DESARROLLO Y LA VIDA “ARBOL” – IDV",
+          "position": "Director Ejecutivo",
+          "startYear": 2011,
+          "endYear": 2026
+        },
+        {
+          "organization": "PRONATURA INTERNACIONAL (ONG BRASILEÑA)",
+          "position": "Parte del Equipo Técnico",
+          "startYear": 2019,
+          "endYear": 2020
+        },
+        {
+          "organization": "Cooperativa de Productores Agroecológicos de Tacna “Panes de  Piedra” – COOPRATAC “Panes de Piedra”",
+          "position": "Presidente, Gerente y Asesor Técnico",
+          "startYear": 2015,
+          "endYear": 2018
+        },
+        {
+          "organization": "Gobierno Regional de Tacna – Gerencia de Desarrollo Económico –  Programa PROCOMPITE Regional",
+          "position": "Coordinador Regional del Programa",
+          "startYear": 2015,
+          "endYear": 2016
+        }
+      ],
+      "political": [],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 48000,
+        "publicIncome": 0,
+        "privateIncome": 48000,
+        "properties": 0,
+        "vehicles": 1
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "__r1Lm0uzoVkWil2MGkCgoSDKeJ_riw-",
+      "name": "MARIO OSCAR HUAYLLA ESTAÑA",
+      "party": "PROGRESEMOS",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/__r1Lm0uzoVkWil2MGkCgoSDKeJ_riw-",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/cfe5e857-efc6-481d-a76a-144ea0c89421.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "INDEPENDIENTE",
+          "position": "ELECTRICISTA",
+          "startYear": 2007,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO POLITICO NACIONAL PERU LIBRE",
+          "position": "Renuncia declarada",
+          "startYear": 2022,
+          "endYear": 2022
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "ALIANZA PARA EL PROGRESO",
+          "position": "Renuncia declarada",
+          "startYear": 2025,
+          "endYear": 2025
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 42000,
+        "publicIncome": 0,
+        "privateIncome": 42000,
+        "properties": 0,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "TaGaVxxS40SgyQNF0UToXaAir9wQksRT",
+      "name": "MIGUEL ALBERTO RUIZ LLANCO",
+      "party": "PARTIDO PAIS PARA TODOS",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/TaGaVxxS40SgyQNF0UToXaAir9wQksRT",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/e32b6ca7-cb2e-4e3f-a0d5-c840ba34cf8d.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "ARQUITECTO",
+          "completed": true,
+          "year": 2012,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "BACHILLER EN ARQUITECTURA Y URBANISMO",
+          "completed": true,
+          "year": 2010,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MUNICIPALIDAD PROVINCIAL DE TACNA",
+          "position": "GERENTE DE DESARROLLO URBBANO",
+          "startYear": 2024,
+          "endYear": 2026
+        },
+        {
+          "organization": "MUNICIPALIDAD CORONEL GREGORIO ALBARRACIN LANCHIPA",
+          "position": "GERENTE DE DESARROLLO URBANO",
+          "startYear": 2023,
+          "endYear": 2023
+        },
+        {
+          "organization": "MUNICIPALIDAD PROVINCIAL DE TACNA",
+          "position": "SUB GERENTE DE PLANEAMIENTO URBANO",
+          "startYear": 2023,
+          "endYear": 2023
+        },
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL DE POCOLLAY",
+          "position": "SUB GERENTE DE PLANEAMIENTO URBANO Y CATASTRO",
+          "startYear": 2020,
+          "endYear": 2022
+        },
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL DE ITE",
+          "position": "GERENTE DE INFRAESTRUCTURA",
+          "startYear": 2019,
+          "endYear": 2019
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO POLITICO PERUANOS UNIDOS : ¡SOMOS LIBRES!",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 224000,
+        "publicIncome": 224000,
+        "privateIncome": 0,
+        "properties": 2,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "eiV4hgfJZ5fpfXwQ0-i4Pv87al83b9tP",
+      "name": "NIEL BRHAM ZAVALA MEZA",
+      "party": "ALIANZA PARA EL PROGRESO",
+      "role": "municipal",
+      "scope": "Provincia de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/eiV4hgfJZ5fpfXwQ0-i4Pv87al83b9tP",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/cf4ed792-6efe-4cb3-aeaf-af49c30fa787.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "ALAS PERUANAS",
+          "degree": "LIC. EN ADMINISTRACIÓN Y NEGOCIOS INTERNACIONALES",
+          "completed": true,
+          "year": 2024,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD TECNOLOGICA DEL PERU",
+          "degree": "MAESTRIA EN GESTION PUBLICA",
+          "completed": false,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MUNICIPALIDAD GREGORIO ALBARRACIN LANCHIPA",
+          "position": "ALCALDE",
+          "startYear": 2023,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "FRENTE ESPERANZA POR TACNA",
+          "position": "ALCALDE DISTRITAL",
+          "startYear": 2022,
+          "endYear": 2026
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+          "position": "Renuncia declarada",
+          "startYear": 2025,
+          "endYear": 2025
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "FRENTE ESPERANZA POR TACNA",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 127400,
+        "publicIncome": 127400,
+        "privateIncome": 0,
+        "properties": 2,
+        "vehicles": 2
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "tzBJlUv7pUODjD4Mg32KZvoEYzch1HQB",
+      "name": "SEGUNDO MARIO RUIZ RUBIO",
+      "party": "ALIANZA PARA EL PROGRESO",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/tzBJlUv7pUODjD4Mg32KZvoEYzch1HQB",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/41d2009c-ebdc-4051-aab3-9bf5d479263c.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Técnica",
+          "institution": "E.S.E.P. CARLOS CUETO FERNANDINI",
+          "degree": "BACHILLER EN SALUD",
+          "completed": true,
+          "year": null,
+          "note": "Se adjunta el titulo de Bachiller profesional en salud"
+        },
+        {
+          "level": "Universitaria",
+          "institution": "U.A. NESTOR CACERES VELASQUEZ DE JULIACA",
+          "degree": "ABOGADO",
+          "completed": true,
+          "year": 1995,
+          "note": "S e adjunta Titulo profesional de Abogado."
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "BACHILLER EN DERECHO",
+          "completed": true,
+          "year": 1994,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "Universidad Alas Peruanas S.A.",
+          "degree": "MAESTRO EN DERECHO CIVIL Y COMERCIAL",
+          "completed": true,
+          "year": 2014,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD PRIVADA DE TACNA",
+          "degree": "DOCTORADO EN DERECHO",
+          "completed": true,
+          "year": null,
+          "note": "SE ADJUNTA RESOLUCION DIRECTORAL N°0531-2025-ESPG/UPT"
+        }
+      ],
+      "experience": [
+        {
+          "organization": "ESTUDIO JURIDICO PARTICULAR",
+          "position": "ABOGADO",
+          "startYear": 2019,
+          "endYear": 2025
+        },
+        {
+          "organization": "UNIVERSIDAD PRIVADA DE TACNA",
+          "position": "DOCENTE",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "organization": "UNIVERSIDAD PRIVADA DE TACNA",
+          "position": "DOCENTE",
+          "startYear": 2020,
+          "endYear": 2021
+        },
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL CORONEL GREGORIO ALBARRACIN LANCHIPA",
+          "position": "ALCALDE",
+          "startYear": 2015,
+          "endYear": 2018
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo electivo",
+          "organization": "SIEMPRE TACNA",
+          "position": "ALCALDE DISTRITAL",
+          "startYear": 2015,
+          "endYear": 2018
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "SIEMPRE TACNA",
+          "position": "REPRESENTANTE LEGAL",
+          "startYear": 2021,
+          "endYear": 2024
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "SIEMPRE TACNA",
+          "position": "PRESIDENTE",
+          "startYear": 2021,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "SIEMPRE TACNA",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "UNION POR EL PERU",
+          "position": "Renuncia declarada",
+          "startYear": 2011,
+          "endYear": 2011
+        }
+      ],
+      "legal": [
+        {
+          "kind": "Registro penal declarado",
+          "subject": "USURPACION SIMPLE",
+          "outcome": "1 AÑO",
+          "court": "JUZGADO PENAL DE TACNA",
+          "caseNumber": "82-94",
+          "date": "24/01/1995",
+          "note": "SE ADJUNTA INSTRUC. N°838-TACNA"
+        }
+      ],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 68405.44,
+        "publicIncome": 28405.44,
+        "privateIncome": 40000,
+        "properties": 1,
+        "vehicles": 0
+      },
+      "additional": [
+        "SE ADJUNTA CERTIFICADO JUDICIAL DE ANTECEDENTES PENALES",
+        "se adjunta 2 copias de dni para acreditar la residencia",
+        "se adjunta  la partida P20017950",
+        "SE ADJUNTA BOLETA DE PENSION MENSUAL\nREPORTE DE INGRESO DEL AÑO 2025"
+      ],
+      "annotations": []
+    },
+    {
+      "id": "HltNP2lV-RtohKtiA7GNbKopN5HRwYyz",
+      "name": "STEPHEN ALEXANDER UGARTE DAVILA",
+      "party": "MOVIMIENTO INDEPENDIENTE REGIONAL FUERZA TACNA",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/HltNP2lV-RtohKtiA7GNbKopN5HRwYyz",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/a7b158f1-ee0f-44a7-af96-580727ec3ff0.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "LICENCIADO EN COMUNICACION SOCIAL",
+          "completed": true,
+          "year": 2007,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Tacna",
+          "degree": "BACHILLER EN CIENCIAS DE LA COMUNICACION",
+          "completed": true,
+          "year": 2006,
+          "note": ""
+        },
+        {
+          "level": "Posgrado",
+          "institution": "UNIVERSIDAD DE TARAPACÁ",
+          "degree": "GRADO DE MAGÍSTER EN DIRECCIÓN Y GESTIÓN DE EMPRESAS - MBA (GRADO DE MAESTRO)",
+          "completed": true,
+          "year": 2021,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "MINISTERIO DEL INTERIOR",
+          "position": "PREFECTO REGIONAL",
+          "startYear": 2023,
+          "endYear": 2026
+        },
+        {
+          "organization": "MUNICIPALIDAD DISTRITAL DE ITE",
+          "position": "GERENTE DE DESARROLLO SOCIAL",
+          "startYear": 2019,
+          "endYear": 2022
+        },
+        {
+          "organization": "GOBIERNO REGIONAL DE TACNA",
+          "position": "DIRECTOR EJECUTIVO DE LA OFICINA EJECUTIVA DE RELACIONES PÚBLICAS E IMAGEN INSTITUCIONAL",
+          "startYear": 2018,
+          "endYear": 2018
+        },
+        {
+          "organization": "GOBIERNO REGIONAL DE TACNA",
+          "position": "DIRECTOR EJECUTIVO DE LA OFICINA REGIONAL DE SEGURIDAD, DEFENSA NACIONAL Y CIVIL",
+          "startYear": 2017,
+          "endYear": 2018
+        }
+      ],
+      "political": [],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 47706.4,
+        "publicIncome": 47706.4,
+        "privateIncome": 0,
+        "properties": 0,
+        "vehicles": 0
+      },
+      "additional": [],
+      "annotations": []
+    },
+    {
+      "id": "cW-qm6WWi-Zc4KBFVjPaaLr9vlsq1RE5",
+      "name": "WALTER ANCHAPURI ZAPATA",
+      "party": "AHORA NACION - AN",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/cW-qm6WWi-Zc4KBFVjPaaLr9vlsq1RE5",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/379cca45-e02f-4146-98c1-4e295b3c9062.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Trujillo",
+          "degree": "ABOGADO",
+          "completed": true,
+          "year": 2025,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Privada de Trujillo",
+          "degree": "BACHILLER EN DERECHO",
+          "completed": true,
+          "year": 2024,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Católica Los Ángeles de Chimbote",
+          "degree": "CONTADOR PÚBLICO",
+          "completed": true,
+          "year": 2021,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "Universidad Católica Los Ángeles de Chimbote",
+          "degree": "BACHILLER EN CIENCIAS CONTABLES Y FINANCIERAS",
+          "completed": true,
+          "year": 2018,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "AZPER JC SAC",
+          "position": "ADMINISTRADOR",
+          "startYear": 2024,
+          "endYear": 2026
+        },
+        {
+          "organization": "ECOSUR PERU SAC",
+          "position": "GERENTE GENERAL",
+          "startYear": 2016,
+          "endYear": 2026
+        },
+        {
+          "organization": "CITV PACHACUTEC PERU SAC",
+          "position": "ADMINISTRADOR",
+          "startYear": 2024,
+          "endYear": 2025
+        }
+      ],
+      "political": [
+        {
+          "kind": "Cargo partidario",
+          "organization": "MOVIMIENTO REGIONAL TODOS POR TACNA",
+          "position": "PRESIDENTE",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "kind": "Cargo partidario",
+          "organization": "MOVIMIENTO REGIONAL TODOS POR TACNA",
+          "position": "FUNDADOR",
+          "startYear": 2023,
+          "endYear": 2024
+        },
+        {
+          "kind": "Renuncia",
+          "organization": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+          "position": "Renuncia declarada",
+          "startYear": 2024,
+          "endYear": 2024
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 43500,
+        "publicIncome": 0,
+        "privateIncome": 43500,
+        "properties": 8,
+        "vehicles": 6
+      },
+      "additional": [
+        "SOY EL PRESIDENTE DEL CONSEJO DIRECTIVO (2026-2027), DEL CLUB DEPORTIVO CULTURAL PATRIOTA CON RUC: 20612142735",
+        "Expediente N°: 01349-2023-0-2301-JR-CI-02,\nÓrgano Jurisdiccional: 2° JUZGADO CIVIL - Sede Central,\nFecha de Inicio: 08/08/2023,\nMateria: OBLIGACION DE DAR SUMA DE DINERO,\nProceso: UNICO DE EJECUCION,\nEspecialidad: CIVIL,\nParte procesal: DEMANDADO,\nEstado: EN EJECUCION.",
+        "Expediente N°: 02362-2025-0-2301-JR-CI-04,\nÓrgano Jurisdiccional: JUZGADO CIVIL TRANSITORIO - SEDE CENTRAL,\nMateria: CONVOCATORIA A JUNTA O ASAMBLEA GENERAL,\nProceso: NO CONTENCIOSO,\nEspecialidad: CIVIL,\nParte procesal: DEMANDADO,\nEstado: EN TRAMITE(Pendiente)",
+        "SOY REPRESENTANTE LEGAL DEL CENTRO DE INSPECCION TECNICA VEHICULAR HUERTALINO SOCIEDAD ANONIMA CERRADA",
+        "Expediente N°: 01525-2023-0-2301-JR-CI-04,\nÓrgano Jurisdiccional: 4º JUZGADO CIVIL (EX J. CIVIL T. GREGORIO A.) - SEDE CENTRAL,\nMateria: OBLIGACION DE DAR SUMA DE DINERO,\nProceso: UNICO DE EJECUCION,\nEspecialidad: CIVIL,\nParte procesal: DEMANDADO,\nEstado: ARCHIVO DEFINITIVO.",
+        "SOY REPRESENTANTE DEL CENTRO DE SERVICIOS MEDICOS SAN ANTONIO DE PADUA SOCIEDAD ANONIMA CERRADA"
+      ],
+      "annotations": []
+    },
+    {
+      "id": "2fMJmBVPl0ZmLAmkaqkan4uWy54UuWqg",
+      "name": "WILBER FLORES CACHICATARI",
+      "party": "PODEMOS PERU",
+      "role": "regional",
+      "scope": "Departamento de Tacna",
+      "status": "INSCRITO",
+      "source": {
+        "name": "JNE · Voto Informado · DJHV",
+        "url": "https://votoinformado.jne.gob.pe/candidatos/hoja-vida/2fMJmBVPl0ZmLAmkaqkan4uWy54UuWqg",
+        "consultedAt": "2026-10-13",
+        "pdfUrl": "https://mpesije.jne.gob.pe/apidocs/06caa5dc-150a-4bf8-91f7-a88a9b0ee1d9.pdf"
+      },
+      "reviewedSections": [
+        "education",
+        "experience",
+        "political",
+        "legal",
+        "finances"
+      ],
+      "education": [
+        {
+          "level": "Básica",
+          "institution": "",
+          "degree": "Primaria concluida · Secundaria concluida",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Técnica",
+          "institution": "ANDRE VESALIO",
+          "degree": "PROFESIONAL TÉCNICO EN ADMINISTRACIÓN DE EMPRESAS",
+          "completed": true,
+          "year": null,
+          "note": ""
+        },
+        {
+          "level": "Universitaria",
+          "institution": "UNIVERSIDAD CESAR VALLEJO",
+          "degree": "INGENIERIA CIVIL",
+          "completed": true,
+          "year": null,
+          "note": ""
+        }
+      ],
+      "experience": [
+        {
+          "organization": "WF INGENIEROS CONTRATISTA E.I.R.L.",
+          "position": "GERENTE",
+          "startYear": 2024,
+          "endYear": 2026
+        },
+        {
+          "organization": "W&V LARCO S.A.C.",
+          "position": "GERENTE",
+          "startYear": 2016,
+          "endYear": 2026
+        }
+      ],
+      "political": [
+        {
+          "kind": "Renuncia",
+          "organization": "UNIDOS POR TACNA",
+          "position": "Renuncia declarada",
+          "startYear": 2026,
+          "endYear": 2026
+        }
+      ],
+      "legal": [],
+      "finances": {
+        "year": 2025,
+        "annualIncome": 18000,
+        "publicIncome": 0,
+        "privateIncome": 18000,
+        "properties": 4,
+        "vehicles": 2
+      },
+      "additional": [],
+      "annotations": []
+    }
+  ]
+}
