@@ -1,6 +1,6 @@
 {
   "name": "tacna-electoral-dashboard",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "type": "module",
   "private": true,
   "description": "Dashboard electoral y análisis de hojas de vida con SQLite",

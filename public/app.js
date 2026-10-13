@@ -77,7 +77,7 @@ function navigate() {
     });
     if(['perfiles','analisis'].includes(id)) {
       const expectedHash=location.hash;
-      candidatesModule.then(()=>{if(location.hash===expectedHash && !$('candidate-content').hidden) requestAnimationFrame(()=>$(id==='perfiles'?'candidate-list-heading':'bi-analytics').scrollIntoView({block:'start',behavior:'auto'}));});
+      candidatesModule.then(()=>{if(location.hash===expectedHash && !$('candidate-content').hidden) requestAnimationFrame(()=>$(id).scrollIntoView({block:'start',behavior:'auto'}));});
     }
   }
   if (viewId === 'vecinos') loadCitizen();
