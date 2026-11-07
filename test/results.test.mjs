@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resultReport,resultMetrics,pairComparison,crossElection,resultsCSV} from '../public/results-model.js';
 
 const data=JSON.parse(await readFile(new URL('../public/data.json',import.meta.url),'utf8'));
-const snapshot=JSON.parse(await readFile(new URL('../public/territorial.json',import.meta.url),'utf8'));
+const snapshot=JSON.parse(await readFile(new URL('./fixtures/territorial.json',import.meta.url),'utf8'));
 const near=(actual,expected)=>assert.ok(Math.abs(actual-expected)<.000001,`${actual} != ${expected}`);
 
 test('resultados: el corte periodístico conserva sus porcentajes sin tomar votos de otra fecha',()=>{
@@ -42,7 +42,14 @@ test('resultados: comparación entre cargos muestra solo organizaciones comparti
   const municipal=resultReport(data,snapshot,'municipal','archive'),regional=resultReport(data,snapshot,'regional','archive'),rows=crossElection(municipal,regional);
   assert.equal(rows.length,4);assert.equal(rows[0].municipal,28.043);assert.equal(rows[0].regional,29.314);
   assert.ok(!rows.some(r=>/Renovación|Progresemos/.test(r.name)));
-  const fallback=resultReport(data,null,'municipal');assert.equal(fallback.sourceKind,'archive');assert.equal(fallback.parties[0].votes,null);
+});
+test('resultados: un reporte territorial ausente conserva el ámbito solicitado',()=>{
+  const partial={...snapshot,reports:snapshot.reports.filter(report=>report.zoneCode!=='220400')};
+  assert.equal(resultReport(data,partial,'municipal','territorial','220400'),null);
+  assert.equal(resultReport(data,null,'municipal'),null);
+  assert.deepEqual(crossElection(null,resultReport(data,partial,'regional')),[]);
+  const archive=resultReport(data,null,'municipal','archive');
+  assert.equal(archive.sourceKind,'archive');assert.equal(archive.parties[0].votes,null);
 });
 test('resultados: CSV conserva ámbito, corte, consulta, métricas y nulos en la exportación completa',()=>{
   const regional=resultReport(data,snapshot,'regional'),csv=resultsCSV(regional);

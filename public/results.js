@@ -1,6 +1,7 @@
-import {humanize,partyKey} from './candidate-model.js';
+import {humanize} from './candidate-model.js';
 import {partyColor} from './map-model.js';
 import {resultReport,resultMetrics,pairComparison,crossElection,resultsCSV} from './results-model.js';
+import {renderHistory} from './results-history.js';
 
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const number=(value,digits=3)=>value==null?'No disponible':new Intl.NumberFormat('es-PE',{maximumFractionDigits:digits}).format(value);
@@ -14,12 +15,38 @@ function link(text,url){const n=el('a','text-link',text);n.href=url;n.target='_b
 function chart(label){const n=svg('svg',{viewBox:'0 0 560 250',class:'results-svg',role:'img','aria-label':label});n.append(svg('title',{},label));return n;}
 function tile(value,label,note){const n=el('article','result-metric');n.append(el('span','',label),el('strong','',value),el('small','',note));return n;}
 function chartHeading(id,title,note){const parent=$(id);parent.replaceChildren(el('h3','',title),el('p','results-chart-note',note));return parent;}
-async function loadSnapshot(){try{const r=await fetch('./territorial.json');if(!r.ok)throw new Error();snapshot=await r.json();$('results-status').textContent='';$('results-retry').hidden=true;}catch{snapshot=null;$('results-source').value='archive';$('results-status').textContent='No se pudo cargar el reporte territorial. Puedes consultar el corte periodístico y volver a intentar la carga.';$('results-retry').hidden=false;}}
+async function loadSnapshot(){
+  try {
+    const response=await fetch('./territorial.json');
+    if(!response.ok)throw new Error();
+    const report=await response.json();
+    if(!Array.isArray(report?.reports)||!Array.isArray(report.geography?.features))throw new Error();
+    snapshot=report;
+  } catch {
+    snapshot=null;
+    $('results-source').value='archive';
+  }
+}
 export async function init(input){data=input;await loadSnapshot();if(!bound){bound=true;$('results-source').addEventListener('change',()=>render(active));$('results-zone').addEventListener('change',()=>render(active));for(const id of ['results-left','results-right'])$(id).addEventListener('change',()=>{if($('results-left').value===$('results-right').value){const other=id==='results-left'?'results-right':'results-left';$(other).value=current.parties.find(p=>p.name!==$(id).value).name;}renderPair();});$('results-retry').addEventListener('click',async()=>{await loadSnapshot();if(snapshot)$('results-source').value='territorial';render(active);});}render(active);}
 export function render(election){if(!data)return;active=election;
   const source=$('results-source').value;if(source==='archive')$('results-zone').value='220100';$('results-source').querySelector('option[value="territorial"]').disabled=!snapshot;
   $('results-zone').disabled=active==='regional'||source==='archive';
+  renderHistory(data.electionDate,active,active==='regional'?'220000':$('results-zone').value);
   current=resultReport(data,snapshot,active,source,$('results-zone').value);
+  $('results-content').hidden=!current;
+  $('results-source-link').hidden=!current;
+  $('export').disabled=!current;
+  $('results-retry').hidden=Boolean(snapshot&&current);
+  $('results-status').textContent=!snapshot?'No se pudo cargar el reporte territorial. Puedes consultar el corte periodístico y volver a intentar la carga.':'';
+  if(!current) {
+    const scope=active==='regional'?'Departamento de Tacna':'Provincia de '+$('results-zone').selectedOptions[0].textContent;
+    $('results-title').textContent=data[active].title+' · '+scope;
+    $('results-cutoff').textContent='Andina / ONPE';
+    $('results-scope-note').textContent='';
+    $('results-source-link').removeAttribute('href');
+    $('results-status').textContent='El reporte territorial de este ámbito no está disponible.';
+    return;
+  }
   const m=resultMetrics(current);
   $('results-title').textContent=current.title+' · '+current.scope;
   $('results-cutoff').textContent=current.sourceName+' · Corte: '+date(current)+' · Consulta: '+current.consultedAt;
@@ -33,7 +60,7 @@ export function render(election){if(!data)return;active=election;
   if(current.complete){const rounding=' Las sumas pueden diferir ligeramente del 100% por el redondeo de los porcentajes publicados.';$('results-table-note').append(document.createTextNode(rounding));$('results-distribution').append(el('p','results-chart-note',rounding));}
   for(const id of ['results-left','results-right']){const previous=$(id).value;$(id).replaceChildren(...m.ranked.map(p=>new Option(humanize(p.name),p.name)));if(m.ranked.some(p=>p.name===previous))$(id).value=previous;else $(id).value=m.ranked[id==='results-left'?0:1].name;}
   if($('results-left').value===$('results-right').value)$('results-right').value=m.ranked.find(p=>p.name!==$('results-left').value).name;
-  renderPair();$('export').disabled=false;
+  renderPair();
 }
 function renderRanking(m){const host=chartHeading('results-ranking','Comparación de todas las listas','Escala común de 0 a 100% de votos válidos. Cada barra conserva su porcentaje original.');
   const grid=el('div','result-ranking');for(const p of m.ranked){const row=el('div','result-rank-row'),identity=el('div','result-rank-identity');if(p.candidate?.photo?.url){const image=el('img');image.src=p.candidate.photo.url;image.alt='Fotografía de '+humanize(p.candidate.name)+' · JNE';image.width=36;image.height=44;image.loading='lazy';identity.append(image);}const names=el('div');names.append(el('strong','',humanize(p.name)));if(p.candidate)names.append(link(humanize(p.candidate.name)+' ↗',p.candidate.sourceUrl));identity.append(el('span','result-rank-number',String(p.rank).padStart(2,'0')),names);const track=el('div','result-bar-track');track.title=pct(p.percent);const bar=el('div','result-bar-fill');bar.style.width=p.percent+'%';bar.style.background=partyColor(p.name);track.append(bar);const value=el('div','result-rank-value');value.append(el('strong','',pct(p.percent)),el('small','',p.votes==null?'Votos no publicados':number(p.votes,0)+' votos'));row.append(identity,track,value);grid.append(row);}host.append(grid,el('p','results-chart-note','0% '+ '·'.repeat(3)+' 25% '+ '·'.repeat(3)+' 50% '+ '·'.repeat(3)+' 75% '+ '·'.repeat(3)+' 100%'));}
@@ -46,7 +73,9 @@ function renderQuality(m){const host=chartHeading('results-quality','Votos váli
   const grid=el('div','results-quality-grid');for(const [label,value]of [['Votos válidos',m.validVotes],['Votos emitidos',m.castVotes],['Emitidos fuera de los válidos',m.otherCast]]){const item=el('div');item.append(el('span','',label),el('strong','',number(value,0)));grid.append(item);}host.append(grid);
   if(m.validShareOfCast!=null){const bar=el('div','result-quality-bar'),valid=el('div');valid.style.width=m.validShareOfCast+'%';bar.append(valid);bar.setAttribute('role','img');bar.setAttribute('aria-label',pct(m.validShareOfCast)+' de votos emitidos son válidos');host.append(bar,el('p','result-pair-insight',`${pct(m.validShareOfCast)} de los votos emitidos del reporte son válidos. El resto (${pct(100-m.validShareOfCast)}) no se divide entre blancos, nulos u otras categorías porque ese desglose no está publicado en esta copia.`));}else host.append(el('p','result-pair-insight','La fuente seleccionada no ofrece totales compatibles de votos emitidos. Se mantienen como no disponibles.'));
   host.append(el('p','results-chart-note','Avance de actas: '+pct(current.progress)+' · Fecha del reporte: '+date(current)));}
-function renderCross(){const source=$('results-source').value,municipal=resultReport(data,snapshot,'municipal',source,$('results-zone').value),regional=resultReport(data,snapshot,'regional',source),rows=crossElection(municipal,regional);const host=chartHeading('results-cross','Organizaciones en ambos cargos',`${municipal.scope} frente a ${regional.scope}. Cada porcentaje usa los votos válidos de su propia elección; no se suman ni indican transferencias de votos.`);
+function renderCross(){const source=$('results-source').value,municipal=resultReport(data,snapshot,'municipal',source,$('results-zone').value),regional=resultReport(data,snapshot,'regional',source);
+  if(!municipal||!regional){chartHeading('results-cross','Organizaciones en ambos cargos','La comparación requiere un reporte disponible para cada cargo.');return;}
+  const rows=crossElection(municipal,regional),host=chartHeading('results-cross','Organizaciones en ambos cargos',`${municipal.scope} frente a ${regional.scope}. Cada porcentaje usa los votos válidos de su propia elección; no se suman ni indican transferencias de votos.`);
   const legend=el('p','results-cross-key');legend.append(el('span','municipal-key','● Alcaldía provincial'),el('span','regional-key','◆ Gobierno regional'));host.append(legend);const table=el('div','results-cross-rows');const headings=el('div','results-cross-row results-cross-headings');headings.append(el('strong','','Organización'),el('span','','Escala 0–100% · Alcaldía'),el('span','','Región'));table.append(headings);for(const row of rows){const line=el('div','results-cross-row');line.append(el('strong','',humanize(row.name)));const graphic=svg('svg',{viewBox:'0 0 440 48',role:'img','aria-label':`Alcaldía: ${pct(row.municipal)}; gobierno regional: ${pct(row.regional)}`});graphic.append(svg('line',{x1:10,x2:330,y1:24,y2:24,stroke:'#e5ecf2','stroke-width':8}),svg('line',{x1:10+row.municipal/100*320,x2:10+row.regional/100*320,y1:24,y2:24,stroke:'#8ba4b8','stroke-width':3}),svg('circle',{cx:10+row.municipal/100*320,cy:24,r:6,fill:'#df9a27'}));const x=10+row.regional/100*320;graphic.append(svg('path',{d:`M${x} 16 L${x+7} 24 L${x} 32 L${x-7} 24 Z`,fill:'#184a6a'}),svg('text',{x:350,y:29,class:'results-svg-value'},pct(row.municipal)));line.append(graphic,el('span','',pct(row.regional)));table.append(line);}host.append(table,el('p','results-chart-note',`Corte alcaldía: ${date(municipal)} · Corte regional: ${date(regional)}. Solo se muestran organizaciones presentes en ambos reportes.`),link('Fuente de alcaldía ↗',municipal.sourceUrl),document.createTextNode(' · '),link('Fuente regional ↗',regional.sourceUrl));}
 function renderTable(m){const body=$('results-body');body.replaceChildren();for(const p of m.ranked){const row=el('tr');for(const value of [String(p.rank).padStart(2,'0'),humanize(p.name),p.candidate?humanize(p.candidate.name):'Ficha no vinculada',pct(p.percent),number(p.votes,0),pp(p.gapLeader),p.gapPrevious==null?'—':pp(p.gapPrevious),pct(p.cumulative)])row.append(el('td','',value));body.append(row);}$('results-table-note').textContent=`${m.ranked.length} listas · Suma de porcentajes: ${pct(m.listedShare)}. Las diferencias se expresan en puntos porcentuales; el acumulado suma filas en orden de posición.${current.complete?' Los votos válidos equivalen a la suma de votos de las listas.':' El remanente fuera del listado no se reparte entre organizaciones desconocidas.'}`;}
 export function exportCurrent(){if(!current)return;const url=URL.createObjectURL(new Blob([resultsCSV(current)],{type:'text/csv;charset=utf-8'}));const anchor=el('a');anchor.href=url;anchor.download=`tacna-resultados-${current.election}-${current.zoneCode}.csv`;anchor.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}

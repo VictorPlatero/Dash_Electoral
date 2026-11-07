@@ -4,6 +4,20 @@ export const sections = ['education', 'experience', 'political', 'legal', 'finan
 export const partyKey = value => normalize(value).replace(/[^a-z0-9]+/g, ' ').trim();
 export const humanize = value => String(value ?? '').toLocaleLowerCase('es-PE').replace(/(^|\s|[(/-])\p{L}/gu, text => text.toLocaleUpperCase('es-PE'));
 
+const candidateCollator = new Intl.Collator('es');
+export function compareCandidates(a, b, sort) {
+  if (sort === 'votes') {
+    const left = a.electoral?.percent, right = b.electoral?.percent;
+    const byVotes = a.role.localeCompare(b.role, 'es') || Number(left == null) - Number(right == null) || (right ?? 0) - (left ?? 0);
+    if (byVotes) return byVotes;
+  }
+  if (sort === 'recent') {
+    const byDate = b.source.consultedAt.localeCompare(a.source.consultedAt, 'es');
+    if (byDate) return byDate;
+  }
+  return candidateCollator.compare(a.name, b.name) || (a.id < b.id ? -1 : Number(a.id > b.id));
+}
+
 export function describeCandidate(candidate) {
   const reviewed = candidate.reviewedSections || [];
   const education = candidate.education || [], jobs = candidate.experience || [];

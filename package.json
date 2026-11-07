@@ -4,6 +4,6 @@
   "type": "module",
   "private": true,
   "description": "Dashboard electoral y análisis de hojas de vida con SQLite",
-  "scripts": { "build": "node scripts/build.mjs", "start": "node scripts/serve.mjs", "preview:static":"node scripts/serve-static.mjs", "sync:jne": "node scripts/sync-jne.mjs", "sync:map":"node scripts/sync-map.mjs", "test": "node --test" },
+  "scripts": { "build": "node scripts/build.mjs", "start": "node scripts/serve.mjs", "preview:static":"node scripts/serve-static.mjs", "sync:jne": "node scripts/sync-jne.mjs", "sync:map":"node scripts/sync-map.mjs", "history:capture":"node scripts/history.mjs capture", "history:publish":"node scripts/history.mjs publish", "update:daily":"node scripts/sync-daily.mjs", "update:force":"node scripts/sync-daily.mjs --force", "update:status":"node scripts/sync-daily.mjs --status", "update:register":"powershell -NoProfile -ExecutionPolicy Bypass -File scripts/register-daily-update.ps1", "test": "node --test" },
   "engines": { "node": ">=22.13.0 <25" }
 }

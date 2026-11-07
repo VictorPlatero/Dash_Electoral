@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 1,
+  "cuts": [
+    {
+      "id": "10e1f3cfe2d334c13daddda1e4eedbbe9c8e1ab78f0af109cdbea0f3082fb521",
+      "electionDate": "2026-10-04",
+      "election": "regional",
+      "title": "Gobierno regional",
+      "scope": "Departamento de Tacna",
+      "zoneCode": "220000",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=gobernador&idEleccion=1&tipoFiltro=ubigeo_nivel_01&idAmbitoGeografico=1&ubigeoNivel1=220000",
+      "reportedAt": "2026-11-06T21:01:45.697Z",
+      "cutoffLabel": null,
+      "consultedAt": "2026-11-07",
+      "complete": true,
+      "totalsCompatible": true,
+      "progress": 100,
+      "validVotes": 218948,
+      "castVotes": 245815,
+      "parties": [
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 29.337,
+          "votes": 64233
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 17.61,
+          "votes": 38557
+        },
+        {
+          "name": "RENOVACIÓN POPULAR PERÚ",
+          "percent": 13.611,
+          "votes": 29802
+        },
+        {
+          "name": "MOVIMIENTO INDEPENDIENTE REGIONAL FUERZA TACNA",
+          "percent": 8.773,
+          "votes": 19208
+        },
+        {
+          "name": "PODEMOS PERÚ",
+          "percent": 7.778,
+          "votes": 17029
+        },
+        {
+          "name": "PROGRESEMOS",
+          "percent": 6.9,
+          "votes": 15108
+        },
+        {
+          "name": "PARTIDO PAÍS PARA TODOS",
+          "percent": 4.362,
+          "votes": 9550
+        },
+        {
+          "name": "UNIDOS POR TACNA",
+          "percent": 3.455,
+          "votes": 7564
+        },
+        {
+          "name": "PARTIDO DEMÓCRATA UNIDO PERÚ",
+          "percent": 3.292,
+          "votes": 7207
+        },
+        {
+          "name": "PARTIDO CÍVICO OBRAS",
+          "percent": 1.613,
+          "votes": 3532
+        },
+        {
+          "name": "PARTIDO DEL BUEN GOBIERNO",
+          "percent": 1.221,
+          "votes": 2674
+        },
+        {
+          "name": "PARTIDO POLÍTICO TODO CON EL PUEBLO",
+          "percent": 0.805,
+          "votes": 1763
+        },
+        {
+          "name": "PERÚ MODERNO",
+          "percent": 0.661,
+          "votes": 1447
+        },
+        {
+          "name": "ALIANZA ELECTORAL VENCEREMOS",
+          "percent": 0.582,
+          "votes": 1274
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "13d6ff755af162ad059119af2f6ba180db20e3515f6416ded4cb0b0325be4cbf",
+      "electionDate": "2026-10-04",
+      "election": "regional",
+      "title": "Gobierno regional",
+      "scope": "Departamento de Tacna",
+      "zoneCode": "220000",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=gobernador&idEleccion=1&tipoFiltro=ubigeo_nivel_01&idAmbitoGeografico=1&ubigeoNivel1=220000",
+      "reportedAt": "2026-10-13T11:45:29.532Z",
+      "cutoffLabel": null,
+      "consultedAt": "2026-10-13",
+      "complete": true,
+      "totalsCompatible": true,
+      "progress": 98.839,
+      "validVotes": 216454,
+      "castVotes": 242971,
+      "parties": [
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 29.314,
+          "votes": 63452
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 17.63,
+          "votes": 38161
+        },
+        {
+          "name": "RENOVACIÓN POPULAR PERÚ",
+          "percent": 13.615,
+          "votes": 29471
+        },
+        {
+          "name": "MOVIMIENTO INDEPENDIENTE REGIONAL FUERZA TACNA",
+          "percent": 8.777,
+          "votes": 18998
+        },
+        {
+          "name": "PODEMOS PERÚ",
+          "percent": 7.772,
+          "votes": 16822
+        },
+        {
+          "name": "PROGRESEMOS",
+          "percent": 6.91,
+          "votes": 14958
+        },
+        {
+          "name": "PARTIDO PAÍS PARA TODOS",
+          "percent": 4.371,
+          "votes": 9461
+        },
+        {
+          "name": "UNIDOS POR TACNA",
+          "percent": 3.442,
+          "votes": 7450
+        },
+        {
+          "name": "PARTIDO DEMÓCRATA UNIDO PERÚ",
+          "percent": 3.287,
+          "votes": 7115
+        },
+        {
+          "name": "PARTIDO CÍVICO OBRAS",
+          "percent": 1.611,
+          "votes": 3488
+        },
+        {
+          "name": "PARTIDO DEL BUEN GOBIERNO",
+          "percent": 1.221,
+          "votes": 2643
+        },
+        {
+          "name": "PARTIDO POLÍTICO TODO CON EL PUEBLO",
+          "percent": 0.807,
+          "votes": 1747
+        },
+        {
+          "name": "PERÚ MODERNO",
+          "percent": 0.66,
+          "votes": 1429
+        },
+        {
+          "name": "ALIANZA ELECTORAL VENCEREMOS",
+          "percent": 0.582,
+          "votes": 1259
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "2e91ccb4cf5bf400130bf7f7c21f9978bea2c4458876c95f19b6a8c2a3e1a262",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Candarave",
+      "zoneCode": "220400",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=provincial&idEleccion=3&tipoFiltro=ubigeo_nivel_02&idAmbitoGeografico=1&ubigeoNivel1=220000&ubigeoNivel2=220400",
+      "reportedAt": null,
+      "cutoffLabel": null,
+      "consultedAt": "2026-10-13",
+      "complete": true,
+      "totalsCompatible": false,
+      "progress": null,
+      "validVotes": 3354,
+      "castVotes": null,
+      "parties": [
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 40.4,
+          "votes": 1355
+        },
+        {
+          "name": "PROGRESEMOS",
+          "percent": 33.9,
+          "votes": 1137
+        },
+        {
+          "name": "AVANZA PAÍS - PARTIDO DE INTEGRACIÓN SOCIAL",
+          "percent": 19.917,
+          "votes": 668
+        },
+        {
+          "name": "UNIDOS POR TACNA",
+          "percent": 3.667,
+          "votes": 123
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 2.117,
+          "votes": 71
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "556ed618ae22a2b5d6291025443bfb573d36e874e926a45ba27f6239865a6158",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Jorge Basadre",
+      "zoneCode": "220300",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=provincial&idEleccion=3&tipoFiltro=ubigeo_nivel_02&idAmbitoGeografico=1&ubigeoNivel1=220000&ubigeoNivel2=220300",
+      "reportedAt": "2026-10-05T15:46:14.755Z",
+      "cutoffLabel": null,
+      "consultedAt": "2026-10-13",
+      "complete": true,
+      "totalsCompatible": true,
+      "progress": 100,
+      "validVotes": 8416,
+      "castVotes": 9075,
+      "parties": [
+        {
+          "name": "PODEMOS PERÚ",
+          "percent": 32.723,
+          "votes": 2754
+        },
+        {
+          "name": "PERÚ MODERNO",
+          "percent": 22.707,
+          "votes": 1911
+        },
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 14.865,
+          "votes": 1251
+        },
+        {
+          "name": "AVANZA PAÍS - PARTIDO DE INTEGRACIÓN SOCIAL",
+          "percent": 10.741,
+          "votes": 904
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 8.389,
+          "votes": 706
+        },
+        {
+          "name": "PROGRESEMOS",
+          "percent": 6.785,
+          "votes": 571
+        },
+        {
+          "name": "PARTIDO PAÍS PARA TODOS",
+          "percent": 2.709,
+          "votes": 228
+        },
+        {
+          "name": "UNIDOS POR TACNA",
+          "percent": 0.76,
+          "votes": 64
+        },
+        {
+          "name": "ALIANZA ELECTORAL VENCEREMOS",
+          "percent": 0.321,
+          "votes": 27
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "76162204f15c0de1629758dc3aabac1feb7a4c04f141eb3ce541a35f4429cb41",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Tacna",
+      "zoneCode": "220100",
+      "sourceKind": "archive",
+      "sourceKey": "elcomercio.pe",
+      "sourceName": "El Comercio · alcaldía provincial",
+      "sourceUrl": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-provincia-de-tacna-tacna-noticia/",
+      "reportedAt": "2026-10-06T17:46:00.000Z",
+      "cutoffLabel": "06 oct 2026 · 12:46",
+      "consultedAt": "2026-10-13",
+      "complete": false,
+      "totalsCompatible": null,
+      "progress": 99.151,
+      "validVotes": null,
+      "castVotes": null,
+      "parties": [
+        {
+          "name": "Alianza para el Progreso",
+          "percent": 28.043,
+          "votes": null
+        },
+        {
+          "name": "Ahora Nación - AN",
+          "percent": 22.269,
+          "votes": null
+        },
+        {
+          "name": "Podemos Perú",
+          "percent": 17.826,
+          "votes": null
+        },
+        {
+          "name": "Movimiento Independiente Regional Fuerza Tacna",
+          "percent": 15.803,
+          "votes": null
+        },
+        {
+          "name": "Progresemos",
+          "percent": 5.947,
+          "votes": null
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "797a30f3a4cf5643a7572d000d1b4795ee19c3524f7727bd66d163a3cf563507",
+      "electionDate": "2026-10-04",
+      "election": "regional",
+      "title": "Gobierno regional",
+      "scope": "Departamento de Tacna",
+      "zoneCode": "220000",
+      "sourceKind": "archive",
+      "sourceKey": "elcomercio.pe",
+      "sourceName": "El Comercio · gobierno regional",
+      "sourceUrl": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-region-de-tacna-noticia/",
+      "reportedAt": "2026-10-05T11:32:00.000Z",
+      "cutoffLabel": "05 oct 2026 · 06:32",
+      "consultedAt": "2026-10-06",
+      "complete": false,
+      "totalsCompatible": null,
+      "progress": 93.133,
+      "validVotes": null,
+      "castVotes": null,
+      "parties": [
+        {
+          "name": "Alianza para el Progreso",
+          "percent": 29.535,
+          "votes": null
+        },
+        {
+          "name": "Ahora Nación - AN",
+          "percent": 17,
+          "votes": null
+        },
+        {
+          "name": "Renovación Popular Perú",
+          "percent": 13.871,
+          "votes": null
+        },
+        {
+          "name": "Movimiento Independiente Regional Fuerza Tacna",
+          "percent": 8.928,
+          "votes": null
+        },
+        {
+          "name": "Podemos Perú",
+          "percent": 7.923,
+          "votes": null
+        }
+      ],
+      "revision": "8ec1119"
+    },
+    {
+      "id": "b14e22460df44dfe522a18aaab5e46661f1fc6e0bb4ebcc19521617a976dc48a",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Tacna",
+      "zoneCode": "220100",
+      "sourceKind": "archive",
+      "sourceKey": "elcomercio.pe",
+      "sourceName": "El Comercio · alcaldía provincial",
+      "sourceUrl": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-provincia-de-tacna-tacna-noticia/",
+      "reportedAt": "2026-10-05T11:52:00.000Z",
+      "cutoffLabel": "05 oct 2026 · 06:52",
+      "consultedAt": "2026-10-06",
+      "complete": false,
+      "totalsCompatible": null,
+      "progress": 93.1,
+      "validVotes": null,
+      "castVotes": null,
+      "parties": [
+        {
+          "name": "Alianza para el Progreso",
+          "percent": 28.556,
+          "votes": null
+        },
+        {
+          "name": "Ahora Nación - AN",
+          "percent": 21.171,
+          "votes": null
+        },
+        {
+          "name": "Podemos Perú",
+          "percent": 18.188,
+          "votes": null
+        },
+        {
+          "name": "Movimiento Independiente Regional Fuerza Tacna",
+          "percent": 16.13,
+          "votes": null
+        },
+        {
+          "name": "Progresemos",
+          "percent": 5.991,
+          "votes": null
+        }
+      ],
+      "revision": "8ec1119"
+    },
+    {
+      "id": "bbf54631ce2be52d8db240d9aee420f25777089239c907d8aabcb2394b377fe6",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Tarata",
+      "zoneCode": "220200",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=provincial&idEleccion=3&tipoFiltro=ubigeo_nivel_02&idAmbitoGeografico=1&ubigeoNivel1=220000&ubigeoNivel2=220200",
+      "reportedAt": "2026-10-05T15:46:14.755Z",
+      "cutoffLabel": null,
+      "consultedAt": "2026-10-13",
+      "complete": true,
+      "totalsCompatible": true,
+      "progress": 100,
+      "validVotes": 5173,
+      "castVotes": 5995,
+      "parties": [
+        {
+          "name": "PROGRESEMOS",
+          "percent": 34.023,
+          "votes": 1760
+        },
+        {
+          "name": "PARTIDO PAÍS PARA TODOS",
+          "percent": 33.733,
+          "votes": 1745
+        },
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 24.783,
+          "votes": 1282
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 7.462,
+          "votes": 386
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "c1322deca3c550889f9d91b53b371a25fd02096d16b9464ba0a121945c171875",
+      "electionDate": "2026-10-04",
+      "election": "municipal",
+      "title": "Alcaldía provincial",
+      "scope": "Provincia de Tacna",
+      "zoneCode": "220100",
+      "sourceKind": "territorial",
+      "sourceKey": "andina.pe",
+      "sourceName": "Andina · datos atribuidos a ONPE",
+      "sourceUrl": "https://andina.pe/agencia/api/ResultadosMunicipales.ashx?tipo=candidatos&nivel=provincial&idEleccion=3&tipoFiltro=ubigeo_nivel_02&idAmbitoGeografico=1&ubigeoNivel1=220000&ubigeoNivel2=220100",
+      "reportedAt": "2026-10-05T15:46:14.755Z",
+      "cutoffLabel": null,
+      "consultedAt": "2026-10-13",
+      "complete": true,
+      "totalsCompatible": true,
+      "progress": 98.832,
+      "validVotes": 190163,
+      "castVotes": 222984,
+      "parties": [
+        {
+          "name": "ALIANZA PARA EL PROGRESO",
+          "percent": 28.029,
+          "votes": 53300
+        },
+        {
+          "name": "AHORA NACIÓN - AN",
+          "percent": 22.276,
+          "votes": 42361
+        },
+        {
+          "name": "PODEMOS PERÚ",
+          "percent": 17.837,
+          "votes": 33920
+        },
+        {
+          "name": "MOVIMIENTO INDEPENDIENTE REGIONAL FUERZA TACNA",
+          "percent": 15.8,
+          "votes": 30046
+        },
+        {
+          "name": "PROGRESEMOS",
+          "percent": 5.948,
+          "votes": 11310
+        },
+        {
+          "name": "PARTIDO PAÍS PARA TODOS",
+          "percent": 4.233,
+          "votes": 8049
+        },
+        {
+          "name": "UNIDOS POR TACNA",
+          "percent": 3.22,
+          "votes": 6123
+        },
+        {
+          "name": "PARTIDO SICREO",
+          "percent": 1.66,
+          "votes": 3156
+        },
+        {
+          "name": "NUEVA ESPERANZA",
+          "percent": 0.998,
+          "votes": 1898
+        }
+      ],
+      "revision": null
+    },
+    {
+      "id": "fc71a9cb150de5aeb218e763dad1b89001be3e532f0c4c4e722fbbcee17f12bd",
+      "electionDate": "2026-10-04",
+      "election": "regional",
+      "title": "Gobierno regional",
+      "scope": "Departamento de Tacna",
+      "zoneCode": "220000",
+      "sourceKind": "archive",
+      "sourceKey": "elcomercio.pe",
+      "sourceName": "El Comercio · gobierno regional",
+      "sourceUrl": "https://elcomercio.pe/elecciones/elecciones-regionales-y-municipales-2026-resultados-oficiales-de-onpe-en-la-region-de-tacna-noticia/",
+      "reportedAt": "2026-10-06T17:46:00.000Z",
+      "cutoffLabel": "06 oct 2026 · 12:46",
+      "consultedAt": "2026-10-13",
+      "complete": false,
+      "totalsCompatible": null,
+      "progress": 98.839,
+      "validVotes": null,
+      "castVotes": null,
+      "parties": [
+        {
+          "name": "Alianza para el Progreso",
+          "percent": 29.314,
+          "votes": null
+        },
+        {
+          "name": "Ahora Nación - AN",
+          "percent": 17.63,
+          "votes": null
+        },
+        {
+          "name": "Renovación Popular Perú",
+          "percent": 13.615,
+          "votes": null
+        },
+        {
+          "name": "Movimiento Independiente Regional Fuerza Tacna",
+          "percent": 8.777,
+          "votes": null
+        },
+        {
+          "name": "Podemos Perú",
+          "percent": 7.772,
+          "votes": null
+        }
+      ],
+      "revision": null
+    }
+  ]
+}

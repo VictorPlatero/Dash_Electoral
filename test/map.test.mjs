@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {partyKey} from '../public/candidate-model.js';
 import {compatibleReport,supportByZone,comparableMaximum,polygonPath,projection,territorialCSV} from '../public/map-model.js';
-import {mapReport} from '../scripts/sync-map.mjs';
+import {mapReport,requireCurrentReports} from '../scripts/sync-map.mjs';
 
 const snapshot=JSON.parse(await readFile(new URL('../public/territorial.json',import.meta.url),'utf8'));
 const zones=snapshot.geography.features.map(feature=>feature.properties);
@@ -58,6 +58,16 @@ test('el importador rechaza un resumen que corresponde a otra zona y separa un c
   const incompatible=mapReport(response,{...totals,data:{...totals.data,totalVotosValidos:200}},zone,'municipal','2026-10-13','https://andina.pe/example');
   assert.equal(incompatible.validVotes,100);assert.equal(incompatible.reportedAt,null);assert.equal(incompatible.progress,null);
   assert.equal(mapReport({success:true,data:null},totals,zone,'municipal','2026-10-13','https://andina.pe/example'),null);
+});
+test('la actualización automática conserva la copia local si Andina pierde un ámbito o devuelve un corte anterior',()=>{
+  const report={election:'regional',zoneCode:'220000',zoneLevel:'department',reportedAt:'2026-10-13T11:45:29Z'};
+  const municipal={election:'municipal',zoneCode:'220100',zoneLevel:'province',reportedAt:null};
+  assert.throws(()=>requireCurrentReports([report],[]),/reportes electorales válidos/);
+  assert.throws(()=>requireCurrentReports([report,municipal],[report]),/municipal 220100/);
+  for (const reportedAt of ['2026-10-05T11:45:29Z',null]) {
+    assert.throws(()=>requireCurrentReports([report],[{...report,reportedAt}]),/regional 220000/);
+  }
+  assert.doesNotThrow(()=>requireCurrentReports([report,municipal],[municipal,{...report,reportedAt:'2026-11-06T21:01:45Z'}]));
 });
 test('geometrías locales generan rutas SVG finitas y fotos de líderes con fuente JNE',async()=>{
   const project=projection(snapshot.geography.features.filter(f=>f.properties.level==='province'));

@@ -1,9 +1,10 @@
 import {partyKey,csvCell} from './candidate-model.js';
 
 export function resultReport(data,snapshot,election,source='territorial',zoneCode='220100') {
-  const zone=election==='regional'?'220000':zoneCode;
-  const territorial=snapshot?.reports.find(r=>r.election===election&&r.zoneCode===zone&&r.zoneLevel===(election==='regional'?'department':'province'));
-  if(source==='territorial'&&territorial) {
+  if(source==='territorial') {
+    const zone=election==='regional'?'220000':zoneCode;
+    const territorial=snapshot?.reports.find(r=>r.election===election&&r.zoneCode===zone&&r.zoneLevel===(election==='regional'?'department':'province'));
+    if(!territorial?.parties.length)return null;
     const area=snapshot.geography.features.find(f=>f.properties.code===zone)?.properties.name;
     return {...territorial,title:data[election].title,scope:election==='regional'?'Departamento de Tacna':'Provincia de '+area,complete:true,sourceKind:'territorial'};
   }
@@ -29,6 +30,7 @@ export function pairComparison(report,leftName,rightName) {
 }
 
 export function crossElection(municipal,regional) {
+  if(!municipal||!regional)return [];
   return municipal.parties.flatMap(p=>{const r=regional.parties.find(r=>partyKey(r.name)===partyKey(p.name));return r?[{name:p.name,municipal:p.percent,regional:r.percent}]:[];});
 }
 

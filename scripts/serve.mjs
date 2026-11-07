@@ -21,10 +21,10 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
     if (store.seedHash() !== hash) store.import(JSON.parse(seed), 'JNE', hash);
   } catch (error) { store.close(); throw new Error(`No se pudo cargar la base inicial. Ejecuta build. ${error.message}`); }
   const json = (res, status, payload) => { res.writeHead(status, { ...security, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(payload)); };
+  const adminDigest = adminToken ? createHash('sha256').update(adminToken).digest() : null;
   const canWrite = req => {
-    const token = req.headers.authorization?.replace(/^Bearer /, '') || '';
-    if (adminToken) return timingSafeEqual(createHash('sha256').update(token).digest(), createHash('sha256').update(adminToken).digest());
-    return ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress) && ['localhost', '127.0.0.1', '[::1]'].includes(new URL('http://' + req.headers.host).hostname);
+    const token = req.headers.authorization?.match(/^Bearer (.+)$/i)?.[1];
+    return Boolean(adminDigest && token && timingSafeEqual(createHash('sha256').update(token).digest(), adminDigest));
   };
   async function body(req) {
     let length = 0; const chunks = [];
@@ -45,7 +45,7 @@ export async function createDashboardServer({ root = resolve(project, 'dist'), d
         }
         if (!['GET','HEAD'].includes(req.method)) return json(res, 405, { error: 'Método no permitido' });
         if (name === '/api/health') return json(res, 200, { status: 'ok', database: 'sqlite' });
-        if (name === '/api/candidates/meta') return json(res, 200, { ...store.overview(), canWrite: canWrite(req), storage: 'SQLite' });
+        if (name === '/api/candidates/meta') return json(res, 200, { ...store.overview(), supportsImport: Boolean(adminDigest), canWrite: canWrite(req), storage: 'SQLite' });
         if (name === '/api/candidates') return json(res, 200, store.list(url.searchParams));
         if (name === '/api/candidates/analytics') return json(res, 200, store.analytics(url.searchParams));
         if (name === '/api/candidates/backup') {

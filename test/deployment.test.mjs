@@ -1,14 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile,mkdtemp,rm} from 'node:fs/promises';
+import {readFile,mkdtemp,mkdir,cp,rm} from 'node:fs/promises';
 import {resolve,dirname,basename,join} from 'node:path';
 import {tmpdir} from 'node:os';
-import {spawn} from 'node:child_process';
+import {execFile,spawn} from 'node:child_process';
+import {createServer,request} from 'node:http';
+import {promisify} from 'node:util';
 import {createStaticServer} from '../scripts/serve-static.mjs';
 import {createDashboardServer} from '../scripts/serve.mjs';
 import {createCandidateClient} from '../public/candidate-data.js';
 
-const candidates=JSON.parse(await readFile(new URL('../public/candidates.json',import.meta.url),'utf8')).candidates;
+const catalog=JSON.parse(await readFile(new URL('../public/candidates.json',import.meta.url),'utf8'));
+const {candidates}=catalog;
 const start=server=>new Promise(resolve=>server.listen(0,'127.0.0.1',()=>resolve(`http://127.0.0.1:${server.address().port}`)));
 const close=server=>new Promise(resolve=>server.close(resolve));
 const fetcher=base=>(path,options)=>fetch(new URL(path,base+'/'),options);
@@ -34,7 +37,7 @@ test('Render Static Site: perfiles, filtros, gráficas y exportaciones funcionan
 });
 
 test('Catálogo estático y SQLite producen el mismo resultado para todos los filtros',async()=>{
-  const staticServer=createStaticServer({root:resolve('public')}),apiServer=await createDashboardServer({root:resolve('public'),dbPath:':memory:'});
+  const staticServer=createStaticServer({root:resolve('public')}),apiServer=await createDashboardServer({root:resolve('public'),dbPath:':memory:',adminToken:'test-key'});
   const [staticURL,apiURL]=await Promise.all([start(staticServer),start(apiServer)]);
   const snapshot=createCandidateClient({fetcher:fetcher(staticURL)}),api=createCandidateClient({fetcher:fetcher(apiURL)});
   try {
@@ -46,8 +49,19 @@ test('Catálogo estático y SQLite producen el mismo resultado para todos los fi
       const csvA=await snapshot.csv(query),csvB=await api.csv(query);
       assert.equal(csvA.replace(/^\uFEFF/,''),csvB.replace(/^\uFEFF/,''));
     }
-    const result=await api.import({candidates:[candidates[0]]});assert.equal(result.imported,1);
+    const result=await api.import({candidates:[candidates[0]]},'test-key');assert.equal(result.imported,1);
     assert.equal((await api.backup()).candidates.length,21);
+    const names=['Ángela Prueba de orden','Beatriz Prueba de orden'];
+    const accented=names.map((name,index)=>({...candidates[0],id:'sort-test-'+index,name}));
+    await api.import({candidates:accented},'test-key');
+    const expandedSnapshot=createCandidateClient({fetcher:(path,options)=>path==='./candidates.json'
+      ?Promise.resolve(Response.json({...catalog,candidates:[...catalog.candidates,...accented]}))
+      :fetcher(staticURL)(path,options)});
+    for(const sort of ['name','recent','votes'])for(const page of [1,2]){
+      const query=new URLSearchParams({q:'prueba de orden',sort,limit:'1',page:String(page)});
+      assert.equal((await expandedSnapshot.list(query)).candidates[0].name,names[page-1]);
+      assert.equal((await api.list(query)).candidates[0].name,names[page-1]);
+    }
   }finally{await Promise.all([close(staticServer),close(apiServer)]);}
 });
 
@@ -67,10 +81,43 @@ test('Una carga interrumpida del catálogo se puede reintentar',async()=>{
   try{await assert.rejects(()=>client.meta(),/503/);assert.equal((await client.meta()).total,21);}finally{await close(server);}
 });
 
+test('Un proxy local no puede habilitar la importación sin ADMIN_TOKEN',async()=>{
+  const backend=await createDashboardServer({root:resolve('public'),dbPath:':memory:',adminToken:''});
+  await start(backend);
+  const proxy=createServer((req,res)=>{
+    const upstream=request({host:'127.0.0.1',port:backend.address().port,path:req.url,method:req.method,
+      headers:{...req.headers,host:'localhost','x-forwarded-for':'203.0.113.99'}},response=>{
+      res.writeHead(response.statusCode,response.headers);
+      response.pipe(res);
+    });
+    upstream.on('error',()=>{res.writeHead(502);res.end();});
+    req.pipe(upstream);
+  });
+  const url=await start(proxy);
+  try {
+    const client=createCandidateClient({fetcher:fetcher(url)});
+    assert.equal((await client.meta()).supportsImport,false);
+    const original=candidates[0];
+    const response=await fetch(url+'/api/candidates/import',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({candidates:[{...original,name:'Intento sin autorización'}]})
+    });
+    assert.equal(response.status,401);
+    assert.equal((await client.detail(original.id)).name,original.name);
+  } finally {await Promise.all([close(proxy),close(backend)]);}
+});
+
 test('Inicio de producción usa PORT, 0.0.0.0 y una ruta SQLite externa al proyecto',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'electoral-deploy-'));
-  const child=spawn(process.execPath,['scripts/serve.mjs'],{cwd:resolve('.'),env:{...process.env,HOST:'',RENDER:'true',PORT:'0',DATABASE_PATH:join(directory,'candidates.sqlite')}});
+  const project=join(directory,'app');
+  let child;
   try {
+    await mkdir(project);
+    await Promise.all(['package.json','public','scripts','src'].map(path=>cp(resolve(path),join(project,path),{recursive:true})));
+    await promisify(execFile)(process.execPath,['scripts/build.mjs'],{cwd:project,windowsHide:true,timeout:15000,
+      env:{...process.env,SUPABASE_URL:'',SUPABASE_PUBLISHABLE_KEY:''}});
+    child=spawn(process.execPath,['scripts/serve.mjs'],{cwd:project,windowsHide:true,
+      env:{...process.env,HOST:'',RENDER:'true',PORT:'0',DATABASE_PATH:join(directory,'candidates.sqlite')}});
     const output=await new Promise((resolve,reject)=>{
       let stdout='',stderr='';const timer=setTimeout(()=>reject(new Error('El servidor no inició: '+stderr)),15000);
       child.stdout.on('data',data=>{stdout+=data;if(/localhost:\d+/.test(stdout)){clearTimeout(timer);resolve(stdout);}});
@@ -84,7 +131,7 @@ test('Inicio de producción usa PORT, 0.0.0.0 y una ruta SQLite externa al proye
     assert.equal((await (await fetch(base+'/api/candidates/meta')).json()).total,21);
     assert.ok((await readFile(join(directory,'candidates.sqlite'))).length>0);
   }finally{
-    if(child.exitCode===null&&child.signalCode===null)await new Promise(resolve=>{child.once('exit',resolve);child.kill('SIGTERM');});
+    if(child?.pid&&child.exitCode===null&&child.signalCode===null)await new Promise(resolve=>{child.once('exit',resolve);child.kill('SIGTERM');});
     const target=resolve(directory);assert.equal(dirname(target),resolve(tmpdir()));assert.ok(basename(target).startsWith('electoral-deploy-'));await rm(target,{recursive:true,force:true});
   }
 });

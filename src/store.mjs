@@ -1,7 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { analyze, normalize, partyKey, businessAnalytics } from '../public/candidate-model.js';
+import { analyze, normalize, partyKey, businessAnalytics, compareCandidates } from '../public/candidate-model.js';
 import { validateBatch } from './schema.mjs';
 
 export function openStore(path) {
@@ -39,7 +39,7 @@ export function openStore(path) {
   const detail = db.prepare('SELECT payload FROM candidates WHERE id=?');
   const report = db.prepare('SELECT payload FROM electoral_reports WHERE role=? AND party_key=? AND scope_key=?');
   const enrich = candidate => { const result = report.get(candidate.role,partyKey(candidate.party),partyKey(candidate.scope)); return { ...candidate, electoral: result ? JSON.parse(result.payload) : null }; };
-  const all = () => db.prepare('SELECT payload FROM candidates ORDER BY name, id').all().map(row => enrich(JSON.parse(row.payload)));
+  const all = () => db.prepare('SELECT payload FROM candidates').all().map(row => enrich(JSON.parse(row.payload))).sort(compareCandidates);
   function filter(params) {
     const clauses = [], values = [];
     for (const key of ['role','party']) if (params.get(key)) { clauses.push(`c.${key}=?`); values.push(params.get(key)); }
@@ -49,7 +49,7 @@ export function openStore(path) {
     return { where: clauses.length ? ' WHERE ' + clauses.join(' AND ') : '', values };
   }
   const joined = ' FROM candidates c LEFT JOIN electoral_reports r ON c.role=r.role AND c.party_key=r.party_key AND c.scope_key=r.scope_key';
-  const filtered = params => { const {where,values} = filter(params); return db.prepare('SELECT c.payload'+joined+where+' ORDER BY c.name,c.id').all(...values).map(row => enrich(JSON.parse(row.payload))); };
+  const filtered = params => { const {where,values} = filter(params); return db.prepare('SELECT c.payload'+joined+where).all(...values).map(row => enrich(JSON.parse(row.payload))).sort(compareCandidates); };
   return {
     db,
     import(payload, origin = 'manual', seedHash = '') {
@@ -97,12 +97,15 @@ export function openStore(path) {
     analytics: params => businessAnalytics(filtered(params)),
     list(params) {
       const { where, values } = filter(params);
-      const total = db.prepare('SELECT count(*) AS total' + joined + where).get(...values).total;
+      // Aplicar la colación del catálogo antes de paginar y leer solo las fichas de la página.
+      const rows = db.prepare('SELECT c.id,c.name,c.role,c.consulted_at,r.percent' + joined + where).all(...values)
+        .map(row => ({ id: row.id, name: row.name, role: row.role, source: { consultedAt: row.consulted_at }, electoral: { percent: row.percent } }));
+      const total = rows.length;
       const limit = Math.min(50, Math.max(1, Number.parseInt(params.get('limit'),10) || 12));
       const page = Math.min(Math.max(1, Math.ceil(total / limit)), Math.max(1, Number.parseInt(params.get('page'),10) || 1));
-      const order = params.get('sort') === 'recent' ? 'c.consulted_at DESC,c.name,c.id' : params.get('sort') === 'votes' ? 'c.role,r.percent IS NULL,r.percent DESC,c.name,c.id' : 'c.name,c.id';
-      const candidates = db.prepare(`SELECT c.payload${joined}${where} ORDER BY ${order} LIMIT ? OFFSET ?`).all(...values, limit, (page - 1) * limit).map(row => {
-        const c = enrich(JSON.parse(row.payload));
+      const sort = params.get('sort');
+      const candidates = rows.sort((a,b)=>compareCandidates(a,b,sort)).slice((page - 1) * limit, page * limit).map(row => {
+        const c = enrich(JSON.parse(detail.get(row.id).payload));
         return { id:c.id, name:c.name, party:c.party, role:c.role, scope:c.scope, status:c.status, source:c.source, photo:c.photo, description:c.description, electoral:c.electoral, analysis:analyze(c) };
       });
       return { candidates, total, page, limit };

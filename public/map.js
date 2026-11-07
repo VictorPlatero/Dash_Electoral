@@ -46,6 +46,9 @@ function render(){
   renderSVG(features);renderLegend();renderDetails();
 }
 function renderSVG(features){
+  const host=$('territorial-map');
+  const focusedZone=host.contains(document.activeElement)?document.activeElement.getAttribute('data-zone'):null;
+  let focusTarget;
   const project=projection(snapshot.geography.features.filter(f=>f.properties.level==='province'));
   svg=shape('svg',{viewBox:`${viewport.x} ${viewport.y} ${viewport.width} ${viewport.height}`,class:'tacna-map-svg',role:'group','aria-label':'Mapa interactivo de Tacna. Selecciona una zona o utiliza el selector de zona.'});
   svg.append(shape('title',{},'Mapa electoral de Tacna'),shape('desc',{},'Polígonos referenciales seleccionables por teclado. Las zonas rayadas no tienen datos compatibles; no representan cero votos.'));
@@ -54,6 +57,7 @@ function renderSVG(features){
   for(const feature of features){const row=rows.find(row=>row.zone.code===feature.properties.code),isSelected=selected===row.zone.code;
     const fill=!row.available?'url(#map-no-data)':$('map-party').value||candidate()?intensity(row.party.percent):partyColor(row.party.name);
     const path=shape('path',{d:polygonPath(feature.geometry,project),fill,class:'territory-path'+(isSelected?' selected':''),tabindex:0,role:'button','aria-pressed':String(isSelected),'aria-label':`${row.zone.level==='province'?'Provincia':row.zone.level==='district'?'Distrito':'Región'} ${row.zone.name}: ${row.available?humanize(row.party.name)+' '+pct(row.party.percent):'sin desglose disponible'}. Seleccionar zona.`,'data-zone':row.zone.code});
+    if(row.zone.code===focusedZone)focusTarget=path;
     path.append(shape('title',{},row.zone.name+' · '+(row.available?humanize(row.party.name)+' · '+pct(row.party.percent):row.eligible?'Desglose no disponible':'Fuera del ámbito de esta candidatura')));
     path.addEventListener('click',()=>{if(!suppressClick)choose(row.zone.code);});path.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();choose(row.zone.code);}});svg.append(path);
     if(level()!=='district'||features.length<=11){const [x,y]=featureCenter(feature,project);const label=shape('text',{x,y,class:'territory-label','text-anchor':'middle','pointer-events':'none'});const names=row.zone.name==='Jorge Basadre'?['Jorge','Basadre']:row.zone.name==='Departamento de Tacna'?['Tacna']:row.zone.name.split(' ').length>3?row.zone.name.split(' ').slice(0,3):[row.zone.name];names.forEach((name,index)=>label.append(shape('tspan',{x,dy:index?'1.1em':0},name)));svg.append(label);}
@@ -61,7 +65,7 @@ function renderSVG(features){
   svg.addEventListener('pointerdown',event=>{if(event.button!==0)return;drag={x:event.clientX,y:event.clientY,original:{...viewport},moved:false,code:event.target.closest?.('[data-zone]')?.getAttribute('data-zone')};svg.setPointerCapture(event.pointerId);});
   svg.addEventListener('pointermove',event=>{if(!drag)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.hypot(dx,dy)>5)drag.moved=true;if(drag.moved){const rect=svg.getBoundingClientRect();viewport={...drag.original,x:drag.original.x-dx*drag.original.width/rect.width,y:drag.original.y-dy*drag.original.height/rect.height};setView();}});
   svg.addEventListener('pointerup',()=>{if(drag){const clicked=drag.code,moved=drag.moved;suppressClick=true;drag=null;if(clicked&&!moved)choose(clicked);setTimeout(()=>{suppressClick=false;},0);}});svg.addEventListener('pointercancel',()=>{drag=null;suppressClick=false;});
-  $('territorial-map').replaceChildren(svg);setView();
+  host.replaceChildren(svg);setView();focusTarget?.focus({preventScroll:true});
 }
 function renderLegend(){
   const legend=$('map-legend');legend.replaceChildren();

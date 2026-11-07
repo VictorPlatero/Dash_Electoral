@@ -81,11 +81,51 @@ La tabla detalla posición, organización, candidatura vinculada, porcentaje, vo
 
 Los votos válidos y los emitidos usan denominadores distintos. El resto de los emitidos no se divide entre blancos y nulos sin un desglose compatible. El avance de actas no es participación: no se calcula una tasa de participación con el padrón contradictorio. La comparación entre cargos muestra porcentajes de elecciones y ámbitos diferentes, con sus cortes y fuentes, sin sumarlos ni inferir transferencias de votos. La metodología de cada indicador está disponible en la propia sección.
 
+## Historial de cortes
+
+En **Resultados → Historial de cortes** puedes seleccionar una publicación guardada y compararla con un corte anterior de la misma fuente, elección, cargo y ámbito. La tabla muestra porcentajes, diferencias en puntos porcentuales y votos cuando ambos cortes los publican. El CSV conserva los identificadores de los cortes y el enlace a la fuente.
+
+El archivo `public/electoral-history.json` incluye los cortes de El Comercio del 5 y 6 de octubre para alcaldía provincial de Tacna y gobierno regional. Las copias del día 5 proceden del commit `8ec1119`. También incluye cinco reportes de Andina, entre ellos el listado de Candarave cuya fecha de corte no pudo validarse. Las horas de las etiquetas de El Comercio se interpretan en la zona horaria de Lima.
+
+`npm run sync:map` archiva los reportes previos y los nuevos antes de reemplazar el archivo territorial. Para guardar un cambio manual en `public/data.json`, ejecuta `node scripts/history.mjs capture` antes y después de actualizarlo. Para recuperar un corte de Git, usa `node scripts/history.mjs capture --commit 8ec1119`. La captura conserva las versiones anteriores y omite duplicados de la misma publicación.
+
+### Usar Supabase como archivo de cortes
+
+1. Aplica la migración de `supabase/migrations/20261107000100_electoral_cuts.sql` en tu proyecto Supabase. La tabla `electoral_cuts` usa RLS y permite que la API pública lea los cortes publicados.
+2. Para subir el historial revisado, define `SUPABASE_URL` y `SUPABASE_SECRET_KEY` en un entorno privado y ejecuta `node scripts/history.mjs publish`. Puedes repetir el comando después de guardar nuevos cortes.
+3. Configura `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en el build de Render. Cada build consulta los cortes publicados y los combina con el archivo local. El navegador recibe el JSON generado en `dist`. Un nuevo corte de Supabase se verá después del siguiente build.
+
+Al ejecutar el build sin variables de Supabase, el historial se genera desde el archivo versionado. Reserva la clave secreta para la publicación desde un entorno privado. En el build de Render solo se usa la clave publicable.
+
+### Actualizar el mapa y el historial cada día en Windows
+
+Ejecuta el instalador una vez desde la carpeta del proyecto en PowerShell:
+
+```powershell
+.\scripts\register-daily-update.ps1
+```
+
+La tarea **Dash Electoral - Actualizacion diaria** se ejecuta en tu sesión de Windows, oculta (sin ventanas). Se dispara al iniciar sesión, en cuanto Windows se conecta a una red y cada 15 minutos, pero descarga una sola vez por día de Lima. Cuando Andina responde con datos válidos, guarda los cortes nuevos y vuelve a generar `dist/`. Si se pierde internet o la fuente devuelve reportes incompletos o anteriores, conserva la última copia del dashboard y lo vuelve a intentar.
+
+- Sin internet no cuenta como fallo: el día queda pendiente hasta el siguiente disparo.
+- Los fallos de la fuente esperan cada vez más (15, 30, 60, 120 y 180 min) y se reinician al cambiar de día.
+- Los pasos (descarga, build y Supabase) se registran por separado; si falla el build, no se vuelve a descargar.
+- Un archivo de bloqueo impide dos ejecuciones simultáneas; los bloqueos huérfanos se liberan solos.
+- El instalador elige un Node compatible (`>=22.13 <25`), con preferencia por `C:\Program Files\nodejs`.
+
+`npm run update:status` muestra el último resultado, el error y el próximo intento; `npm run update:force` actualiza en el momento. El historial de intentos se acumula en `research/actualizacion-diaria.log` (rota a `.log.1` al superar 512 KB).
+
+Para habilitar también el envío a Supabase, aplica la migración y configura `SUPABASE_URL` y `SUPABASE_SECRET_KEY` en el archivo local `.env`, ignorado por Git. Vuelve a ejecutar el instalador con `-PublicarEnSupabase`. Si además agregas `SUPABASE_PUBLISHABLE_KEY`, el build incorpora los cortes publicados en el proyecto Supabase.
+
+Recarga el dashboard local para ver los cortes nuevos. El sitio de Render recibe su propia actualización al desplegar.
+
+Para pausar la tarea usa `Disable-ScheduledTask -TaskName 'Dash Electoral - Actualizacion diaria'`; para quitarla, `.\scripts\register-daily-update.ps1 -Desinstalar`.
+
 ## Mapa electoral interactivo
 
 La sección `#mapa` permite seleccionar las **4 provincias y los 28 distritos**, incluyendo La Yarada Los Palos, mediante polígonos o un selector por nombre. Tiene zoom, desplazamiento, selección por teclado, filtros por cargo, organización y candidatura, detalle de votos y porcentajes, enlaces a las fuentes y descarga CSV de las zonas visibles. Funciona en móvil y en Render Static Site sin una API propia, claves ni servicios de mapas externos en tiempo de ejecución.
 
-El archivo publicado `public/territorial.json` contiene geometría referencial y reportes consultados el **13 de octubre de 2026** en el [visor electoral de Andina](https://andina.pe/agencia/embedresultadosmunicipales2026.aspx?dep=220000&nivel=provincial&widget=1), que atribuye sus datos a ONPE. La [geometría distribuida por Andina](https://andina.pe/agencia/js/geo/onpe_indice.json) incluye los 28 distritos; el servicio MINAM consultado conserva 27. Se mantienen separados los códigos ONPE e INEI, cuya numeración de provincias difiere. Los polígonos se simplifican para navegación y no certifican límites legales.
+El archivo `public/territorial.json` contiene geometría referencial y reportes del [visor electoral de Andina](https://andina.pe/agencia/embedresultadosmunicipales2026.aspx?dep=220000&nivel=provincial&widget=1), que atribuye sus datos a ONPE. La consulta inicial fue el **13 de octubre de 2026** y cada actualización guarda su propia fecha de consulta. La [geometría distribuida por Andina](https://andina.pe/agencia/js/geo/onpe_indice.json) incluye los 28 distritos; el servicio MINAM consultado conserva 27. Se mantienen separados los códigos ONPE e INEI, cuya numeración de provincias difiere. Los polígonos se simplifican para navegación y no certifican límites legales.
 
 La consulta permitió validar **cinco reportes**: las cuatro alcaldías provinciales y el total del gobierno regional. No devolvió un desglose validable de apoyo distrital ni de votación regional por provincia. Las zonas sin datos se rayan; no se les asigna cero ni el porcentaje de su provincia o departamento. El indicador de mayor apoyo de un candidato requiere al menos dos zonas de su misma elección, nivel y fecha de corte; con este catálogo señala que falta un desglose comparable.
 
@@ -109,7 +149,7 @@ En Candidatos, abre **Importar fichas**. Descarga un ejemplo de estructura (cont
 
 La importación está disponible cuando se ejecuta el servidor SQLite. En Render Static Site se consulta el catálogo publicado y se puede descargar CSV o respaldo JSON; el botón de edición centralizada no aparece. Para publicar nuevos datos en ese modo, actualiza `public/candidates.json` mediante la sincronización o el catálogo exportado, valida con las pruebas y realiza build/push. La base SQLite local sigue dentro de `storage/`; no se simula una base compartida en un alojamiento estático.
 
-En localhost la administración está habilitada. Si defines `ADMIN_TOKEN`, debes introducir esa clave en el diálogo incluso en local. Fuera de localhost, las escrituras requieren la clave; sin clave configurada el acceso remoto es de lectura. La clave solo se mantiene mientras el diálogo está abierto. No publiques `.env` ni la base de trabajo en Git.
+La importación requiere configurar `ADMIN_TOKEN` al iniciar el servidor e introducir esa clave en el diálogo. Esto también aplica en localhost. En PowerShell 7 puedes definirla con `$env:ADMIN_TOKEN = Read-Host 'Clave de administración' -MaskInput`. Si el servidor inicia sin clave, queda en modo de consulta. La clave solo se mantiene en el navegador mientras el diálogo está abierto.
 
 Puedes descargar todas las fichas de la base en JSON desde `/api/candidates/backup`. Ese archivo se puede restaurar con el importador; el CSV es para análisis tabular. Para respaldar el archivo SQLite directamente, detén el servidor antes de copiarlo, de modo que no queden escrituras pendientes en WAL.
 
@@ -141,7 +181,7 @@ npm test
 
 O `node --test`. Las pruebas funcionales cubren solapamiento de experiencia, datos ausentes, absoluciones, ámbito y mapeo JNE, integridad y fuente de las 21 fotos, descripciones, vinculación de porcentajes, denominadores BI, mediana por año, migración SQLite, anotaciones, validación, persistencia, autorización, filtros, paginación, respaldo, CSV y caché HTTP.
 
-La suite completa tiene **34 pruebas**, incluyendo la regresión del despliegue estático sin API, equivalencia de filtros/gráficos/CSV entre SQLite y catálogo, recuperación ante 404 o rewrite HTML, reintento de cargas fallidas y arranque de producción con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. Las ocho pruebas del mapa verifican provincias y distritos, correspondencia de códigos, compatibilidad de ámbito y fecha, denominadores, ausencia de porcentajes inventados, metadatos incompatibles, geometría SVG, fuentes y fotos JNE, y exportación de valores ausentes. Las seis pruebas de resultados cubren separación de fuentes y cortes, denominadores, brechas, acumulados, comparación de listas y cargos, recuperación sin snapshot y CSV completo con valores nulos y precisión decimal. El build valida las fichas y genera `dist/build-info.json` con versión, huella de los archivos y cantidad de candidatos para verificar qué versión está desplegada.
+La suite prepara el build de producción en una carpeta temporal, así que puede ejecutarse desde una copia limpia. Verifica el despliegue estático, la equivalencia entre SQLite y catálogo, el orden de nombres acentuados, la autorización detrás de un proxy y el arranque con `PORT`, host `0.0.0.0` y una ruta configurable de base de datos. Las pruebas del mapa y de resultados verifican los ámbitos, cortes, denominadores, geometría, comparaciones y exportaciones. El build genera `dist/build-info.json` con la versión, la huella de los archivos y la cantidad de candidatos.
 
 ## Render
 

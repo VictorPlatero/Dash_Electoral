@@ -1,9 +1,10 @@
-import { analyze, normalize, describeCandidate, electoralFor, businessAnalytics, candidateCSV } from './candidate-model.js';
+import { analyze, normalize, describeCandidate, electoralFor, businessAnalytics, candidateCSV, compareCandidates } from './candidate-model.js';
 
 // Render Static Sites serve files but do not run the SQLite API. Both deployments
 // use the same published records and calculations, with no invented API routes.
 export function createCandidateClient({ fetcher = globalThis.fetch.bind(globalThis), probeTimeout = 6000 } = {}) {
   let mode='loading', metadata, snapshot, records, initialized;
+  const serverMetadata = meta => ({ ...meta, mode: 'server', supportsImport: meta.supportsImport ?? true });
   const timeout=milliseconds=>AbortSignal.timeout(milliseconds);
   async function json(path,options={}) {
     const response=await fetcher(path,{...options,signal:options.signal || timeout(15000)});
@@ -23,7 +24,7 @@ export function createCandidateClient({ fetcher = globalThis.fetch.bind(globalTh
         if(runtime?.mode==='snapshot') throw new Error('Catálogo estático publicado');
         const meta=await json('/api/candidates/meta',{signal:timeout(probeTimeout)});
         if(!Number.isInteger(meta?.total) || !Array.isArray(meta.parties) || !meta.source) throw new Error('API de candidatos incompatible.');
-        metadata={...meta,mode:'server',supportsImport:true};mode='server';return;
+        metadata=serverMetadata(meta);mode='server';return;
       } catch {
         const [catalog,reports]=await Promise.all([json('./candidates.json'),json('./data.json')]);
         if(!Array.isArray(catalog.candidates) || !catalog.candidates.length || !Array.isArray(reports.sources)) throw new Error('El catálogo publicado no está disponible.');
@@ -42,25 +43,21 @@ export function createCandidateClient({ fetcher = globalThis.fetch.bind(globalTh
   function checkSignal(options) { if(options?.signal?.aborted) throw new DOMException('Consulta cancelada','AbortError'); }
   return {
     get mode(){return mode;},
-    async meta(){await ready();if(mode==='server') metadata={...await json('/api/candidates/meta'),mode:'server',supportsImport:true};return metadata;},
+    async meta(){await ready();if(mode==='server') metadata=serverMetadata(await json('/api/candidates/meta'));return metadata;},
     async list(params,options={}) {
       await ready();checkSignal(options);
       if(mode==='server') return json('/api/candidates?'+params,options);
-      const sorted=filtered(params).sort((a,b)=>{
-        if(params.get('sort')==='votes') return a.role.localeCompare(b.role) || Number(a.electoral===null)-Number(b.electoral===null) || (b.electoral?.percent ?? 0)-(a.electoral?.percent ?? 0) || a.name.localeCompare(b.name,'es') || a.id.localeCompare(b.id);
-        if(params.get('sort')==='recent') return b.source.consultedAt.localeCompare(a.source.consultedAt) || a.name.localeCompare(b.name,'es') || a.id.localeCompare(b.id);
-        return a.name.localeCompare(b.name,'es') || a.id.localeCompare(b.id);
-      });
+      const sort=params.get('sort'),sorted=filtered(params).sort((a,b)=>compareCandidates(a,b,sort));
       const total=sorted.length,limit=Math.min(50,Math.max(1,parseInt(params.get('limit'),10)||12)),page=Math.min(Math.max(1,Math.ceil(total/limit)),Math.max(1,parseInt(params.get('page'),10)||1));
       return {total,page,limit,candidates:sorted.slice((page-1)*limit,page*limit)};
     },
-    async analytics(params,options={}) {await ready();checkSignal(options);return mode==='server'?json('/api/candidates/analytics?'+params,options):businessAnalytics(filtered(params));},
+    async analytics(params,options={}) {await ready();checkSignal(options);return mode==='server'?json('/api/candidates/analytics?'+params,options):businessAnalytics(filtered(params).sort(compareCandidates));},
     async detail(id) {
       await ready();if(mode==='server')return json('/api/candidates/'+encodeURIComponent(id));
       const candidate=records.find(c=>c.id===id);if(!candidate)throw new Error('Candidato no encontrado.');return candidate;
     },
     async csv(params) {
-      await ready();if(mode==='snapshot')return candidateCSV(filtered(params));
+      await ready();if(mode==='snapshot')return candidateCSV(filtered(params).sort(compareCandidates));
       const response=await fetcher('/api/candidates/export?'+params,{signal:timeout(15000)});
       if(!response.ok || !response.headers.get('content-type')?.includes('text/csv'))throw new Error('No se pudo descargar el CSV.');return response.text();
     },

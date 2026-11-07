@@ -7,3 +7,4 @@ node_modules/
 test-results/
 public/candidates.json.tmp
 public/territorial.json.tmp
+public/electoral-history.json.tmp

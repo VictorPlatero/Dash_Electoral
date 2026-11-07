@@ -3,6 +3,7 @@ import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {partyKey,humanize} from '../public/candidate-model.js';
 import {downloadPortrait} from './portraits.mjs';
+import {makeCuts,saveCuts} from './history.mjs';
 
 const ANDINA='https://andina.pe/agencia/',JNE='https://votoinformado.jne.gob.pe/api/v1';
 const REGION='220000';
@@ -32,6 +33,18 @@ export function mapReport(response,totals,zone,election,consultedAt,sourceUrl) {
   return {election,zoneCode:zone.code,zoneLevel:zone.level,scopeCode:election==='regional'?REGION:zone.level==='province'?zone.code:zone.provinceCode,parties:parties.sort((a,b)=>b.percent-a.percent),validVotes,castVotes:totalsCompatible?metadata.totalVotosEmitidos:null,progress:totalsCompatible?metadata.actasContabilizadas:null,reportedAt:totalsCompatible?metadata.fechaActualizacion||null:null,totalsCompatible,consultedAt,sourceName:'Andina · datos atribuidos a ONPE',sourceUrl};
 }
 
+export function requireCurrentReports(previous, next) {
+  if (!next.length) throw new Error('Andina no devolvió reportes electorales válidos.');
+  for (const report of previous) {
+    const current = next.find(item => item.election === report.election &&
+      item.zoneCode === report.zoneCode && item.zoneLevel === report.zoneLevel);
+    if (!current || (report.reportedAt && (!current.reportedAt ||
+        Date.parse(current.reportedAt) < Date.parse(report.reportedAt)))) {
+      throw new Error(`Andina devolvió un reporte ausente o anterior para ${report.election} ${report.zoneCode}. Se conserva la copia local.`);
+    }
+  }
+}
+
 async function sync(){
   const consultedAt=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Lima',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   const catalog=await request(ANDINA+'js/geo/ubigeo_onpe.json'),index=await request(ANDINA+'js/geo/onpe_indice.json');
@@ -54,6 +67,15 @@ async function sync(){
     if(org){const roster=await request(JNE+'/candidatos/organizaciones/candidatos',{...location,idSolicitudLista:org.listas[0].idSolicitudLista});const head=roster.data?.flatMap(e=>e.organizaciones.flatMap(o=>o.listas.flatMap(l=>l.candidatos||[]))).find(c=>c.cargoEleccion==='ALCALDE PROVINCIAL');if(head?.idHojaVida){const sourceUrl='https://votoinformado.jne.gob.pe/candidatos/hoja-vida/'+head.idHojaVida;const photo=await downloadPortrait(head.urlFotoCandidato,head.idHojaVida,sourceUrl,consultedAt);report.parties[0].candidate={id:head.idHojaVida,name:[head.nombres,head.apellidoPaterno,head.apellidoMaterno].filter(Boolean).join(' '),sourceUrl,photo};}}
   }
   const output={schemaVersion:1,consultedAt,source:{name:'Agencia Andina · datos atribuidos a ONPE',url:ANDINA+'embedresultadosmunicipales2026.aspx?dep=220000&nivel=provincial&widget=1'},geometrySource:{name:'Geometría ONPE distribuida por Andina; límites referenciales',url:ANDINA+'js/geo/onpe_indice.json',referenceUrl:'https://geoservidorperu.minam.gob.pe/arcgis/rest/services/ZEE_VISOR/07_CARTOGRAF%C3%8DA_BASE_TACNA/MapServer/12',note:'El MINAM consultado contiene 27 distritos. Se utiliza la geometría distribuida por Andina que incluye los 28, incluida La Yarada Los Palos. Los códigos ONPE y los códigos INEI son distintos y se conservan por separado.'},geography:{type:'FeatureCollection',features:[department,...provinces,...districts]},reports:reports.sort((a,b)=>(a.election+a.zoneCode).localeCompare(b.election+b.zoneCode)),unavailable:unavailable.sort((a,b)=>(a.election+a.zoneCode).localeCompare(b.election+b.zoneCode))};
-  await writeFile('public/territorial.json.tmp',JSON.stringify(output)+'\n');await rename('public/territorial.json.tmp','public/territorial.json');console.log(JSON.stringify({provinces:provinces.length,districts:districts.length,reports:reports.length,unavailable:unavailable.length,leaders:reports.filter(r=>r.election==='municipal').map(r=>({zone:r.zoneCode,leader:r.parties[0].candidate?.name}))}));
+  const elections=JSON.parse(await readFile('public/data.json','utf8'));
+  const previous=JSON.parse(await readFile('public/territorial.json','utf8').catch(error=>{
+    if(error.code==='ENOENT')return 'null';
+    throw error;
+  }));
+  if (process.argv.includes('--require-current-reports')) requireCurrentReports(previous?.reports || [], output.reports);
+  const history=await saveCuts([...makeCuts(elections,previous),...makeCuts(elections,output)]);
+  await writeFile('public/territorial.json.tmp',JSON.stringify(output)+'\n');
+  await rename('public/territorial.json.tmp','public/territorial.json');
+  console.log(JSON.stringify({provinces:provinces.length,districts:districts.length,reports:reports.length,unavailable:unavailable.length,history,leaders:reports.filter(r=>r.election==='municipal').map(r=>({zone:r.zoneCode,leader:r.parties[0].candidate?.name}))}));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)await sync();
