@@ -1,5 +1,6 @@
 import { analyze, roleLabel, humanize, describeCandidate } from './candidate-model.js';
 import { createCandidateClient } from './candidate-data.js';
+import { addCandidateCivic } from './civic.js';
 
 const $ = id => document.getElementById(id);
 const money = value => value == null ? 'No disponible' : new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN', maximumFractionDigits: 2 }).format(value);
@@ -246,7 +247,7 @@ async function openDetail(id) {
   const sequence = ++detailRequest;
   const title = el('h2', '', 'Cargando hoja de vida…'); title.id = 'candidate-dialog-title'; $('candidate-detail').replaceChildren(title);
   $('candidate-dialog').showModal();
-  try { const c = await detail(id); if (sequence === detailRequest) renderDetail(c); }
+  try { const c = await detail(id); if (sequence === detailRequest) { renderDetail(c); void addCandidateCivic($('candidate-detail'), c.id); } }
   catch (error) { if (sequence === detailRequest) title.textContent = error.message; }
 }
 async function compare() {

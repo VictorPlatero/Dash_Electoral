@@ -1,0 +1,11 @@
+.civic-card { margin-block: 1rem; }
+.civic-card h3 { margin-block: 1rem .5rem; }
+.civic-controls, .civic-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.civic-card label { display: block; font-weight: 600; margin-bottom: .35rem; }
+.civic-card input, .civic-card select { width: 100%; max-width: 32rem; }
+.civic-record { border-top: 1px solid currentColor; padding-top: .75rem; margin-top: .85rem; overflow-wrap: anywhere; }
+.civic-record h4, .civic-record p { margin-block: 0 .45rem; }
+.civic-record ul { padding-inline-start: 1.3rem; margin-block: .5rem; }
+@media (max-width: 650px) {
+  .civic-controls, .civic-columns { grid-template-columns: 1fr; }
+}

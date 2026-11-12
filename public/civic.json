@@ -1,0 +1,176 @@
+{
+  "reviewedAt": "2026-11-12",
+  "commitments": [
+    {
+      "candidateId": "tzBJlUv7pUODjD4Mg32KZvoEYzch1HQB",
+      "candidate": "Segundo Mario Ruiz Rubio",
+      "topic": "Agua",
+      "title": "Aprovechar y represar agua de las cuencas de Uchusuma y Caplina.",
+      "date": "2026-09-11",
+      "status": "Propuesta de campaña",
+      "evidence": [],
+      "sources": [
+        {
+          "label": "Revelación · cobertura del debate regional",
+          "url": "https://revelacion.pe/2026/09/20/agua-salud-empleo-y-zofra-tacna-concentran-propuestas-de-candidatos/"
+        },
+        {
+          "label": "JNE · debate regional de Tacna",
+          "url": "https://votoinformado.jne.gob.pe/zona-de-debate/regional/tacna"
+        }
+      ]
+    },
+    {
+      "candidateId": "HltNP2lV-RtohKtiA7GNbKopN5HRwYyz",
+      "candidate": "Stephen Alexander Ugarte Dávila",
+      "topic": "Agua",
+      "title": "Evaluar la desalinización de agua para uso agrícola en La Yarada Los Palos.",
+      "date": "2026-09-11",
+      "status": "Propuesta de campaña",
+      "evidence": [],
+      "sources": [
+        {
+          "label": "Revelación · cobertura del debate regional",
+          "url": "https://revelacion.pe/2026/09/20/agua-salud-empleo-y-zofra-tacna-concentran-propuestas-de-candidatos/"
+        },
+        {
+          "label": "JNE · debate regional de Tacna",
+          "url": "https://votoinformado.jne.gob.pe/zona-de-debate/regional/tacna"
+        }
+      ]
+    },
+    {
+      "candidateId": "t48u1-qEJ3jrIXqBslqgYr-x3RYtPUPc",
+      "candidate": "Francisco Ramos Flores",
+      "topic": "Agua",
+      "title": "Elaborar un Plan Maestro Hídrico al 2030.",
+      "date": "2026-09-11",
+      "status": "Propuesta de campaña",
+      "evidence": [],
+      "sources": [
+        {
+          "label": "Revelación · cobertura del debate regional",
+          "url": "https://revelacion.pe/2026/09/20/agua-salud-empleo-y-zofra-tacna-concentran-propuestas-de-candidatos/"
+        },
+        {
+          "label": "JNE · debate regional de Tacna",
+          "url": "https://votoinformado.jne.gob.pe/zona-de-debate/regional/tacna"
+        }
+      ]
+    },
+    {
+      "candidateId": "t48u1-qEJ3jrIXqBslqgYr-x3RYtPUPc",
+      "candidate": "Francisco Ramos Flores",
+      "topic": "Salud",
+      "title": "Culminar el Hospital Hipólito Unanue.",
+      "date": "2026-09-11",
+      "status": "Propuesta de campaña",
+      "evidence": [],
+      "sources": [
+        {
+          "label": "Revelación · cobertura del debate regional",
+          "url": "https://revelacion.pe/2026/09/20/agua-salud-empleo-y-zofra-tacna-concentran-propuestas-de-candidatos/"
+        },
+        {
+          "label": "JNE · debate regional de Tacna",
+          "url": "https://votoinformado.jne.gob.pe/zona-de-debate/regional/tacna"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "candidateId": "KBPhd37eJI4qmgSNJZKTuemTTwhMV6lr",
+      "candidate": "Hilda Marisol Herrera Huayhua",
+      "topic": "Resolución judicial",
+      "title": "Amparo contra una condena por actos funcionales",
+      "date": "2022-07-19",
+      "status": "Amparo declarado infundado",
+      "summary": "La sentencia del Tribunal Constitucional describe una condena de 2017 confirmada en 2018 y declara infundada la demanda de amparo que solicitó anular esas resoluciones. La sentencia incluye un voto singular.",
+      "sources": [
+        {
+          "label": "Tribunal Constitucional · Exp. 00101-2022-PA/TC",
+          "url": "https://www.tc.gob.pe/jurisprudencia/2022/00101-2022-AA.pdf"
+        }
+      ]
+    },
+    {
+      "candidate": "Juan Alberto Seminario Machuca",
+      "topic": "Controversia electoral",
+      "title": "Tacha contra la candidatura en Coronel Gregorio Albarracín Lanchipa",
+      "date": "2026-08-25",
+      "status": "Tacha desestimada",
+      "summary": "El JNE declaró infundada la apelación y confirmó la resolución del Jurado Electoral Especial de Tacna que declaró infundada la tacha contra la candidatura.",
+      "sources": [
+        {
+          "label": "JNE · resolución publicada en El Peruano",
+          "url": "https://busquedas.elperuano.pe/dispositivo/NL/2555576-1"
+        }
+      ]
+    }
+  ],
+  "municipalities": {
+    "220109": "https://www.gob.pe/munipocollay",
+    "220111": "https://www.gob.pe/munialtoalianza",
+    "220112": "https://www.gob.pe/municiudadnueva",
+    "220113": "https://www.munialbarracin.gob.pe/"
+  },
+  "municipalDirectory": "https://www.congreso.gob.pe/Docs/Otamdegrl/files/directorio_de_tacna_provincial_y_distrital_ok.pdf",
+  "issues": [
+    {
+      "id": "residuos",
+      "title": "Basura sin recoger",
+      "kind": "municipal",
+      "guidance": "Pide atención al área de limpieza pública de la municipalidad de tu distrito.",
+      "prepare": "Dirección o punto de referencia, fecha y una foto si puedes tomarla.",
+      "source": {
+        "label": "Municipalidad de Tacna · servicio de limpieza pública",
+        "url": "https://www.munitacna.gob.pe/archivo/download/36283/show/ordenanza-municipal-n-034-2025"
+      }
+    },
+    {
+      "id": "parques",
+      "title": "Parque o área verde descuidada",
+      "kind": "municipal",
+      "guidance": "Consulta con el área de parques y jardines de la municipalidad. Si el espacio es administrado por otra entidad, pide que te indiquen el canal correspondiente.",
+      "prepare": "Nombre del parque, ubicación y descripción del problema.",
+      "source": {
+        "label": "Municipalidad de Tacna · servicios municipales",
+        "url": "https://www.munitacna.gob.pe/archivo/download/36283/show/ordenanza-municipal-n-034-2025"
+      }
+    },
+    {
+      "id": "alumbrado",
+      "title": "Alumbrado público apagado",
+      "entity": "Empresa eléctrica de la zona · canal Osinergmin",
+      "guidance": "Usa el reporte de alumbrado público de Osinergmin para que se derive a la empresa eléctrica.",
+      "prepare": "Dirección, referencia y número de poste si está visible.",
+      "source": {
+        "label": "Reportar a Osinergmin",
+        "url": "https://www.gob.pe/9304"
+      }
+    },
+    {
+      "id": "agua",
+      "title": "Corte imprevisto de agua",
+      "entity": "Prestador de agua de tu localidad",
+      "guidance": "Reporta el corte al prestador que figura en tu recibo. Si no te atiende, solicita orientación a Sunass.",
+      "prepare": "Número de suministro, dirección y hora aproximada del corte.",
+      "source": {
+        "label": "Sunass · pasos para reportar el corte",
+        "url": "https://www.gob.pe/541"
+      }
+    },
+    {
+      "id": "aniego",
+      "title": "Aniego o atoro de alcantarillado",
+      "entity": "Prestador de saneamiento de tu localidad",
+      "guidance": "Avisa a tu prestador. Sunass Tacna también ofrece orientación y recibe reportes de incidencias operativas.",
+      "prepare": "Dirección, referencia, hora y descripción del problema.",
+      "source": {
+        "label": "Sunass Tacna · canales de atención",
+        "url": "https://www.gob.pe/institucion/sunass/noticias/1384581-problemas-con-los-servicios-de-saneamiento-sunass-recuerda-sus-canales-gratuitos-de-atencion-a-usuarios"
+      }
+    }
+  ]
+}

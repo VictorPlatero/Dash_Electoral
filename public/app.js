@@ -48,7 +48,7 @@ function renderElection() {
 }
 function navigate() {
   if(location.hash==='#main') {$('main').setAttribute('tabindex','-1');$('main').focus();return;}
-  const allowed = ['resumen', 'resultados', 'candidatos', 'perfiles','analisis','mapa', 'contexto', 'fuentes', 'vecinos', 'province-select'];
+  const allowed = ['resumen', 'resultados', 'candidatos', 'perfiles','analisis','mapa', 'contexto', 'fuentes', 'vecinos', 'ciudadania', 'province-select'];
   const id = allowed.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'resumen';
   const viewId = id === 'province-select' ? 'vecinos' : ['perfiles','analisis'].includes(id)?'candidatos':id;
   document.querySelectorAll('.view').forEach(view => view.hidden = view.id !== viewId);
@@ -58,7 +58,7 @@ function navigate() {
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
-  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', mapa:'Mapa electoral de Tacna', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos' }[viewId];
+  $('page-title').textContent = { resumen: 'Dashboard electoral', resultados: 'Resultados parciales', candidatos: 'Candidatos y hojas de vida', mapa:'Mapa electoral de Tacna', contexto: 'Contexto de Tacna', fuentes: 'Información verificable', vecinos: 'Servicios para vecinos', ciudadania: 'Seguimiento ciudadano' }[viewId];
   document.querySelector('.edition').textContent = viewId === 'candidatos' ? 'Hojas de vida: ' + ($('candidatos').dataset.consultedAt || 'Consultando…') : 'Resultados: 13 oct 2026 · Directorio: 06 oct 2026';
   if (viewId === 'candidatos') {
     candidatesModule ||= import('./candidates.js').then(module => module.init()).catch(() => {
@@ -76,6 +76,10 @@ function navigate() {
   if(viewId==='mapa')mapModule ||= import('./map.js').then(module=>module.init()).catch(()=>{mapModule=null;});
   if(viewId==='resultados')resultsLoading ||= import('./results.js').then(async module=>{await module.init(data);resultsModule=module;module.render(selected);}).catch(()=>{resultsLoading=null;$('results-status').textContent='No se pudo cargar el análisis. Recarga la página para volver a intentarlo.';});
   if (viewId === 'vecinos') loadCitizen();
+  if (viewId === 'ciudadania') import('./civic.js').then(module => module.initCivic()).catch(() => {
+    $('civic-district-status').textContent = 'No se pudo abrir la sección. Recarga la página para reintentar.';
+    $('civic-review').textContent = 'No se pudo cargar el catálogo.';
+  });
   $('sidebar').classList.remove('open'); $('menu').setAttribute('aria-expanded', 'false');
   if (id === 'province-select') $('province-select').focus();
 }

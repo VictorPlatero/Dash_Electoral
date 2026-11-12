@@ -5,7 +5,7 @@
   <title>Tacna Decide · Dashboard electoral 2026</title>
   <meta name="description" content="Compara candidatos a alcalde provincial y gobernador de Tacna: hojas de vida, formación, experiencia, declaraciones y reportes electorales con fuentes verificables.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d304c'/%3E%3Cpath d='m8 16 5 5 11-12' fill='none' stroke='%23ffae38' stroke-width='4'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="candidates.css"><link rel="stylesheet" href="map.css"><link rel="stylesheet" href="results.css"><script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="candidates.css"><link rel="stylesheet" href="map.css"><link rel="stylesheet" href="results.css"><link rel="stylesheet" href="civic.css"><script src="app.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Ir al contenido</a>
@@ -14,10 +14,12 @@
     <a class="brand" href="#resumen"><span class="brand-mark">T<span>✓</span></span><span>TACNA<span class="brand-sub">DECIDE / 2026</span></span></a>
     <div class="side-label">OBSERVATORIO ELECTORAL</div>
     <nav aria-label="Navegación principal">
+      <a href="./reportes.html">Reportes por fecha</a>
       <a href="#resumen" data-view="resumen"><span class="nav-icon">▦</span> Vista general</a>
       <a href="#resultados" data-view="resultados"><span class="nav-icon">▥</span> Resultados</a>
       <a href="#candidatos" data-view="candidatos"><span class="nav-icon">◉</span> Candidatos y hojas de vida</a>
       <a href="#mapa" data-view="mapa"><span class="nav-icon">◈</span> Mapa electoral</a>
+      <a href="#ciudadania" data-view="ciudadania"><span class="nav-icon" aria-hidden="true">◎</span> Seguimiento ciudadano</a>
       <a href="#vecinos" data-view="vecinos"><span class="nav-icon">◇</span> Servicios para vecinos</a>
       <a href="#contexto" data-view="contexto"><span class="nav-icon">◎</span> Contexto de Tacna</a>
       <a href="#fuentes" data-view="fuentes"><span class="nav-icon">▤</span> Fuentes y metodología</a>
@@ -117,6 +119,36 @@
         </section>
         <section class="view" id="contexto" hidden><div class="context-grid"><article class="panel"><span class="eyebrow">PERÍODO 2023–2026</span><h2>Luis Ramón Torres Robledo</h2><p>Gobernador regional de Tacna</p><p class="footnote">Inicio de gestión: 1 de enero de 2023. Autoridad consignada en la ficha institucional; no es un resultado de 2026.</p><a class="text-link" id="governor-link" target="_blank" rel="noopener noreferrer">Ver ficha oficial ↗</a></article><article class="panel"><span class="eyebrow">PERÍODO 2023–2026</span><h2>Pascual Milton Güisa Bravo</h2><p>Alcalde provincial de Tacna</p><p class="footnote">Inicio de gestión: 1 de enero de 2023. La alcaldía provincial y el gobierno regional tienen ámbitos distintos.</p><a class="text-link" id="mayor-link" target="_blank" rel="noopener noreferrer">Ver ficha oficial ↗</a></article><article class="panel territory"><span class="eyebrow">REFERENCIA TERRITORIAL · PCM 2021</span><h2>4 provincias · 28 distritos</h2><div class="province-list"><span>Tacna</span><span>Tarata</span><span>Candarave</span><span>Jorge Basadre</span></div><p class="footnote">Referencia territorial histórica, sin validación de modificaciones para el proceso electoral de 2026.</p></article><article class="panel quality"><span class="eyebrow">CALIDAD DE LOS DATOS</span><h2>Padrón: requiere validación</h2><p>La nota de RENIEC muestra 304 650 en el título y 349 859 en el cuerpo. Por esta contradicción, el dashboard no utiliza ese total como indicador.</p><a class="text-link" id="reniec-link" target="_blank" rel="noopener noreferrer">Consultar nota de RENIEC ↗</a></article></div></section>
         <section class="view" id="fuentes" hidden><article class="panel methodology"><h2>Fuentes y metodología</h2><p>Resultados periodísticos y hojas de vida revisados el 13 de octubre de 2026. Los resultados tienen corte del 6 de octubre, 12:46; el directorio y contexto conservan su consulta del 6 de octubre. Se conserva el corte de cada fuente; el panel no se actualiza automáticamente. Los datos de alcalde corresponden a la provincia de Tacna y los de gobernador a todo el departamento.</p><p>La brecha se calcula restando el segundo porcentaje al primero. El gráfico incluye solamente las cinco organizaciones publicadas. El anillo representa el avance del conteo reportado, no participación electoral ni apoyo a un candidato.</p><p>Las autoridades 2023–2026 se muestran como contexto. Para un resultado definitivo, verificar ONPE y la proclamación del JNE.</p></article><div id="source-list" class="source-list"></div></section>
+        <section class="view" id="ciudadania" hidden>
+          <div class="citizen-heading"><div><h2>Seguimiento ciudadano</h2><p>Consulta compromisos y controversias documentadas, descarga una ficha de tu distrito o encuentra dónde reportar un problema.</p></div></div>
+          <article class="panel civic-card">
+            <h3>Ficha del distrito y orientación ciudadana</h3>
+            <p id="civic-district-status" role="status">Cargando el catálogo territorial…</p>
+            <div id="civic-district-controls" hidden>
+              <div class="civic-controls">
+                <div><label for="civic-province">Provincia</label><select id="civic-province"></select></div>
+                <div><label for="civic-district">Distrito</label><select id="civic-district"></select></div>
+              </div>
+              <p id="civic-district-note" aria-live="polite"></p>
+              <button class="button outline" id="civic-download" type="button">Descargar ficha del distrito (HTML)</button>
+              <h3>¿A quién le corresponde resolverlo?</h3>
+              <label for="civic-issue">Tipo de problema</label><select id="civic-issue"></select>
+              <div id="civic-routing" class="civic-record" aria-live="polite"></div>
+            </div>
+          </article>
+          <article class="panel civic-card">
+            <h3>Compromisos y controversias de candidaturas</h3>
+            <p id="civic-review" role="status">Cargando el catálogo…</p>
+            <div id="civic-record-controls" hidden>
+              <label for="civic-search">Buscar por candidatura, tema o estado</label>
+              <input id="civic-search" type="search" placeholder="Ej.: agua o tacha">
+              <div class="civic-columns">
+                <section><h3>Seguimiento de compromisos</h3><div id="civic-commitments" aria-live="polite"></div></section>
+                <section><h3>Noticias y controversias documentadas</h3><p>Selección de casos con fecha, fuente y desenlace documentado.</p><div id="civic-cases" aria-live="polite"></div></section>
+              </div>
+            </div>
+          </article>
+        </section>
         <section class="view" id="vecinos" hidden>
           <div class="citizen-heading"><div><span class="eyebrow">ATENCIÓN CIUDADANA</span><h2>¿Qué necesitas hacer?</h2><p>Busca un servicio o elige un tema. Los trámites se realizan en las páginas oficiales.</p></div><span class="pill">Revisado: 06 oct 2026</span></div>
           <div class="service-filters"><div><label for="service-search">Buscar servicio</label><input id="service-search" type="search" placeholder="Ej.: multa, candidatos, municipalidad" autocomplete="off"></div><div><label for="service-topic">Tema</label><select id="service-topic"><option value="all">Todos los temas</option><option value="electoral">Trámites electorales</option><option value="information">Información electoral</option><option value="municipal">Atención municipal</option></select></div><button id="clear-services" class="button outline">Limpiar filtros</button></div>
